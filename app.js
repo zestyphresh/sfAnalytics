@@ -1,7 +1,7 @@
 (function () {
     
     $j = jQuery.noConflict();
-    var conn = new jsforce.Connection({ accessToken: '{!$API.Session_Id}' });
+    
     
     var dims = {}, groups = {};
     var data = crossfilter();
