@@ -10,9 +10,11 @@
         
         console.log(results);
         
-    })
+    });
         
     function fetch() {
+        
+        console.log('fetch');
 
         var deferred = Q.defer();
         
