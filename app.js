@@ -1,7 +1,6 @@
-(function () {
+function load() {
     
     $j = jQuery.noConflict();
-    
     
     var dims = {}, groups = {};
     var data = crossfilter();
@@ -36,4 +35,4 @@
 
     }
 
-}());
+);
