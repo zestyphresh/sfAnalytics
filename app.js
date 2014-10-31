@@ -24,7 +24,7 @@
                 records.push(record);
             })
             .on('error', function(query) {
-                deferred.reject(err);
+                deferred.reject('error');
             })
             .on('end', function(err) {
                 deferred.resolve(records);
