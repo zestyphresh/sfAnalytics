@@ -5,12 +5,8 @@
     var dims = {}, groups = {};
     var data = crossfilter();
     
-    Q.all([fetch()]).done(function(results) {
-        
-        console.log(results);
-        
-    });
-        
+    fetch().then(function(result) { console.log(result); }).done()
+  
     function fetch() {
         
         console.log('fetch');
