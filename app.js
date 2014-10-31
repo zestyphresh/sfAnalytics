@@ -23,10 +23,10 @@
             .on('record', function(record) {
                 records.push(record);
             })
-            .on('end', function(query) {
+            .on('error', function(query) {
                 deferred.reject(err);
             })
-            .on('error', function(err) {
+            .on('end', function(err) {
                 deferred.resolve(records);
             })
             .run({ autoFetch : true, maxFetch : 15000 });
