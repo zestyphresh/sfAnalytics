@@ -1,4 +1,4 @@
-function load() {
+(function(conn) {
     
     $j = jQuery.noConflict();
     
@@ -35,4 +35,4 @@ function load() {
 
     }
 
-};
+})(conn);
