@@ -95,7 +95,8 @@
     
     function createTable(id, data) {
 
-        var _columns = [{"data": "value.netSales", "title": "Net Sales"}, 
+        var _columns = [{"data": "key", "title": "Sub Sector"},
+                        {"data": "value.netSales", "title": "Net Sales"}, 
                         {"data": "value.budget", "title": "Budget"},                
                         {"data": "value.vsBudget", "title": "Var £"},                    
                         {"data": "value.varBudget", "title": "Var %"},                
