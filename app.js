@@ -8,11 +8,10 @@
     fetch()
         .then(function(result) { 
             
-            console.log(result);
             data.add(result);
             dims.subSector = data.dimension(function(d) { return d.subSector; });
             groups.subSector = dims.subSector.group().reduce(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
-            console.log(groups.subSector.all());
+            createTable('tableytd', groups.subSector.all());
             
             //Grouping Products By Sub Sector
             function reduceAddBySubSector(p, v) {
@@ -92,6 +91,56 @@
 
         return deferred.promise;
 
+    }
+    
+    function createTable(id, data) {
+
+        var _columns = [{"data": "values.netSales", "title": "Net Sales"}, 
+                        {"data": "values.budget", "title": "Budget"},                
+                        {"data": "values.vsBudget", "title": "Var £"},                    
+                        {"data": "values.varBudget", "title": "Var %"},                
+                        {"data": "values.target", "title": "Target"},                      
+                        {"data": "values.vsTarget", "title": "Var £"},        
+                        {"data": "values.varTarget", "title": "Var %"},
+                        {"data": "values.last", "title": "Last Year"},                      
+                        {"data": "values.varLast", "title": "Var %"},   
+        ];
+
+        var table = $j('#tableytd').DataTable({
+            'data' : data,
+            'paging' : false,
+            'info' : false, 
+            'searching' : false,
+            'orderable' : false,
+            'columns' : _columns,
+            'columnDefs' : [{ 
+                                'targets' : [1,2,3,5,6,8], 
+                                'render' : function ( data, type, row, meta ) {
+                                    switch (type) {
+                                        case 'display':
+                                            return accounting.formatMoney(data, "£", 0, ".", ",");
+                                            break;
+                                    }
+
+                                    return data;
+                                },
+                                'className' : 'text-right'
+                            },
+                            { 
+                                'targets' : [4,7,9], 
+                                'render' : function ( data, type, row, meta ) {
+                                    switch (type) {
+                                        case 'display':
+                                            return accounting.formatNumber(data, 0, ",") + "%";
+                                            break;
+                                    }
+
+                                    return data;
+                                },
+                                'className' : 'text-right'
+                            }
+            ]
+        });
     }
 
 })(conn);
