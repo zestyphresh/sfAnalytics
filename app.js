@@ -9,53 +9,11 @@
         .then(function(result) { 
             
             data.add(result);
+            dims.dummy = data.dimension(function(d) { return 'all'; });
             dims.subSector = data.dimension(function(d) { return d.subSector; });
-            groups.subSector = dims.subSector.group().reduce(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
-            createTable('tableytd', groups.subSector.all());
-            
-            //Grouping Products By Sub Sector
-            function reduceAddBySubSector(p, v) {
-                
-                p.count++;
-                p.netSales += v.netSales;
-                p.budget += v.budget;
-                p.target += v.target;
-                p.last += v.last;
-                
-                p.vsBudget = p.netSales - p.budget;
-                p.vsTarget = p.netSales - p.target;
-                
-                p.varBudget = p.netSales === 0 ? 0 : p.vsBudget / p.netSales;
-                p.varTarget = p.netSales === 0 ? 0 : p.vsTarget / p.netSales;
-                p.varLast = p.netSales === 0 ? 0 : (p.netSales - p.last) / p.netSales;
-                
-                return p;
-                
-            }
-            
-            function reduceSubtractBySubSector(p, v) {
-                
-                p.count--;
-                p.netSales -= v.netSales;
-                p.budget -= v.budget;
-                p.target -= v.target;
-                p.last -= v.last;
-                
-                p.vsBudget = p.netSales - p.budget;
-                p.vsTarget = p.netSales - p.target;
-                
-                p.varBudget = p.netSales === 0 ? 0 : p.vsBudget / p.netSales;
-                p.varTarget = p.netSales === 0 ? 0 : p.vsTarget / p.netSales;
-                p.varLast = p.netSales === 0 ? 0 : (p.netSales - p.last) / p.netSales;
-                
-                return p;
-                
-            }
-            
-            function reduceInitialiseBySubSector() {
-                return {'count' : 0, 'netSales' : 0, 'budget' : 0, 'vsBudget': 0, 'varBudget': 0, 'target': 0, 
-                        'vsTarget' : 0, 'varTarget': 0, 'last': 0, 'varlast': 0};
-            }
+            groups.dummy = dims.dummy.group().reduce(reduceAdd, reduceSubtract, reduceInitialise);
+            groups.subSector = dims.subSector.group().reduce(reduceAdd, reduceSubtract, reduceInitialise);
+            createTable('tableytd', groups.subSector.all(), groups.dummy.all()[0]);
             
         })
         .done()
@@ -93,7 +51,51 @@
 
     }
     
-    function createTable(id, data) {
+                //Grouping Products By Sub Sector
+            function reduceAdd(p, v) {
+                
+                p.count++;
+                p.netSales += v.netSales;
+                p.budget += v.budget;
+                p.target += v.target;
+                p.last += v.last;
+                
+                p.vsBudget = p.netSales - p.budget;
+                p.vsTarget = p.netSales - p.target;
+                
+                p.varBudget = p.netSales === 0 ? 0 : p.vsBudget / p.netSales;
+                p.varTarget = p.netSales === 0 ? 0 : p.vsTarget / p.netSales;
+                p.varLast = p.netSales === 0 ? 0 : (p.netSales - p.last) / p.netSales;
+                
+                return p;
+                
+            }
+            
+            function reduceSubtract(p, v) {
+                
+                p.count--;
+                p.netSales -= v.netSales;
+                p.budget -= v.budget;
+                p.target -= v.target;
+                p.last -= v.last;
+                
+                p.vsBudget = p.netSales - p.budget;
+                p.vsTarget = p.netSales - p.target;
+                
+                p.varBudget = p.netSales === 0 ? 0 : p.vsBudget / p.netSales;
+                p.varTarget = p.netSales === 0 ? 0 : p.vsTarget / p.netSales;
+                p.varLast = p.netSales === 0 ? 0 : (p.netSales - p.last) / p.netSales;
+                
+                return p;
+                
+            }
+            
+            function reduceInitialise() {
+                return {'count' : 0, 'netSales' : 0, 'budget' : 0, 'vsBudget': 0, 'varBudget': 0, 'target': 0, 
+                        'vsTarget' : 0, 'varTarget': 0, 'last': 0, 'varlast': 0};
+            }
+    
+    function createTable(id, data, total) {
 
         var _columns = [{"data": "key", "title": "Sub Sector"},
                         {"data": "value.netSales", "title": "Net Sales"}, 
@@ -140,7 +142,21 @@
                                 },
                                 'className' : 'text-right'
                             }
-            ]
+            ],
+            'footerCallback' : function (tfoot, data, start, end, display) {
+                var api = this.api();
+
+                $j(api.column(0).footer()).html('Total');
+                $j(api.column(1).footer()).html(accounting.formatMoney(total.value.netSales, "£", 0, ".", ","));
+                $j(api.column(2).footer()).html(accounting.formatMoney(total.value.budget, "£", 0, ".", ","));              
+                $j(api.column(3).footer()).html(accounting.formatMoney(total.value.vsBudget, "£", 0, ".", ","));
+                $j(api.column(4).footer()).html(accounting.formatNumber(total.value.varBudget*100, 0, ",") + "%");
+                $j(api.column(5).footer()).html(accounting.formatMoney(total.value.target, "£", 0, ".", ","));
+                $j(api.column(6).footer()).html(accounting.formatMoney(total.value.vsTarget, "£", 0, ".", ","));
+                $j(api.column(7).footer()).html(accounting.formatNumber(total.value.varTarget*100, 0, ",") + "%");
+                $j(api.column(8).footer()).html(accounting.formatMoney(total.value.last, "£", 0, ".", ","));
+                $j(api.column(9).footer()).html(accounting.formatNumber(total.value.varLast*100, 0, ",") + "%");
+            }
         });
     }
 
