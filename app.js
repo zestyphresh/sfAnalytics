@@ -12,7 +12,7 @@
             data.add(result);
             dims.subSector = data.dimension(function(d) { return d.subSector; });
             groups.subSector = dims.subSector.group().reduce(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
-            console.log(groups.subSector);
+            console.log(groups.subSector.all());
             
             //Grouping Products By Sub Sector
             function reduceAddBySubSector(p, v) {
