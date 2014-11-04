@@ -23,8 +23,8 @@
                 p.target += v.target;
                 p.last += v.last;
                 
-                p.vsBudget = p.netSales - p.Budget;
-                p.vsTarget = p.netSales - p.Target;
+                p.vsBudget = p.netSales - p.budget;
+                p.vsTarget = p.netSales - p.target;
                 
                 p.varBudget = p.netSales === 0 ? 0 : p.vsBudget / p.netSales;
                 p.varTarget = p.netSales === 0 ? 0 : p.vsTarget / p.netSales;
@@ -42,8 +42,8 @@
                 p.target -= v.target;
                 p.last -= v.last;
                 
-                p.vsBudget = p.netSales - p.Budget;
-                p.vsTarget = p.netSales - p.Target;
+                p.vsBudget = p.netSales - p.budget;
+                p.vsTarget = p.netSales - p.target;
                 
                 p.varBudget = p.netSales === 0 ? 0 : p.vsBudget / p.netSales;
                 p.varTarget = p.netSales === 0 ? 0 : p.vsTarget / p.netSales;
