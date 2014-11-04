@@ -95,15 +95,15 @@
     
     function createTable(id, data) {
 
-        var _columns = [{"data": "values.netSales", "title": "Net Sales"}, 
-                        {"data": "values.budget", "title": "Budget"},                
-                        {"data": "values.vsBudget", "title": "Var £"},                    
-                        {"data": "values.varBudget", "title": "Var %"},                
-                        {"data": "values.target", "title": "Target"},                      
-                        {"data": "values.vsTarget", "title": "Var £"},        
-                        {"data": "values.varTarget", "title": "Var %"},
-                        {"data": "values.last", "title": "Last Year"},                      
-                        {"data": "values.varLast", "title": "Var %"},   
+        var _columns = [{"data": "value.netSales", "title": "Net Sales"}, 
+                        {"data": "value.budget", "title": "Budget"},                
+                        {"data": "value.vsBudget", "title": "Var £"},                    
+                        {"data": "value.varBudget", "title": "Var %"},                
+                        {"data": "value.target", "title": "Target"},                      
+                        {"data": "value.vsTarget", "title": "Var £"},        
+                        {"data": "value.varTarget", "title": "Var %"},
+                        {"data": "value.last", "title": "Last Year"},                      
+                        {"data": "value.varLast", "title": "Var %"},   
         ];
 
         var table = $j('#tableytd').DataTable({
