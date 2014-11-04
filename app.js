@@ -15,7 +15,7 @@
         
         var records = [];
         
-        conn.sobject("Contact")
+        conn.sobject("Account")
             .select('Sales_Year_To_Date__c, Budget_Year_To_Date__c, Target_Year_To_Date__c, Sales_Previous_Year_To_Date__c')
             .where('Sub_Sector__c = Commercial')
             .execute({ autoFetch : true, maxFetch : 15000 }, function(err, records) {
