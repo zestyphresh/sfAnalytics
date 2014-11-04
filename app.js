@@ -132,7 +132,7 @@
                                 'render' : function ( data, type, row, meta ) {
                                     switch (type) {
                                         case 'display':
-                                            return accounting.formatNumber(data, 0, ",") + "%";
+                                            return accounting.formatNumber(data*100, 0, ",") + "%";
                                             break;
                                     }
 
