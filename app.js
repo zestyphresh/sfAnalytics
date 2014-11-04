@@ -167,7 +167,7 @@
                                 'render' : function ( data, type, row, meta ) {
                                     switch (type) {
                                         case 'display':
-                                            return accounting.formatMoney(data, "£", 0, ".", ",");
+                                            return accounting.formatMoney(data, "£", 0, ",", ".");
                                             break;
                                     }
 
