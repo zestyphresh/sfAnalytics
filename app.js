@@ -17,6 +17,19 @@
             
         })
         .done()
+        
+    fetch2()
+        .then(function(result) { 
+            
+            data.add(result);
+            dims.dummy = data.dimension(function(d) { return 'all'; });
+            dims.subSector = data.dimension(function(d) { return d.subSector; });
+            groups.dummy = dims.dummy.group().reduce(reduceAdd, reduceSubtract, reduceInitialise);
+            groups.subSector = dims.subSector.group().reduce(reduceAdd, reduceSubtract, reduceInitialise);
+            createTable('tablelp', groups.subSector.all(), groups.dummy.all()[0]);
+            
+        })
+        .done()
   
     function fetch() {
         
@@ -37,6 +50,39 @@
                     'budget' : record.Budget_Year_To_Date__c,
                     'target' : record.Target_Year_To_Date__c,
                     'last' : record.Sales_Previous_Year_To_Date__c
+                });
+            })
+            .on('error', function(query) {
+                deferred.reject('error');
+            })
+            .on('end', function(err) {
+                deferred.resolve(records);
+            })
+            .run({ autoFetch : true, maxFetch : 15000 });
+
+        return deferred.promise;
+
+    }
+    
+    function fetch2() {
+        
+        console.log('fetch');
+
+        var deferred = Q.defer();
+        
+        var records = [];
+
+        conn.sobject("Account")
+            .select("Sub_Sector__c, Sales_Last_Period__c, Budget_Last_Period__c, Target_Last_Period__c, Sales_Previous_Year_Last_Period__c")
+            .where("Sub_Sector__c IN ('Commercial', 'Hardware Wholesale', 'Independent Hardware Retailers', 'Independent Merchants', 'Independent Retail Showrooms'," +
+                   "'Independent Web Sales', 'Ireland', 'National Merchant Groups', 'Trade Distributor')")
+            .on('record', function(record) {
+                records.push({
+                    'subSector' : record.Sub_Sector__c,
+                    'netSales' : record.Sales_Last_Period__c,
+                    'budget' : record.Budget_Last_Period__c,
+                    'target' : record.Target_Last_Period__c,
+                    'last' : record.Sales_Previous_Year_Last_Period__c
                 });
             })
             .on('error', function(query) {
