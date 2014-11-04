@@ -155,7 +155,7 @@
                         {"data": "value.varLast", "title": "Var %"},   
         ];
 
-        var table = $j('#tableytd').DataTable({
+        var table = $j('#' + id).DataTable({
             'data' : data,
             'paging' : false,
             'info' : false, 
