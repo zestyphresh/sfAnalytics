@@ -11,7 +11,7 @@
             console.log(result);
             data.add(result);
             dims.subSector = data.dimension(function(d) { return d.subSector; });
-            groups.subSector = dims.subSector.group(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
+            groups.subSector = dims.subSector.group().reduce(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
             console.log(groups.subSector);
             
             //Grouping Products By Sub Sector
@@ -31,6 +31,7 @@
                 p.varLast = p.netSales === 0 ? 0 : (p.netSales - p.last) / p.netSales;
                 
                 return p;
+                
             }
             
             function reduceSubtractBySubSector(p, v) {
