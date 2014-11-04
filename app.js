@@ -8,10 +8,11 @@
     fetch()
         .then(function(result) { 
             
-            data.add(result);
-            dims.subSector = data.dimension(function(d) { return d.Sub_Sector__c; });
-            groups.subSector = dims.subSector.group(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
-            console.log(groups.subSector);
+            console.log(result);
+            //data.add(result);
+            //dims.subSector = data.dimension(function(d) { return d.Sub_Sector__c; });
+            //groups.subSector = dims.subSector.group(reduceAddBySubSector, reduceSubtractBySubSector, reduceInitialiseBySubSector);
+            //console.log(groups.subSector);
             
             //Grouping Products By Sub Sector
             function reduceAddBySubSector(p, v) {
