@@ -19,7 +19,7 @@
         conn.sobject("Product2")
             .select("Part_Code__c, Name, Retail_Barcode__c, Retail_Barcode_Format__c, Retail_Barcode_Number__c, Inner Transit_Barcode__c, Inner Transit_Barcode_Format__c, Inner Transit_Barcode_Number__c, " +
                      "Outer Transit_Barcode__c, Outer Transit_Barcode_Format__c, Outer Transit_Barcode_Number__c")
-            .where("Project__c = " + "'" + projectID + "'")
+            .where("Project__c = " + projectID)
             .on('record', function(record) {
                 records.push(record);
             })
