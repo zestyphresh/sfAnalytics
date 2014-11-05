@@ -11,8 +11,6 @@
         .done()
         
     function getData() {
-        
-        console.log(projectId);
 
         var deferred = Q.defer();
         
