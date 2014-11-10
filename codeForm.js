@@ -58,11 +58,11 @@
             'info' : false, 
             'searching' : false,
             'orderable' : false,
-            "dom": 'T<"clear">lfrtip',
-            "tableTools": {
-                "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+            'dom': 'T<"clear">lfrtip',
+            'tableTools': {
+                'sSwfPath': "{!URLFOR($Resource.js_datatables, 'datatables/1.10.4/extensions/TableTools/swf/copy_csv_xls_pdf.swf')}"
             },
-            "scrollX": true,
+            'scrollX': '100%',
             'columns' : _columns,
             'columnDefs' : [
             ],
