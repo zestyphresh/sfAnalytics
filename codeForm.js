@@ -60,9 +60,7 @@
             "scrollX": "100%",
             'columns' : _columns,
             'columnDefs' : [
-            ],
-            'footerCallback' : function (tfoot, data, start, end, display) {
-            }
+            ]
         });
     }
 
