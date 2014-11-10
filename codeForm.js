@@ -52,8 +52,9 @@
                         {"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"}
         ];
 
-        var table = $j('#' + id).DataTable({
+        var table = $j('#' + id).dataTable({
             'data' : data,
+            "autoWidth": false,
             'paging' : false,
             'info' : false,
             "scrollY": "600px",
@@ -67,6 +68,7 @@
             },
             'columns' : _columns,
             'columnDefs' : [
+                { "width": "9%", "targets": [0,1,2,3,4,5,6,7,8,9,10] }
             ],
             'footerCallback' : function (tfoot, data, start, end, display) {
             }
