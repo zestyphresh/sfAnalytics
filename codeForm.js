@@ -44,18 +44,21 @@
                         {"data": "Retail_Barcode__c", "title": "Retail Barcode Required"},                
                         {"data": "Retail_Barcode_Format__c", "title": "Retail Barcode Format"},                    
                         {"data": "Retail_Barcode_Number__c", "title": "Retail Barcode Number"},                
-                        //{"data": "Inner_Transit_Barcode__c", "title": "Inner Transit Barcode Required"},                      
-                        //{"data": "Inner_Transit_Barcode_Format__c", "title": "Inner Transit Barcode Format"},        
-                        //{"data": "Inner_Transit_Barcode_Number__c", "title": "Inner Transit Barcode Number"},
-                        //{"data": "Outer_Transit_Barcode__c", "title": "Outer Transit Barcode Required"},                      
-                        //{"data": "Outer_Transit_Barcode_Format__c", "title": "Outer Transit Barcode Format"},        
-                        //{"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"}
+                        {"data": "Inner_Transit_Barcode__c", "title": "Inner Transit Barcode Required"},                      
+                        {"data": "Inner_Transit_Barcode_Format__c", "title": "Inner Transit Barcode Format"},        
+                        {"data": "Inner_Transit_Barcode_Number__c", "title": "Inner Transit Barcode Number"},
+                        {"data": "Outer_Transit_Barcode__c", "title": "Outer Transit Barcode Required"},                      
+                        {"data": "Outer_Transit_Barcode_Format__c", "title": "Outer Transit Barcode Format"},        
+                        {"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"}
         ];
 
         var table = $j('#' + id).DataTable({
             'data' : data,
             'paging' : false,
-            'info' : false, 
+            'info' : false,
+            "scrollY": "600px",
+            "scrollX": "100%",
+            "scrollCollapse": true,
             'searching' : false,
             'orderable' : false,
             'dom': 'T<"clear">lfrtip',
