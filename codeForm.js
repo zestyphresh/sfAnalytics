@@ -62,7 +62,7 @@
             'tableTools': {
                 'sSwfPath': "{!URLFOR($Resource.js_datatables, 'datatables/1.10.4/extensions/TableTools/swf/copy_csv_xls_pdf.swf')}"
             },
-            'scrollX': '100%',
+            'scrollX': true,
             'columns' : _columns,
             'columnDefs' : [
             ],
