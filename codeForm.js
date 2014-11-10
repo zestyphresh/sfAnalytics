@@ -5,6 +5,8 @@
     getData()
         .then(function(result) { 
             
+            console.log(result);
+            
             createTable('codes', result);
             
         })
