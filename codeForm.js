@@ -54,13 +54,9 @@
 
         var table = $j('#' + id).dataTable({
             'data' : data,
-            "autoWidth": true,
             'paging' : false,
-            "scrollY": "600px",
-            "scrollX": "100%",
+            "scrollX": true,
             'columns' : _columns,
-            'columnDefs' : [
-            ]
         });
     }
 
