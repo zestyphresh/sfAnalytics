@@ -58,6 +58,10 @@
             'info' : false, 
             'searching' : false,
             'orderable' : false,
+            "dom": 'T<"clear">lfrtip',
+            "tableTools": {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+            },
             'columns' : _columns,
             'columnDefs' : [
             ],
