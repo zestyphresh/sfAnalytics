@@ -62,6 +62,7 @@
             "tableTools": {
                 "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
             },
+            "scrollX": true,
             'columns' : _columns,
             'columnDefs' : [
             ],
