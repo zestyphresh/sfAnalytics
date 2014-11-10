@@ -1,4 +1,4 @@
-(function(conn, projectId) {
+(function(conn, projectId, swf) {
     
     $j = jQuery.noConflict();
     
@@ -59,16 +59,17 @@
             "scrollX": true,
             'dom': 'T<"clear">lfrtip',
             'tableTools': {
-                'sSwfPath': "{!URLFOR($Resource.js_datatables, 'datatables/1.10.4/extensions/TableTools/swf/copy_csv_xls_pdf.swf')}"
+                'sSwfPath': swf
             },
             'columns' : _columns,
             'columnDefs' : [
                 { "width": "9%", "targets": [0,1,2,3,4,5,6,7,8,9,10] }
             ],
         });
+
     }
 
-})(conn, projectId);
+})(conn, projectId, tableToolsSwf);
 
         // var table = $j('#' + id).dataTable({
         //     'data' : data,
