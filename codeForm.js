@@ -62,7 +62,6 @@
             "scrollCollapse": true,
             'searching' : false,
             'orderable' : false,
-            'dom': 'T<"clear">lfrtip',
             'tableTools': {
                 'sSwfPath': "{!URLFOR($Resource.js_datatables, 'datatables/1.10.4/extensions/TableTools/swf/copy_csv_xls_pdf.swf')}"
             },
