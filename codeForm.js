@@ -5,7 +5,7 @@
     getData()
         .then(function(result) { 
             
-            console.log(result);
+            createTable('codes', result);
             
         })
         .done()
@@ -35,18 +35,19 @@
 
     }
 
-    function createTable(id, data, total) {
+    function createTable(id, data) {
 
-        var _columns = [{"data": "key", "title": "Sub Sector"},
-                        {"data": "value.netSales", "title": "Net Sales"}, 
-                        {"data": "value.budget", "title": "Budget"},                
-                        {"data": "value.vsBudget", "title": "Var £"},                    
-                        {"data": "value.varBudget", "title": "Var %"},                
-                        {"data": "value.target", "title": "Target"},                      
-                        {"data": "value.vsTarget", "title": "Var £"},        
-                        {"data": "value.varTarget", "title": "Var %"},
-                        {"data": "value.last", "title": "Last Year"},                      
-                        {"data": "value.varLast", "title": "Var %"},   
+        var _columns = [{"data": "Part_Code__c", "title": "Code"},
+                        {"data": "Name", "title": "QAD Description"}, 
+                        {"data": "Retail_Barcode__c", "title": "Retail Barcode Required"},                
+                        {"data": "Retail_Barcode_Format__c", "title": "Retail Barcode Format"},                    
+                        {"data": "Retail_Barcode_Number__c", "title": "Retail Barcode Number"},                
+                        {"data": "Inner_Transit_Barcode__c", "title": "Inner Transit Barcode Required"},                      
+                        {"data": "Inner_Transit_Barcode_Format__c", "title": "Inner Transit Barcode Format"},        
+                        {"data": "Inner_Transit_Barcode_Number__c", "title": "Inner Transit Barcode Number"},
+                        {"data": "Outer_Transit_Barcode__c", "title": "Outer Transit Barcode Required"},                      
+                        {"data": "Outer_Transit_Barcode_Format__c", "title": "Outer Transit Barcode Format"},        
+                        {"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"}
         ];
 
         var table = $j('#' + id).DataTable({
@@ -56,46 +57,9 @@
             'searching' : false,
             'orderable' : false,
             'columns' : _columns,
-            'columnDefs' : [{ 
-                                'targets' : [1,2,3,5,6,8], 
-                                'render' : function ( data, type, row, meta ) {
-                                    switch (type) {
-                                        case 'display':
-                                            return accounting.formatMoney(data, "£", 0, ",", ".");
-                                            break;
-                                    }
-
-                                    return data;
-                                },
-                                'className' : 'text-right'
-                            },
-                            { 
-                                'targets' : [4,7,9], 
-                                'render' : function ( data, type, row, meta ) {
-                                    switch (type) {
-                                        case 'display':
-                                            return accounting.formatNumber(data*100, 0, ",") + "%";
-                                            break;
-                                    }
-
-                                    return data;
-                                },
-                                'className' : 'text-right'
-                            }
+            'columnDefs' : [
             ],
             'footerCallback' : function (tfoot, data, start, end, display) {
-                var api = this.api();
-
-                $j(api.column(0).footer()).html('Total');
-                $j(api.column(1).footer()).html(accounting.formatMoney(total.value.netSales, "£", 0, ".", ","));
-                $j(api.column(2).footer()).html(accounting.formatMoney(total.value.budget, "£", 0, ".", ","));              
-                $j(api.column(3).footer()).html(accounting.formatMoney(total.value.vsBudget, "£", 0, ".", ","));
-                $j(api.column(4).footer()).html(accounting.formatNumber(total.value.varBudget*100, 0, ",") + "%");
-                $j(api.column(5).footer()).html(accounting.formatMoney(total.value.target, "£", 0, ".", ","));
-                $j(api.column(6).footer()).html(accounting.formatMoney(total.value.vsTarget, "£", 0, ".", ","));
-                $j(api.column(7).footer()).html(accounting.formatNumber(total.value.varTarget*100, 0, ",") + "%");
-                $j(api.column(8).footer()).html(accounting.formatMoney(total.value.last, "£", 0, ".", ","));
-                $j(api.column(9).footer()).html(accounting.formatNumber(total.value.varLast*100, 0, ",") + "%");
             }
         });
     }
