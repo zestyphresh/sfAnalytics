@@ -55,9 +55,10 @@
         var table = $j('#' + id).dataTable({
             'data' : data,
             'paging' : false,
-            "scrollY": "500px",
+            "scrollY": "600px",
             "scrollX": true,
-            'dom': 'T<"clear">lfrtip',
+            "responsive": true,
+            'dom': 'CT<"clear">slfrtip',
             'tableTools': {
                 "aButtons": [
                     "copy",
@@ -73,9 +74,6 @@
                 'sSwfPath': swf
             },
             'columns' : _columns,
-            'columnDefs' : [
-                { "width": "9%", "targets": [0,1,2,3,4,5,6,7,8,9,10] }
-            ],
         });
 
     }
