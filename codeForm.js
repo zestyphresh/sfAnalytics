@@ -57,7 +57,7 @@
             'paging' : false,
             "scrollY": "600px",
             "scrollX": true,
-            "responsive": true,
+            "responsive": false,
             'dom': 'CT<"clear">slfrtip',
             'tableTools': {
                 "aButtons": [
