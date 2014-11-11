@@ -54,6 +54,7 @@
 
         var table = $j('#' + id).dataTable({
             'data' : data,
+            "autoWidth": false,
             'paging' : false,
             "scrollY": "600px",
             "scrollX": true,
