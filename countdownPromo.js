@@ -11,19 +11,44 @@
     getData()
         .then(function(result) { 
             
-            console.log(result);
-            
             _data.add(result);
             
             dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
             dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
+            dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
+            groups.weekValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
+            groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
             
-            console.log(groups.salespersonValue.all());
+            console.log(groups.productMatrix.all());
             
         })
         .done();
+        
+    var productMatrix = {
+        
+        reduceAdd : function (p, v) {
+                
+            p.count++;
+            p[v.Salesperson__r.Name] += v.Quantity__c;
+            return p;
+                
+        },
+        
+        reduceSubtract : function (p, v) {
+                
+            p.count--;
+            p[v.Salesperson__r.Name] -= v.Quantity__c;
+            return p;
+                
+        },
+            
+        reduceInit : function () {
+            return {'count' : 0, 'Steve Gent' : 0, 'Mark Pugh' : 0, 'Brian Murphy': 0, 'Steven Hooper': 0, 'Tracy Boorman': 0, 
+                    'Phil Lacy' : 0, 'Brian Robertson': 0, 'Norrie Currie': 0, 'Matthew Kettleborough': 0};
+        }
+    };   
         
     function getData() {
 
