@@ -56,7 +56,6 @@
             'data' : data,
             'paging' : false,
             "autowidth": true,
-            "responsive": false,
             'dom': 'CT<"clear">slfrtip',
             'tableTools': {
                 "aButtons": [
