@@ -18,7 +18,7 @@
 
         conn.sobject("Daily_Historical_Sales__c")
             .select("Salesperson__r.Name, Account__r.Name, Quantity__c, Value__c, Invoice_Date__c, Product__r.Product_Code_Name__c")
-            .where("Promotion__c = " + "'" + promo + "'")
+            .where("Promotion__r.Id = " + "'" + promo + "'")
             .on('record', function(record) {
                 records.push(record);
             })
