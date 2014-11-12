@@ -56,20 +56,18 @@
             'data' : data,
             'paging' : false,
             "autowidth": true,
-            "scrollX": true,
+            "scrollX": "100%",
             "responsive": false,
             'dom': 'CT<"clear">slfrtip',
             'tableTools': {
                 "aButtons": [
                     "copy",
-                    "csv",
                     "xls",
                     {
                         "sExtends": "pdf",
                         "sPdfOrientation": "landscape",
                         "sPdfMessage": "Your custom message would go here."
                     },
-                    "print"
                 ],
                 'sSwfPath': swf
             },
