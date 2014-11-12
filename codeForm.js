@@ -58,16 +58,9 @@
             'dom': 'lt<"clear">T',
             'tableTools': {
                 "aButtons": [
-                    "print",
                     "copy",
                     "xls",
-                    {
-                        "sExtends": "pdf",
-                        "sPdfOrientation": "landscape",
-                        "sPdfMessage": "QAD Product Code Request" 
-                    },
-                ],
-                'sSwfPath': swf
+                ]
             },
             'columns' : _columns,
         });
