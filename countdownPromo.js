@@ -11,6 +11,8 @@
     getData()
         .then(function(result) { 
             
+            console.log(result);
+            
             _data.add(result);
             
             dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
@@ -41,7 +43,7 @@
             .on('end', function(err) {
                 deferred.resolve(records);
             })
-            .run({ autoFetch : true, maxFetch : 100 });
+            .run({ autoFetch : true, maxFetch : 5000 });
 
         return deferred.promise;
 
