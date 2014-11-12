@@ -54,9 +54,8 @@
 
         var table = $j('#' + id).dataTable({
             'data' : data,
-            "autoWidth": false,
             'paging' : false,
-            "scrollY": "600px",
+            "autowidth": true,
             "scrollX": true,
             "responsive": false,
             'dom': 'CT<"clear">slfrtip',
