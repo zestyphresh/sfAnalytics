@@ -55,7 +55,7 @@
         var table = $j('#' + id).dataTable({
             'data' : data,
             'paging' : false,
-            'dom': 'TC<"clear">lt',
+            'dom': 'lt<"clear">T',
             'tableTools': {
                 "aButtons": [
                     "copy",
