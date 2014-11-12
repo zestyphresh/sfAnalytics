@@ -60,7 +60,8 @@
                 "aButtons": [
                     "copy",
                     "xls",
-                ]
+                ],
+                'sSwfPath': swf
             },
             'columns' : _columns,
         });
