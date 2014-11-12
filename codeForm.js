@@ -75,25 +75,3 @@
     }
 
 })(conn, projectId, tableToolsSwf);
-
-        // var table = $j('#' + id).dataTable({
-        //     'data' : data,
-        //     "autoWidth": false,
-        //     'paging' : false,
-        //     'info' : false,
-        //     "scrollY": "600px",
-        //     "scrollX": "100%",
-        //     "scrollCollapse": true,
-        //     'searching' : false,
-        //     'orderable' : false,
-        //     'dom': 'T<"clear">lfrtip',
-        //     'tableTools': {
-        //         'sSwfPath': "{!URLFOR($Resource.js_datatables, 'datatables/1.10.4/extensions/TableTools/swf/copy_csv_xls_pdf.swf')}"
-        //     },
-        //     'columns' : _columns,
-        //     'columnDefs' : [
-        //         { "width": "9%", "targets": [0,1,2,3,4,5,6,7,8,9,10] }
-        //     ],
-        //     'footerCallback' : function (tfoot, data, start, end, display) {
-        //     }
-        // });
