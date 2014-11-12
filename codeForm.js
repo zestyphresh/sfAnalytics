@@ -55,8 +55,7 @@
         var table = $j('#' + id).dataTable({
             'data' : data,
             'paging' : false,
-            "autowidth": true,
-            'dom': 'CT<"clear">slfrtip',
+            'dom': 'CT<"clear">lt',
             'tableTools': {
                 "aButtons": [
                     "copy",
@@ -64,7 +63,7 @@
                     {
                         "sExtends": "pdf",
                         "sPdfOrientation": "landscape",
-                        "sPdfMessage": "Your custom message would go here."
+                        "sPdfMessage": "QAD Product Code Request" 
                     },
                 ],
                 'sSwfPath': swf
