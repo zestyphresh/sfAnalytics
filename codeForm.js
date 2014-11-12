@@ -10,7 +10,7 @@
             createTable('codes', result);
             
         })
-        .done()
+        .done();
         
     function getData() {
 
