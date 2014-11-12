@@ -2,10 +2,23 @@
     
     $j = jQuery.noConflict();
     
+     //PRIVATE VARS
+    var _data = crossfilter();
+            
+    //PUBLIC VARS   
+    var dims = {}, groups = {};
+    
     getData()
         .then(function(result) { 
             
-            console.log(result);
+            _data.add(result);
+            
+            dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
+            dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
+            
+            groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
+            
+            console.log(groups.salespersonValue.all());
             
         })
         .done();
