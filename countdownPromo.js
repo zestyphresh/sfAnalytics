@@ -33,7 +33,7 @@
         
         var svg = dimple.newSvg('#chartSalesperson', '100%', '100%');
             
-        var chart = new dimple.chart(svg, groups.salesperson.all()).setMargins('80px', '30px', '30px', '30px');
+        var chart = new dimple.chart(svg, groups.salespersonValue.all()).setMargins('80px', '30px', '30px', '30px');
         
         var xAxis = chart.addMeasureAxis('x', 'values');
             xAxis.title = 'Gross Value (£)';
