@@ -55,17 +55,7 @@
         return { draw : draw };
         
     };
-        
-    createCharts() {
-        
-        
 
-        chart.draw();
-    
-    };
-        
-    }
-        
     var productMatrix = {
         
         reduceAdd : function (p, v) {
