@@ -67,11 +67,12 @@
             
         var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '60px', '30px');
         
-        var xAxis = chart.addTimeAxis('y', 'key', '%Y-%m-%d', '%Y-%m-%d');
+        var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%m-%d');
+            xAxis.title = null;
             xAxis.timePeriod = d3.time.week;
             xAxis.timeInterval = 1;
                         
-        var yAxis = chart.addMeasureAxis('x', 'value');
+        var yAxis = chart.addMeasureAxis('y', 'value');
             yAxis.title = 'Gross Value (£)';
         
         var series = chart.addSeries(null, dimple.plot.bar);
