@@ -44,7 +44,7 @@
             yAxis.title = null;
             yAxis.addOrderRule('grossValue'); 
         
-        var series = chart.addSeries('key', dimple.plot.bar);
+        var series = chart.addSeries(null, dimple.plot.bar);
             
         series.getTooltipText = function (e) {
             return ['Total Value - ' + numeral(e.cx).format('$0,0')];
