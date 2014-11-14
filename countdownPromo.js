@@ -21,6 +21,8 @@
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.weekValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
+            
+            console.log(groups);
 
             charts.salesperson().draw();
             charts.weekly().draw();
