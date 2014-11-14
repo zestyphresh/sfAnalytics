@@ -33,60 +33,43 @@
     charts.salesperson = function() {
         
         $j('#container').append('<div id="chartSalesperson" />');
-        
-        var svg = dimple.newSvg('#chartSalesperson', '100%', '100%');
-            
-        var chart = new dimple.chart(svg, groups.salespersonValue.all()).setMargins('120px', '30px', '30px', '30px');
-        
-        var xAxis = chart.addMeasureAxis('x', 'value');
-            xAxis.title = 'Gross Value (£)';
-            xAxis.ticks = 5;
-            xAxis.tickFormat = '0,f'; 
-                        
-        var yAxis = chart.addCategoryAxis('y', 'key');
-            yAxis.title = null;
-            yAxis.addOrderRule('grossValue', true); 
-        
-        var series = chart.addSeries(null, dimple.plot.bar);
-            
-        series.getTooltipText = function (e) {
-            return ['Total Value - ' + e.cx];
-        };
-        
-        series.shapes.each(function(d) {
 
-            // Get the shape as a d3 selection
-            var shape = d3.select(this),
-
-            // Get the height and width from the scales
-            height = chart.y + chart.height - yAxis._scale(d.height);
-            width = xAxis._scale(d.width);
-
-            // Add a text label for the value
-            svg.append("text")
-
-            // Position in the centre of the shape (vertical position is
-            // manually set due to cross-browser problems with baseline)
-            .attr("x", parseFloat(shape.attr("x")) + width / 2 - 15)
-            .attr("y", parseFloat(shape.attr("y")) - height / 2)
-
-            // Centre align
-            .style("text-anchor", "middle")
-            .style("font-size", "10px")
-            .style("font-family", "sans-serif")
-
-            // Make it a little transparent to tone down the black
-            .style("opacity", 0.7)
-
-            // Format the number
-            .text(d3.format(",.1f")(d.yValue / 1000) + "k");
-        });
+        var chart = d4.charts.row();
         
-        function draw() { chart.draw(); }
-        
-        return { draw : draw };
-        
+        d3.select('#chartSalesperson')
+           .datum(svg, groups.salespersonValue.all())
+           .call(chart);
+
     };
+        
+    // charts.salesperson = function() {
+        
+    //     $j('#container').append('<div id="chartSalesperson" />');
+        
+    //     var svg = dimple.newSvg('#chartSalesperson', '100%', '100%');
+            
+    //     var chart = new dimple.chart(svg, groups.salespersonValue.all()).setMargins('120px', '30px', '30px', '30px');
+        
+    //     var xAxis = chart.addMeasureAxis('x', 'value');
+    //         xAxis.title = 'Gross Value (£)';
+    //         xAxis.ticks = 5;
+    //         xAxis.tickFormat = '0,f'; 
+                        
+    //     var yAxis = chart.addCategoryAxis('y', 'key');
+    //         yAxis.title = null;
+    //         yAxis.addOrderRule('grossValue', true); 
+        
+    //     var series = chart.addSeries(null, dimple.plot.bar);
+            
+    //     series.getTooltipText = function (e) {
+    //         return ['Total Value - ' + e.cx];
+    //     };
+
+    //     function draw() { chart.draw(); }
+        
+    //     return { draw : draw };
+        
+    // };
     
     charts.weekly = function() {
         
