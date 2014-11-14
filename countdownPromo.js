@@ -29,9 +29,9 @@
         
     charts.salesperson = function() {
         
-        $j('body').append('<div id="chartSalesperson" />');
+        $j('#container').append('<div id="chartSalesperson" />');
         
-        var svg = dimple.newSvg('#' + id, '100%', '100%');
+        var svg = dimple.newSvg('#chartSalesperson', '100%', '100%');
             
         var chart = new dimple.chart(svg, groups.salesperson.all()).setMargins('80px', '30px', '30px', '30px');
         
