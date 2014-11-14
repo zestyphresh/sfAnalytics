@@ -37,7 +37,7 @@
         var chart = d4.charts.row();
         
         d3.select('#chartSalesperson')
-           .datum(svg, groups.salespersonValue.all())
+           .datum(groups.salespersonValue.all())
            .call(chart);
 
     };
