@@ -67,10 +67,13 @@
             
         var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '30px', '80px');
         
-        var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%W');
+        //var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%W');
+        //    xAxis.title = null;
+        //    xAxis.timePeriod = d3.time.weeks;
+        //    xAxis.timeInterval = 1;
+            
+        var xAxis = chart.addCategoryAxis('x', 'key');
             xAxis.title = null;
-            xAxis.timePeriod = d3.time.weeks;
-            xAxis.timeInterval = 1;
                         
         var yAxis = chart.addMeasureAxis('y', 'value');
             yAxis.title = 'Gross Value (£)';
