@@ -65,7 +65,7 @@
         
         var svg = dimple.newSvg('#chartWeekly', '100%', '100%');
             
-        var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '60px', '30px');
+        var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '30px', '80px');
         
         var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%W');
             xAxis.title = null;
