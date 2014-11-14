@@ -69,7 +69,7 @@
         
         var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%m-%d');
             xAxis.title = null;
-            xAxis.timePeriod = d3.time.week;
+            xAxis.timePeriod = d3.time.weeks;
             xAxis.timeInterval = 1;
                         
         var yAxis = chart.addMeasureAxis('y', 'value');
