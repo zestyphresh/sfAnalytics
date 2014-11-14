@@ -19,7 +19,7 @@
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
-            groups.weekValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
+            groups.weekValue = dims.week.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
             
             console.log(groups.weekValue.all());
