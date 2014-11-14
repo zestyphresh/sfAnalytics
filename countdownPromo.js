@@ -67,7 +67,7 @@
             
         var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '60px', '30px');
         
-        var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%m-%d');
+        var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%W');
             xAxis.title = null;
             xAxis.timePeriod = d3.time.weeks;
             xAxis.timeInterval = 1;
