@@ -21,9 +21,7 @@
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.weekValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
-            
-            console.log(groups.salespersonValue.all());
-            
+
             charts.salesperson().draw();
 
         })
@@ -35,9 +33,9 @@
         
         var svg = dimple.newSvg('#chartSalesperson', '100%', '100%');
             
-        var chart = new dimple.chart(svg, groups.salespersonValue.all()).setMargins('80px', '30px', '30px', '30px');
+        var chart = new dimple.chart(svg, groups.salespersonValue.all()).setMargins('120px', '30px', '30px', '30px');
         
-        var xAxis = chart.addMeasureAxis('x', 'values');
+        var xAxis = chart.addMeasureAxis('x', 'value');
             xAxis.title = 'Gross Value (£)';
             xAxis.ticks = 5;
             xAxis.tickFormat = '0,f'; 
