@@ -50,7 +50,7 @@
         var series = chart.addSeries(null, dimple.plot.bar);
             
         series.getTooltipText = function (e) {
-            return ['Total Value - ' + numeral(e.cx).format('$0,0')];
+            return ['Total Value - ' + e.cx];
         };
         
         function draw() { chart.draw(); }
@@ -77,7 +77,7 @@
         var series = chart.addSeries(null, dimple.plot.bar);
             
         series.getTooltipText = function (e) {
-            return ['Total Value - ' + numeral(e.cx).format('$0,0')];
+            return ['Total Value - ' + e.cx];
         };
         
         function draw() { chart.draw(); }
