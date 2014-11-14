@@ -45,7 +45,7 @@
                         
         var yAxis = chart.addCategoryAxis('y', 'key');
             yAxis.title = null;
-            yAxis.addOrderRule('grossValue'); 
+            yAxis.addOrderRule('grossValue', true); 
         
         var series = chart.addSeries(null, dimple.plot.bar);
             
