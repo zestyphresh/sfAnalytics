@@ -23,6 +23,7 @@
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
 
             charts.salesperson().draw();
+            charts.weekly().draw();
 
         })
         .done();
@@ -43,6 +44,33 @@
         var yAxis = chart.addCategoryAxis('y', 'key');
             yAxis.title = null;
             yAxis.addOrderRule('grossValue'); 
+        
+        var series = chart.addSeries(null, dimple.plot.bar);
+            
+        series.getTooltipText = function (e) {
+            return ['Total Value - ' + numeral(e.cx).format('$0,0')];
+        };
+        
+        function draw() { chart.draw(); }
+        
+        return { draw : draw };
+        
+    };
+    
+    charts.weekly = function() {
+        
+        $j('#container').append('<div id="chartWeekly" />');
+        
+        var svg = dimple.newSvg('#chartWeekly', '100%', '100%');
+            
+        var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '60px', '30px');
+        
+        var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%m-%d');
+            xAxis.timePeriod = d3.time.weeks;
+            xAxis.timeInterval = 1;
+                        
+        var yAxis = chart.addMeasureAxis('x', 'value');
+            yAxis.title = 'Gross Value (£)';
         
         var series = chart.addSeries(null, dimple.plot.bar);
             
