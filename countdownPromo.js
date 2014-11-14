@@ -7,6 +7,7 @@
             
     //PUBLIC VARS   
     var dims = {}, groups = {};
+    var charts = {};
     
     getData()
         .then(function(result) { 
@@ -21,10 +22,49 @@
             groups.weekValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
             
-            console.log(groups.productMatrix.all());
-            
+            charts.salesperson().draw();
+
         })
         .done();
+        
+    charts.salesperson = function() {
+        
+        $j('body').append('<div id="chartSalesperson" />');
+        
+        var svg = dimple.newSvg('#' + id, '100%', '100%');
+            
+        var chart = new dimple.chart(svg, groups.salesperson.all()).setMargins('80px', '30px', '30px', '30px');
+        
+        var xAxis = chart.addMeasureAxis('x', 'values');
+            xAxis.title = 'Gross Value (£)';
+            xAxis.ticks = 5;
+            xAxis.tickFormat = '0,f'; 
+                        
+        var yAxis = chart.addCategoryAxis('y', 'key');
+            yAxis.title = null;
+            yAxis.addOrderRule('grossValue'); 
+        
+        var series = chart.addSeries('key', dimple.plot.bar);
+            
+        series.getTooltipText = function (e) {
+            return ['Total Value - ' + numeral(e.cx).format('$0,0')];
+        };
+        
+        function draw() { chart.draw(); }
+        
+        return { draw : draw };
+        
+    };
+        
+    createCharts() {
+        
+        
+
+        chart.draw();
+    
+    };
+        
+    }
         
     var productMatrix = {
         
