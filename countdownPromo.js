@@ -35,6 +35,8 @@
         $j('#container').append('<div id="chartSalesperson" />');
 
         var chart = d4.charts.row()
+            .outerHeight($('#container').height())
+            .outerWidth($('#container').width())
             .x(function(x){
                 x.key('value');
             })
