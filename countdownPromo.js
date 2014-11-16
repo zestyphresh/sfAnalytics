@@ -44,13 +44,17 @@
                 y.key('key');
             })
             .valueKey('value')
-            .margin({ top: 10, right: 10, bottom: 20, left: 120 })
+            .margin({ top: 10, right: 10, bottom: 20, left: 140 })
         ;
         
         d3.select('#chartSalesperson')
            .datum(groups.salespersonValue.all())
            .call(chart);
-
+           
+        $j('text.column-labels').text(function(i, v) {
+            accounting.formatMoney(v, "£", 0, ".", ",")
+        });
+        
     };
         
     // charts.salesperson = function() {
