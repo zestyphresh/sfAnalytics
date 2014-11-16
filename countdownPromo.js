@@ -43,7 +43,7 @@
             .y(function(y){
                 y.key('key');
             })
-            .margin({ top: 10, right: 10, bottom: 20, left: 40 })
+            .margin({ top: 10, right: 10, bottom: 20, left: 120 })
         ;
         
         d3.select('#chartSalesperson')
