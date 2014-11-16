@@ -51,7 +51,7 @@
            .datum(groups.salespersonValue.all())
            .call(chart);
            
-        $j('text.column-label').text(function(i, v) {
+        $j('.column-label').text(function(i, v) {
             accounting.formatMoney(v, "£", 0, ".", ",")
         });
         
