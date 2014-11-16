@@ -35,14 +35,15 @@
         $j('#container').append('<div id="chartSalesperson" />');
 
         var chart = d4.charts.row()
-            .outerHeight($j('#container').height())
-            .outerWidth($j('#container').width())
+            .outerHeight($j('#chartSalesperson').height())
+            .outerWidth($j('#chartSalesperson').width())
             .x(function(x){
                 x.key('value');
             })
             .y(function(y){
                 y.key('key');
             })
+            .margin({ top: 10, right: 10, bottom: 10, left: 60 })
         ;
         
         d3.select('#chartSalesperson')
