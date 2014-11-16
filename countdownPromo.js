@@ -43,6 +43,9 @@
             .y(function(y){
                 y.key('key');
             })
+            .value(function(y){
+                value.key('value');
+            })
             .margin({ top: 10, right: 10, bottom: 20, left: 120 })
         ;
         
