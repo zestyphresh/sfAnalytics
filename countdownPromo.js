@@ -34,7 +34,14 @@
         
         $j('#container').append('<div id="chartSalesperson" />');
 
-        var chart = d4.charts.row();
+        var chart = d4.charts.row()
+            .x(function(x){
+                x.key('value');
+            })
+            .y(function(y){
+                y.key('key');
+            })
+        ;
         
         d3.select('#chartSalesperson')
            .datum(groups.salespersonValue.all())
