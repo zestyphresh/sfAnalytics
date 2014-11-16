@@ -43,8 +43,8 @@
             .y(function(y){
                 y.key('key');
             })
-            .valueKey(function() {
-                return 'value';
+            .valueKey(function(v) {
+                return v['value'];
             })
             .margin({ top: 10, right: 10, bottom: 20, left: 120 })
         ;
