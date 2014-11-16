@@ -44,7 +44,7 @@
                 y.key('key');
             })
             .valueKey(function(v) {
-                return v.value;
+                v.key('value');
             })
             .margin({ top: 10, right: 10, bottom: 20, left: 120 })
         ;
