@@ -24,7 +24,7 @@
             
             console.log(groups.weekValue.all());
 
-            charts.salesperson().draw();
+            charts.salesperson();
             charts.weekly().draw();
 
         })
