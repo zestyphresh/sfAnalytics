@@ -46,7 +46,7 @@
                 y.key('key');
             })
             .valueKey('value')
-            .mixout(['yAxis'])
+            .mixout(['xAxis'])
             .using('barLabels', function(labels) {
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
