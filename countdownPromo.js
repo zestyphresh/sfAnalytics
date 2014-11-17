@@ -46,7 +46,7 @@
             .valueKey('value')
             .using('barLabels', function(labels) {
                 labels.text(function(d) {
-                    return accounting.formatMoney(d.data.value, "£", 0, ",", ".")
+                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
                 })
             })
             .margin({ top: 10, right: 40, bottom: 20, left: 140 })
