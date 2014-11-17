@@ -18,7 +18,7 @@
             dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
-            groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; }).orderNatural();
+            groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.weekValue = dims.week.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
             
@@ -50,7 +50,7 @@
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
                 })
             })
-            .using('yAxis', function(axis){
+            .using('xAxis', function(axis){
 
                 axis.tickSize(10,5);
                 axis.tickPadding(5);
@@ -60,7 +60,7 @@
         ;
         
         d3.select('#chartSalesperson')
-            .datum(groups.salespersonValue.all())
+            .datum(groups.salespersonValue.orderNatural())
             .call(chart)
         ;
            
