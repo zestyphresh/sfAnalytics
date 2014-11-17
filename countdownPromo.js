@@ -94,37 +94,6 @@
            
     };
 
-    charts.weekly = function() {
-        
-        $j('#container').append('<div id="chartWeekly" />');
-        
-        var svg = dimple.newSvg('#chartWeekly', '100%', '100%');
-            
-        var chart = new dimple.chart(svg, groups.weekValue.all()).setMargins('50px', '30px', '30px', '80px');
-        
-        //var xAxis = chart.addTimeAxis('x', 'key', '%Y-%m-%d', '%Y-%W');
-        //    xAxis.title = null;
-        //    xAxis.timePeriod = d3.time.weeks;
-        //    xAxis.timeInterval = 1;
-            
-        var xAxis = chart.addCategoryAxis('x', 'key');
-            xAxis.title = null;
-                        
-        var yAxis = chart.addMeasureAxis('y', 'value');
-            yAxis.title = 'Gross Value (£)';
-        
-        var series = chart.addSeries(null, dimple.plot.bar);
-            
-        series.getTooltipText = function (e) {
-            return ['Total Value - ' + e.cx];
-        };
-        
-        function draw() { chart.draw(); }
-        
-        return { draw : draw };
-        
-    };
-
     var productMatrix = {
         
         reduceAdd : function (p, v) {
