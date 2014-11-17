@@ -19,7 +19,7 @@
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
-            groups.weekValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
+            groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
 
             charts.salesperson();
@@ -55,6 +55,39 @@
         ;
         
         d3.select('#chartSalesperson')
+            .datum(data)
+            .call(chart)
+        ;
+           
+    };
+    
+    charts.weekly = function() {
+        
+        var data = groups.weeklyValue.orderNatural().top(Infinity);
+        console.log(data);
+        
+        $j('#container').append('<div id="chartWeekly" />');
+
+        var chart = d4.charts.column()
+            .outerHeight($j('#chartWeekly').height())
+            .outerWidth($j('#chartWeekly').width())
+            .margin({ top: 10, right: 10, bottom: 20, left: 10 })
+            .x(function(x){
+                x.key('key');
+            })
+            .y(function(y){
+                y.key('value');
+            })
+            .valueKey('value')
+            .mixout(['yAxis'])
+            .using('barLabels', function(labels) {
+                labels.text(function(d) {
+                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
+                })
+            })
+        ;
+        
+        d3.select('#chartWeekly')
             .datum(data)
             .call(chart)
         ;
