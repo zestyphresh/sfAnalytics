@@ -44,15 +44,20 @@
                 y.key('key');
             })
             .valueKey('value')
-            .margin({ top: 10, right: 10, bottom: 20, left: 140 })
+            .margin({ top: 10, right: 40, bottom: 20, left: 140 })
         ;
         
         d3.select('#chartSalesperson')
            .datum(groups.salespersonValue.all())
-           .call(chart);
+           .call(chart)
+           .each('end', function() {
+                $j('.column-label').text(function(i, v) {
+                    return accounting.formatMoney(v, "£", 0, ",", ".")
+                });
+           });
            
         $j('.column-label').text(function(i, v) {
-            accounting.formatMoney(v, "£", 0, ".", ",")
+            return accounting.formatMoney(v, "£", 0, ",", ".")
         });
         
     };
