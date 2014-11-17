@@ -22,7 +22,9 @@
             groups.weekValue = dims.week.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
             
-            console.log(groups.weekValue.all());
+            console.log(groups.salespersonValue.all());
+            console.log(groups.salespersonValue.orderNatural());
+            console.log(groups.salespersonValue.orderNatural().all());
 
             charts.salesperson();
             charts.weekly().draw();
