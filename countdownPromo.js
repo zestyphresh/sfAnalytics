@@ -38,7 +38,7 @@
         var chart = d4.charts.row()
             .outerHeight($j('#chartSalesperson').height())
             .outerWidth($j('#chartSalesperson').width())
-            .margin({ top: 10, right: 40, bottom: 20, left: 140 })
+            .margin({ top: 10, right: 50, bottom: 20, left: 140 })
             .x(function(x){
                 x.key('value');
             })
@@ -46,17 +46,11 @@
                 y.key('key');
             })
             .valueKey('value')
+            .mixout(['yAxis'])
             .using('barLabels', function(labels) {
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
                 })
-            })
-            .using('xAxis', function(axis){
-
-                axis.tickSize(10,5);
-                axis.tickPadding(5);
-                axis.subtitle('Gross GBP');
-            
             })
         ;
         
