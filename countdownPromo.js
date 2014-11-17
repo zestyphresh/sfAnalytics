@@ -44,21 +44,22 @@
                 y.key('key');
             })
             .valueKey('value')
+            .using('barLabels', function(labels) {
+                labels.text(function(d) {
+                    return accounting.formatMoney(d.data.value, "£", 0, ",", ".")
+                })
+            })
             .margin({ top: 10, right: 40, bottom: 20, left: 140 })
         ;
         
         d3.select('#chartSalesperson')
-           .datum(groups.salespersonValue.all())
-           .call(chart)
-           .each('end', function() {
-                $j('.column-label').text(function(i, v) {
-                    return accounting.formatMoney(v, "£", 0, ",", ".")
-                });
-           });
+            .datum(groups.salespersonValue.all())
+            .call(chart)
+        ;
            
-        $j('.column-label').text(function(i, v) {
-            return accounting.formatMoney(v, "£", 0, ",", ".")
-        });
+        // $j('.column-label').text(function(i, v) {
+        //     return accounting.formatMoney(v, "£", 0, ",", ".")
+        // });
         
     };
         
