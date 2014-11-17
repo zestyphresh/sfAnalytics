@@ -30,6 +30,9 @@
         
     charts.salesperson = function() {
         
+        var data = groups.salespersonValue.orderNatural().top(Infinity);
+        console.log(data);
+        
         $j('#container').append('<div id="chartSalesperson" />');
 
         var chart = d4.charts.row()
@@ -58,7 +61,7 @@
         ;
         
         d3.select('#chartSalesperson')
-            .datum(groups.salespersonValue.orderNatural().top(Infinity))
+            .datum(data)
             .call(chart)
         ;
            
