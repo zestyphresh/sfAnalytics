@@ -64,41 +64,8 @@
             .call(chart)
         ;
            
-        // $j('.column-label').text(function(i, v) {
-        //     return accounting.formatMoney(v, "£", 0, ",", ".")
-        // });
-        
     };
-        
-    // charts.salesperson = function() {
-        
-    //     $j('#container').append('<div id="chartSalesperson" />');
-        
-    //     var svg = dimple.newSvg('#chartSalesperson', '100%', '100%');
-            
-    //     var chart = new dimple.chart(svg, groups.salespersonValue.all()).setMargins('120px', '30px', '30px', '30px');
-        
-    //     var xAxis = chart.addMeasureAxis('x', 'value');
-    //         xAxis.title = 'Gross Value (£)';
-    //         xAxis.ticks = 5;
-    //         xAxis.tickFormat = '0,f'; 
-                        
-    //     var yAxis = chart.addCategoryAxis('y', 'key');
-    //         yAxis.title = null;
-    //         yAxis.addOrderRule('grossValue', true); 
-        
-    //     var series = chart.addSeries(null, dimple.plot.bar);
-            
-    //     series.getTooltipText = function (e) {
-    //         return ['Total Value - ' + e.cx];
-    //     };
 
-    //     function draw() { chart.draw(); }
-        
-    //     return { draw : draw };
-        
-    // };
-    
     charts.weekly = function() {
         
         $j('#container').append('<div id="chartWeekly" />');
