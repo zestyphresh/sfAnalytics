@@ -21,10 +21,6 @@
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c; });
             groups.weekValue = dims.week.group().reduceSum(function(d) { return d.Value__c; });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
-            
-            console.log(groups.salespersonValue.all());
-            console.log(groups.salespersonValue.orderNatural());
-            console.log(groups.salespersonValue.orderNatural().all());
 
             charts.salesperson();
             charts.weekly().draw();
@@ -62,7 +58,7 @@
         ;
         
         d3.select('#chartSalesperson')
-            .datum(groups.salespersonValue.orderNatural())
+            .datum(groups.salespersonValue.orderNatural().top(Infinity))
             .call(chart)
         ;
            
