@@ -120,7 +120,10 @@
         var table = $j('#table-matrix').dataTable({
             'data' : data,
             'paging' : true,
-            'columns' : _columns
+            'columns' : _columns,
+            'columnDefs' : [
+                { "width": "120px", "targets": 0 }
+            ]
         });
         
     };
