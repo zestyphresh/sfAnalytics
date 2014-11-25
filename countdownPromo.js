@@ -113,7 +113,7 @@
                         {"data": "value.MatthewKettleborough", "title": "MK"}
         ];
 
-        var table = $j('#' + id).dataTable({
+        var table = $j('#table-matrix').dataTable({
             'data' : data,
             'paging' : true,
             'columns' : _columns
