@@ -81,6 +81,9 @@
                 y.key('value');
             })
             .valueKey('value')
+            .using('xAxis', function(xAxis){
+                xAxis.stagger(true);
+            })
             .mixout(['yAxis'])
             .using('barLabels', function(labels) {
                 labels.text(function(d) {
@@ -102,6 +105,7 @@
         console.log(data);
       
         var _columns = [{"data": "key", "title": "Product"},
+                        {"data": "value.total", "title": "Total"},
                         {"data": "value.SteveGent", "title": "SG"},
                         {"data": "value.MarkPugh", "title": "MP"}, 
                         {"data": "value.BrianMurphy", "title": "BM"},                
@@ -126,7 +130,8 @@
         reduceAdd : function (p, v) {
 
             p.count++;
-            p[v.Salesperson__r.Name.replace(/\s/g, "X")] += v.Quantity__c;
+            p.total += v.Quantity__c;
+            p[v.Salesperson__r.Name.replace(/\s/g, "")] += v.Quantity__c;
             return p;
                 
         },
@@ -134,13 +139,14 @@
         reduceSubtract : function (p, v) {
                 
             p.count--;
-            p[v.Salesperson__r.Name.replace(/\s/g, "X")] -= v.Quantity__c;
+            p.total -= v.Quantity__c;
+            p[v.Salesperson__r.Name.replace(/\s/g, "")] -= v.Quantity__c;
             return p;
                 
         },
             
         reduceInit : function () {
-            return {'count' : 0, 'SteveGent' : 0, 'MarkPugh' : 0, 'BrianMurphy': 0, 'StevenHooper': 0, 'TracyBoorman': 0, 
+            return {'count' : 0, 'total' : 0, 'SteveGent' : 0, 'MarkPugh' : 0, 'BrianMurphy': 0, 'StevenHooper': 0, 'TracyBoorman': 0, 
                     'PhilLacy' : 0, 'BrianRobertson': 0, 'NorrieCurrie': 0, 'MatthewKettleborough': 0};
         }
     };   
