@@ -32,7 +32,7 @@
         
     charts.salesperson = function() {
         
-        var data = groups.salespersonValue.orderNatural().top(Infinity);
+        var data = _.sortBy(groups.salespersonValue.top(Infinity), function(d) { return d.value; });
         console.log(data);
         
         //$j('#row1').append('<div id="chartSalesperson" />');
@@ -101,7 +101,7 @@
     
     tables.product = function() {
         
-        var data = groups.productMatrix.orderNatural().top(Infinity);
+        var data = _.sortBy(groups.productMatrix.top(Infinity), function(d) { return d.value.total; });
         console.log(data);
       
         var _columns = [{"data": "key", "title": "Product"},
