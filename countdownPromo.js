@@ -8,12 +8,14 @@
     //PUBLIC VARS   
     var dims = {}, groups = {};
     var charts = {}, tables = {};
+    var values = {};
     
     getData()
         .then(function(result) { 
             
             _data.add(result);
             
+            dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
             dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
@@ -21,7 +23,12 @@
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
+            
+            values.sales = dims.dummy.group().reduceSum(function(d) { return d.Value__c; });
+            values.volume = dims.dummy.group().reduceSum(function(d) { return d.Quantity__c; });
 
+            values.totalSales();
+            values.totalVolumes();
             charts.salesperson();
             charts.weekly();
             tables.product();
@@ -29,6 +36,24 @@
 
         })
         .done();
+        
+    values.totalSales = function() {
+        
+        var data = dims.dummy.group().reduceSum(function(d) { return d.Value__c; }).top(1)[0].value;
+        console.log(data);
+        
+        $j('#headline-value').text(data);
+        
+    };
+    
+    values.totalVolumes = function() {
+        
+        var data = dims.dummy.group().reduceSum(function(d) { return d.Quantity__c; }).top(1)[0].value;
+        console.log(data);
+        
+        $j('#headline-volume').text(data);
+        
+    };
         
     charts.salesperson = function() {
         
