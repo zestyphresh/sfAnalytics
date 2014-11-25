@@ -24,6 +24,11 @@
 
             charts.salesperson().draw();
             charts.weekly().draw();
+            
+            $j(window).on('resize', function() {
+                charts.salesperson.draw();
+                charts.weekly.draw();
+            })
 
         })
         .done();
