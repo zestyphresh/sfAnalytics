@@ -55,7 +55,7 @@
             })
         ;
 
-        d3.select('#chartSalesperson')
+        d3.select('#chart-salesperson')
             .datum(data)
             .call(chart)
         ;
@@ -88,7 +88,7 @@
             })
         ;
         
-        d3.select('#chartWeekly')
+        d3.select('#chart-weekly')
             .datum(data)
             .call(chart)
         ;
