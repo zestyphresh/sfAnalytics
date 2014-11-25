@@ -120,6 +120,7 @@
         var table = $j('#table-matrix').dataTable({
             'data' : data,
             'paging' : true,
+            'dom' : 'ftip',
             'columns' : _columns,
             'columnDefs' : [
                 { "width": "40%", "targets": 0 }
