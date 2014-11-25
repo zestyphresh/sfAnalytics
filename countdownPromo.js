@@ -22,12 +22,12 @@
             groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
 
-            charts.salesperson().draw();
-            charts.weekly().draw();
+            var chtSalesperson = charts.salesperson().draw();
+            var chtWeekly = charts.weekly().draw();
             
             $j(window).on('resize', function() {
-                charts.salesperson().draw();
-                charts.weekly().draw();
+                chtSalesperson.draw();
+                chtWeekly.draw();
             })
 
         })
