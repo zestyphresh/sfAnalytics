@@ -41,8 +41,8 @@
         $j('#container').append('<div id="chartSalesperson" />');
 
         var chart = d4.charts.row()
-            .outerHeight($j('#chartSalesperson').height())
-            .outerWidth($j('#chartSalesperson').width())
+            //.outerHeight($j('#chartSalesperson').height())
+            //.outerWidth($j('#chartSalesperson').width())
             .margin({ top: 10, right: 50, bottom: 20, left: 140 })
             .x(function(x){
                 x.key('value');
@@ -78,8 +78,8 @@
         $j('#container').append('<div id="chartWeekly" />');
 
         var chart = d4.charts.column()
-            .outerHeight($j('#chartWeekly').height())
-            .outerWidth($j('#chartWeekly').width())
+            //.outerHeight($j('#chartWeekly').height())
+            //.outerWidth($j('#chartWeekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 10 })
             .x(function(x){
                 x.key('key');
