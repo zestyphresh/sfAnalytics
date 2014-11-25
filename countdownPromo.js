@@ -120,6 +120,7 @@
         var table = $j('#table-matrix').dataTable({
             'data' : data,
             'paging' : true,
+            'order': [[ 1, 'desc' ]],
             'dom' : 'ftip',
             'columns' : _columns,
             'columnDefs' : [
