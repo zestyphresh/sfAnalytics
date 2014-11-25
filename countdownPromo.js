@@ -73,7 +73,7 @@
         var chart = d4.charts.column()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
-            .margin({ top: 10, right: 10, bottom: 20, left: 10 })
+            .margin({ top: 10, right: 10, bottom: 40, left: 10 })
             .x(function(x){
                 x.key('key');
             })
