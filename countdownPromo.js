@@ -34,11 +34,11 @@
         var data = groups.salespersonValue.orderNatural().top(Infinity);
         console.log(data);
         
-        $j('#container').append('<div id="chartSalesperson" />');
+        //$j('#row1').append('<div id="chartSalesperson" />');
 
         var chart = d4.charts.row()
-            .outerHeight($j('#chartSalesperson').height())
-            .outerWidth($j('#chartSalesperson').width())
+            .outerHeight($j('#chart-salesperson').height())
+            .outerWidth($j('#chart-salesperson').width())
             .margin({ top: 10, right: 50, bottom: 20, left: 140 })
             .x(function(x){
                 x.key('value');
@@ -67,11 +67,11 @@
         var data = groups.weeklyValue.orderNatural().top(Infinity);
         console.log(data);
         
-        $j('#container').append('<div id="chartWeekly" />');
+        //$j('#container').append('<div id="chartWeekly" />');
 
         var chart = d4.charts.column()
-            .outerHeight($j('#chartWeekly').height())
-            .outerWidth($j('#chartWeekly').width())
+            .outerHeight($j('#chart-weekly').height())
+            .outerWidth($j('#chart-weekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 10 })
             .x(function(x){
                 x.key('key');
