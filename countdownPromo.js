@@ -98,7 +98,8 @@
     
     tables.product = function() {
         
-        var _data = groups.productMatrix.orderNatural().top(Infinity);
+        var data = groups.productMatrix.orderNatural().top(Infinity);
+        console.log(data);
       
         var _columns = [{"data": "key", "title": "Product"},
                         {"data": "value.SteveGent", "title": "SG"},
