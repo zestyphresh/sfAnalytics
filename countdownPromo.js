@@ -122,7 +122,7 @@
             'paging' : true,
             'columns' : _columns,
             'columnDefs' : [
-                { "width": "120px", "targets": 0 }
+                { "width": "220px", "targets": 0 }
             ]
         });
         
