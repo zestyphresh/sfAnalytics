@@ -22,7 +22,7 @@
             groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
 
-            charts.salesperson();
+            charts.salesperson().draw();
             charts.weekly().draw();
 
         })
@@ -54,10 +54,14 @@
             })
         ;
         
-        d3.select('#chartSalesperson')
-            .datum(data)
-            .call(chart)
-        ;
+        function draw() {
+            d3.select('#chartSalesperson')
+                .datum(data)
+                .call(chart)
+            ;
+        }
+        
+        return { draw : draw };
            
     };
     
@@ -87,10 +91,14 @@
             })
         ;
         
-        d3.select('#chartWeekly')
-            .datum(data)
-            .call(chart)
-        ;
+        function draw() {
+            d3.select('#chartWeekly')
+                .datum(data)
+                .call(chart)
+            ;
+        }
+        
+        return { draw : draw };
            
     };
 
