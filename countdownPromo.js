@@ -7,7 +7,7 @@
             
     //PUBLIC VARS   
     var dims = {}, groups = {};
-    var charts = {};
+    var charts = {}, tables = {};
     
     getData()
         .then(function(result) { 
@@ -94,13 +94,37 @@
         ;
            
     };
+    
+    tables.product = function() {
+        
+        var _data = groups.productMatrix.orderNatural().top(Infinity);
+      
+        var _columns = [{"data": "key", "title": "Product"},
+                        {"data": "value.SteveGent", "title": "SG"},
+                        {"data": "value.MarkPugh", "title": "MP"}, 
+                        {"data": "value.BrianMurphy", "title": "BM"},                
+                        {"data": "value.StevenHooper", "title": "SH"},                    
+                        {"data": "value.TracyBoorman", "title": "TB"},                
+                        {"data": "value.PhilLacy", "title": "PL"},                      
+                        {"data": "value.BrianRobertson", "title": "BR"},        
+                        {"data": "value.NorrieCurrie", "title": "NC"},
+                        {"data": "value.MatthewKettleborough", "title": "MK"}
+        ];
+
+        var table = $j('#' + id).dataTable({
+            'data' : data,
+            'paging' : true,
+            'columns' : _columns
+        });
+        
+    };
 
     var productMatrix = {
         
         reduceAdd : function (p, v) {
-                
+
             p.count++;
-            p[v.Salesperson__r.Name] += v.Quantity__c;
+            p[v.Salesperson__r.Name.replace(/\s/g, "X")] += v.Quantity__c;
             return p;
                 
         },
@@ -108,14 +132,14 @@
         reduceSubtract : function (p, v) {
                 
             p.count--;
-            p[v.Salesperson__r.Name] -= v.Quantity__c;
+            p[v.Salesperson__r.Name.replace(/\s/g, "X")] -= v.Quantity__c;
             return p;
                 
         },
             
         reduceInit : function () {
-            return {'count' : 0, 'Steve Gent' : 0, 'Mark Pugh' : 0, 'Brian Murphy': 0, 'Steven Hooper': 0, 'Tracy Boorman': 0, 
-                    'Phil Lacy' : 0, 'Brian Robertson': 0, 'Norrie Currie': 0, 'Matthew Kettleborough': 0};
+            return {'count' : 0, 'SteveGent' : 0, 'MarkPugh' : 0, 'BrianMurphy': 0, 'StevenHooper': 0, 'TracyBoorman': 0, 
+                    'PhilLacy' : 0, 'BrianRobertson': 0, 'NorrieCurrie': 0, 'MatthewKettleborough': 0};
         }
     };   
         
@@ -140,37 +164,6 @@
             .run({ autoFetch : true, maxFetch : 5000 });
 
         return deferred.promise;
-
-    }
-
-    function createTable(id, data) {
-
-        var _columns = [{"data": "Part_Code__c", "title": "Code"},
-                        {"data": "Name", "title": "QAD Description"}, 
-                        {"data": "Retail_Barcode__c", "title": "Retail Barcode Required"},                
-                        {"data": "Retail_Barcode_Format__c", "title": "Retail Barcode Format"},                    
-                        {"data": "Retail_Barcode_Number__c", "title": "Retail Barcode Number"},                
-                        {"data": "Inner_Transit_Barcode__c", "title": "Inner Transit Barcode Required"},                      
-                        {"data": "Inner_Transit_Barcode_Format__c", "title": "Inner Transit Barcode Format"},        
-                        {"data": "Inner_Transit_Barcode_Number__c", "title": "Inner Transit Barcode Number"},
-                        {"data": "Outer_Transit_Barcode__c", "title": "Outer Transit Barcode Required"},                      
-                        {"data": "Outer_Transit_Barcode_Format__c", "title": "Outer Transit Barcode Format"},        
-                        {"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"}
-        ];
-
-        var table = $j('#' + id).dataTable({
-            'data' : data,
-            'paging' : false,
-            'dom': 'lt<"clear">T',
-            'tableTools': {
-                "aButtons": [
-                    "copy",
-                    "xls",
-                ],
-                'sSwfPath': swf
-            },
-            'columns' : _columns,
-        });
 
     }
 
