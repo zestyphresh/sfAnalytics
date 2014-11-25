@@ -24,6 +24,7 @@
 
             charts.salesperson();
             charts.weekly();
+            tables.product();
             
 
         })
