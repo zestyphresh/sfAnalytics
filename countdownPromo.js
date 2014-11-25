@@ -22,13 +22,9 @@
             groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.productMatrix = dims.product.group().reduce(productMatrix.reduceAdd, productMatrix.reduceSubract, productMatrix.reduceInit);
 
-            var chtSalesperson = new charts.salesperson();
-            var chtWeekly = new charts.weekly();
+            charts.salesperson();
+            charts.weekly();
             
-            $j(window).on('resize', function() {
-                chtSalesperson.draw();
-                chtWeekly.draw();
-            })
 
         })
         .done();
@@ -58,16 +54,12 @@
                 })
             })
         ;
-        
-        function draw() {
-            d3.select('#chartSalesperson')
-                .datum(data)
-                .call(chart)
-            ;
-        }
-        
-        return { draw : draw };
-           
+
+        d3.select('#chartSalesperson')
+            .datum(data)
+            .call(chart)
+        ;
+
     };
     
     charts.weekly = function() {
@@ -96,18 +88,10 @@
             })
         ;
         
-        function draw() {
-            chart
-                .outerHeight($j('#chartWeekly').height())
-                .outerWidth($j('#chartWeekly').width())
-                
-            d3.select('#chartWeekly')
-                .datum(data)
-                .call(chart)
-            ;
-        }
-        
-        return { draw : draw };
+        d3.select('#chartWeekly')
+            .datum(data)
+            .call(chart)
+        ;
            
     };
 
