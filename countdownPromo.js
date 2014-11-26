@@ -129,7 +129,7 @@
         ;
         
         d3.select('#chart-weekly')
-            .datum(data)
+            .datum(parsedData)
             .call(chart)
         ;
            
