@@ -96,10 +96,10 @@
         
         //$j('#container').append('<div id="chartWeekly" />');
 
-        var chart = d4.charts.column()
+        var chart = d4.charts.line()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
-            .margin({ top: 10, right: 10, bottom: 40, left: 10 })
+            .margin({ top: 10, right: 10, bottom: 40, left: 20 })
             .x(function(x){
                 x.scale('time');
                 x.key('key');
