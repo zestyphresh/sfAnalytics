@@ -112,7 +112,7 @@
                 xAxis.stagger(false);
             })
             .mixout(['yAxis'])
-            .using('barLabels', function(labels) {
+            .using('lineSeriesLabels', function(labels) {
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
                 })
