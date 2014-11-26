@@ -94,7 +94,19 @@
         var data = groups.weeklyValue.orderNatural().top(Infinity);
         console.log(data);
         
-        //$j('#container').append('<div id="chartWeekly" />');
+        //  var parsedData = d4.parsers.nestedGroup()
+        //     .x(function() {
+        //         return 'year';
+        //     })
+        //     .nestKey(function() {
+        //         return 'salesman';
+        //     })
+        //     .y(function() {
+        //         return 'unitsSold';
+        //     })
+        //     .value(function() {
+        //         return 'unitsSold';
+        //     })(data);
 
         var chart = d4.charts.line()
             .outerHeight($j('#chart-weekly').height())
@@ -104,14 +116,14 @@
                 x.scale('time');
                 x.key('key');
             })
-            //.y(function(y){
-            //    y.key('value');
-            //})
+            .y(function(y){
+                y.key('value');
+            })
             //.valueKey('value')
             //.using('xAxis', function(xAxis){
             //    xAxis.stagger(false);
             //})
-            .mixout(['yAxis'])
+            //.mixout(['yAxis'])
             .using('lineSeriesLabels', function(labels) {
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
