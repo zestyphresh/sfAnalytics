@@ -94,17 +94,6 @@
         var data = groups.weeklyValue.orderNatural().top(Infinity);
         console.log(data);
         
-         var parsedData = d4.parsers.nestedGroup()
-            .x(function() {
-                return 'key';
-            })
-            .y(function() {
-                return 'value';
-            })
-            .value(function() {
-                return 'value';
-            })(data);
-
         var chart = d4.charts.line()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
@@ -116,11 +105,10 @@
             .y(function(y){
                 y.key('value');
             })
-            //.valueKey('value')
+            .valueKey('value')
             //.using('xAxis', function(xAxis){
             //    xAxis.stagger(false);
             //})
-            //.mixout(['yAxis'])
             .using('lineSeriesLabels', function(labels) {
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
@@ -129,7 +117,7 @@
         ;
         
         d3.select('#chart-weekly')
-            .datum(parsedData)
+            .datum(data)
             .call(chart)
         ;
            
