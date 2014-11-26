@@ -39,10 +39,10 @@
         
     values.totalSales = function() {
         
-        var data = dims.dummy.group().reduceSum(function(d) { return d.Value__c; }).top(1)[0].value;
+        var data = dims.dummy.group().reduceSum(function(d) { return d.Value__c; }).top(1)[0];
         console.log(data);
         
-        $j('#headline-value').text(data);
+        $j('#headline-value').text(accounting.formatMoney(data.value, "£", 0, ",", "."));
         
     };
     
