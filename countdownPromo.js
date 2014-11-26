@@ -104,13 +104,13 @@
                 x.scale('time');
                 x.key('key');
             })
-            .y(function(y){
-                y.key('value');
-            })
+            //.y(function(y){
+            //    y.key('value');
+            //})
             //.valueKey('value')
-            .using('xAxis', function(xAxis){
-                xAxis.stagger(false);
-            })
+            //.using('xAxis', function(xAxis){
+            //    xAxis.stagger(false);
+            //})
             .mixout(['yAxis'])
             .using('lineSeriesLabels', function(labels) {
                 labels.text(function(d) {
