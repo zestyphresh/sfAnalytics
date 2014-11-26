@@ -17,7 +17,8 @@
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
-            dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
+            //dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
+            dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').toDate(); });
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
