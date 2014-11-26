@@ -99,7 +99,7 @@
         var chart = d4.charts.line()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
-            .margin({ top: 10, right: 10, bottom: 40, left: 20 })
+            .margin({ top: 10, right: 10, bottom: 20, left: 20 })
             .x(function(x){
                 x.scale('time');
                 x.key('key');
@@ -109,7 +109,7 @@
             })
             .valueKey('value')
             .using('xAxis', function(xAxis){
-                xAxis.stagger(true);
+                xAxis.stagger(false);
             })
             .mixout(['yAxis'])
             .using('barLabels', function(labels) {
