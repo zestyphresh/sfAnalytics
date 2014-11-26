@@ -48,10 +48,10 @@
     
     values.totalVolumes = function() {
         
-        var data = dims.dummy.group().reduceSum(function(d) { return d.Quantity__c; }).top(1)[0].value;
+        var data = dims.dummy.group().reduceSum(function(d) { return d.Quantity__c; }).top(1)[0];
         console.log(data);
         
-        $j('#headline-volume').text(data);
+        $j('#headline-volume').text(accounting.formatNumber(data.value, 0, ",", "."));
         
     };
         
