@@ -107,7 +107,7 @@
             .y(function(y){
                 y.key('value');
             })
-            .valueKey('value')
+            //.valueKey('value')
             .using('xAxis', function(xAxis){
                 xAxis.stagger(false);
             })
