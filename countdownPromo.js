@@ -94,19 +94,16 @@
         var data = groups.weeklyValue.orderNatural().top(Infinity);
         console.log(data);
         
-        //  var parsedData = d4.parsers.nestedGroup()
-        //     .x(function() {
-        //         return 'year';
-        //     })
-        //     .nestKey(function() {
-        //         return 'salesman';
-        //     })
-        //     .y(function() {
-        //         return 'unitsSold';
-        //     })
-        //     .value(function() {
-        //         return 'unitsSold';
-        //     })(data);
+         var parsedData = d4.parsers.nestedGroup()
+            .x(function() {
+                return 'key';
+            })
+            .y(function() {
+                return 'value';
+            })
+            .value(function() {
+                return 'value';
+            })(data);
 
         var chart = d4.charts.line()
             .outerHeight($j('#chart-weekly').height())
