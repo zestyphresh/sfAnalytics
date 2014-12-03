@@ -54,9 +54,9 @@
                         {"data": "Outer_Transit_Barcode_Format__c", "title": "Outer Transit Barcode Format"},        
                         {"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"},
                         {"data": "Outer_Transit_Quantity__c", "title": "Outer Transit Quantity"},
-                        {"data": "Vendor__r.Vendor_Code_And_Name__c", "title": "Vendor"},
                         {"data": "Family", "title": "Design Group"},
                         {"data": "Mkt_Group__c", "title": "Market Group"},
+                        {"data": "Vendor__r.Vendor_Code_And_Name__c", "title": "Vendor"},
                         {"data": "Retail_Packaging_Brand__c", "title": "Brand"},
                         {"data": "Commodity_Code__c", "title": "Commodity Code"}
         ];
