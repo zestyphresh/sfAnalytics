@@ -49,10 +49,10 @@
                         {"data": "Inner_Transit_Barcode__c", "title": "Inner Transit Barcode Required"},                      
                         {"data": "Inner_Transit_Barcode_Format__c", "title": "Inner Transit Barcode Format"},        
                         {"data": "Inner_Transit_Barcode_Number__c", "title": "Inner Transit Barcode Number"},
-                        {"data": "Inner_Transit_Quantity__c", "title": "Inner Transit Quantity"},
                         {"data": "Outer_Transit_Barcode__c", "title": "Outer Transit Barcode Required"},                      
                         {"data": "Outer_Transit_Barcode_Format__c", "title": "Outer Transit Barcode Format"},        
                         {"data": "Outer_Transit_Barcode_Number__c", "title": "Outer Transit Barcode Number"},
+                        {"data": "Inner_Transit_Quantity__c", "title": "Inner Transit Quantity"},
                         {"data": "Outer_Transit_Quantity__c", "title": "Outer Transit Quantity"},
                         {"data": "Family", "title": "Design Group"},
                         {"data": "Mkt_Group__c", "title": "Market Group"},
@@ -67,7 +67,6 @@
             'dom': 'lt<"clear">T',
             'tableTools': {
                 "aButtons": [
-                    "copy",
                     "xls",
                     {
                         "sExtends": "copy",
