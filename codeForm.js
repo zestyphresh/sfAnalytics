@@ -69,6 +69,10 @@
                 "aButtons": [
                     "copy",
                     "xls",
+                    {
+                        "sExtends": "copy",
+                        "bHeader": false
+                    }
                 ],
                 'sSwfPath': swf
             },
