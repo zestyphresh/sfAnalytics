@@ -17,7 +17,6 @@
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
-            //dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').format('YYYY-MM-DD'); });
             dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').toDate(); });
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
@@ -60,8 +59,6 @@
         
         var data = _.sortBy(groups.salespersonValue.top(Infinity), function(d) { return d.value; });
         console.log(data);
-        
-        //$j('#row1').append('<div id="chartSalesperson" />');
 
         var chart = d4.charts.row()
             .outerHeight($j('#chart-salesperson').height())
@@ -105,10 +102,6 @@
             .y(function(y){
                 y.key('value');
             })
-            .valueKey('value')
-            //.using('xAxis', function(xAxis){
-            //    xAxis.stagger(false);
-            //})
             .using('lineSeriesLabels', function(labels) {
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
@@ -198,7 +191,7 @@
             .on('end', function(err) {
                 deferred.resolve(records);
             })
-            .run({ autoFetch : true, maxFetch : 5000 });
+            .run({ autoFetch : true, maxFetch : 10000 });
 
         return deferred.promise;
 
