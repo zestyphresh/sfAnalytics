@@ -97,7 +97,7 @@
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
             .x(function(x){
                 x.scale('time');
-                x.key('key');
+                x.value('key');
             })
             .y(function(y){
                 y.key('value');
