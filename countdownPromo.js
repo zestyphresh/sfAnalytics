@@ -17,7 +17,7 @@
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.salesperson = _data.dimension(function(d) { return d.Salesperson__r.Name; });
-            dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week').toDate(); });
+            dims.week = _data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week'); });
             dims.product = _data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
             
             groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
@@ -88,8 +88,10 @@
     
     charts.weekly = function() {
         
-        var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key; });
+        var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
         console.log(data);
+        
+        _.each(data, function(d) { d.key = d.key.format('mmm dd'); });
 
         //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
         //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
@@ -107,9 +109,9 @@
             .y(function(y){
                 y.key('value');
             })
-            .using('yAxis', function(axis) {
-                axis.ticks(d3.time.weeks, 1); 
-            })
+            //.using('yAxis', function(axis) {
+            //    axis.ticks(d3.time.weeks, 1); 
+            //})
             .mixout('yAxis')
         ;
         
