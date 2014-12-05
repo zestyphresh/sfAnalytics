@@ -91,7 +91,7 @@
         var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key; });
         console.log(data);
 
-        var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
+        //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
         //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
         
         var chart = d4.charts.line()
@@ -100,7 +100,7 @@
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
             .x(function(x){
                 x.scale('time');
-                x.min(minDate);
+                //x.min(minDate);
                 //x.max(maxDate)
                 x.key('key');
             })
@@ -111,12 +111,12 @@
                 axis.ticks(d3.time.weeks, 1); 
             })
             .mixout('yAxis')
-            //.using('lineSeriesLabels', function(labels) {
-            //    console.log(labels);
-            //    labels.text(function(d) {
-            //        return accounting.formatMoney(d.value, "£", 0, ",", ".")
-            //    })
-            //})
+            .using('lineSeriesLabels', function(labels) {
+                console.log(labels);
+                labels.text(function(d) {
+                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
+                })
+            })
         ;
         
         var datum = [{ key: 'sales', values: data }]
