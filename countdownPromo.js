@@ -94,7 +94,7 @@
         //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
         //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
         
-        var chart = d4.charts.line()
+        var chart = d4.charts.bar()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
@@ -111,13 +111,6 @@
                 axis.ticks(d3.time.weeks, 1); 
             })
             .mixout('yAxis')
-            .using('lineSeriesLabels', function(labels) {
-                labels
-                    .displayPointValue(true)
-                    .showDataLabel(function(d, datum, n){
-                        console.log(d, datum, n);
-                    })
-            })
         ;
         
         var datum = [{ key: 'sales', values: data }]
