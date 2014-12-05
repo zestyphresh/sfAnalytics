@@ -101,7 +101,7 @@
             .outerWidth($j('#chart-weekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
             .x(function(x){
-                x.scale('time');
+                //x.scale('time');
                 //x.min(minDate);
                 //x.max(maxDate)
                 x.key('key');
