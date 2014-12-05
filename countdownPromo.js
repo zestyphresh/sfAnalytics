@@ -120,10 +120,6 @@
                             return datum.key + ' ' + d[labels.y.$key];
                         }
                     })
-                    .text(function(d) {
-                        console.log(d);
-                        return accounting.formatMoney(d.value, "£", 0, ",", ".")
-                    })
             })
         ;
         
