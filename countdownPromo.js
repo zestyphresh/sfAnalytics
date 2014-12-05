@@ -105,6 +105,7 @@
             .using('yAxis', function(axis) {
                 axis.ticks(d3.time.weeks, 1); 
             })
+            .mixout('yAxis')
             //.using('lineSeriesLabels', function(labels) {
             //    console.log(labels);
             //    labels.text(function(d) {
