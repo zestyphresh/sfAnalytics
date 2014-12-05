@@ -121,6 +121,7 @@
                         }
                     })
                     .text(function(d) {
+                        console.log(d);
                         return accounting.formatMoney(d.value, "£", 0, ",", ".")
                     })
             })
