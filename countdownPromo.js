@@ -119,7 +119,7 @@
         var datum = [{ key: 'sales', values: data }]
         
         d3.select('#chart-weekly')
-            .datum(datum)
+            .datum(data)
             .call(chart)
         ;
            
