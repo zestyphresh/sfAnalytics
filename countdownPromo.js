@@ -89,9 +89,11 @@
     charts.weekly = function() {
         
         var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
-        console.log(data);
+        
         
         _.each(data, function(d) { d.key = d.key.format('mmm dd'); });
+        
+        console.log(data);
 
         //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
         //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
@@ -109,6 +111,7 @@
             .y(function(y){
                 y.key('value');
             })
+            .valueKey('value')
             //.using('yAxis', function(axis) {
             //    axis.ticks(d3.time.weeks, 1); 
             //})
