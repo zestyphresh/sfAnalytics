@@ -112,13 +112,12 @@
             })
             .mixout('yAxis')
             .using('lineSeriesLabels', function(labels) {
-                console.log(labels);
                 labels
                     .displayPointValue(true)
                     .pointLabelText(function(d, datum){
                         console.log(d, datum);
-                        if(d[this.y.$key] !== null) {
-                            return datum.key + ' ' + d[this.y.$key];
+                        if(d[labels.y.$key] !== null) {
+                            return datum.key + ' ' + d[labels.y.$key];
                         }
                     })
                     .text(function(d) {
