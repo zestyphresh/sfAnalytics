@@ -113,9 +113,16 @@
             .mixout('yAxis')
             .using('lineSeriesLabels', function(labels) {
                 console.log(labels);
-                labels.text(function(d) {
-                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
-                })
+                labels
+                    .pointLabelText(function(d, datum){
+                        console.log(d, datum);
+                        if(d[this.y.$key] !== null) {
+                            return datum.key + ' ' + d[this.y.$key];
+                        }
+                    })
+                    .text(function(d) {
+                        return accounting.formatMoney(d.value, "£", 0, ",", ".")
+                    })
             })
         ;
         
