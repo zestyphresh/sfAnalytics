@@ -116,6 +116,11 @@
             //    axis.ticks(d3.time.weeks, 1); 
             //})
             .mixout('yAxis')
+            .using('barLabels', function(labels) {
+                labels.text(function(d) {
+                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
+                })
+            })
         ;
         
         var datum = [{ key: 'sales', values: data }]
