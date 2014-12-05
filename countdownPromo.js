@@ -90,20 +90,18 @@
         
         var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key; });
         console.log(data);
-        
-        console.log(_.min(data, 'key'));
-        
-        //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
+
+        var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
         //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
         
-        var chart = d4.charts.column()
+        var chart = d4.charts.line()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
             .x(function(x){
                 x.scale('time');
                 x.min(minDate);
-                x.max(maxDate)
+                //x.max(maxDate)
                 x.key('key');
             })
             .y(function(y){
