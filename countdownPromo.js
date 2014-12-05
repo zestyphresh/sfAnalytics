@@ -94,7 +94,7 @@
         //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
         //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
         
-        var chart = d4.charts.bar()
+        var chart = d4.charts.column()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
