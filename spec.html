@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+        
+        <title> </title>
+        
+        <style>
+            
+            .half-section {
+                width : 50%;
+                padding : 10px;
+                border : 1px solid;
+                stroke : grey;
+            }    
+            
+            
+            
+        </style>
+        
+        
+        
+    </head>
+    <body>
+        
+    <h1 id="heading">Croydex Product Specification</h1>    
+    <h2 id="sub-heading"></h2>
+    
+    <div id="retail-packaging" class="half-section">
+        
+        <h3>Retail Packaging</h3>
+        
+        <span>Retail Packaging Format - </span><span id="retail-format"></span>
+        
+    </div>
+        
+        
+        
+        
+
+    </body>
+    <script>
+    
+    var data = {
+        code : 'WL140222',
+        longDescription : 'Moulded Wood White Toilet Seat',
+        retailFormat : 'White box, colour label'
+    };
+    
+    _.each(data, function(d) {
+        
+        $('#sub-heading').text(data.code + " - " + data.longDescription);
+        $('#retail-format').text(data.retailFormat);
+
+        
+    })
+    
+    
+        
+        
+        
+        
+        
+    </script>
+</html>
