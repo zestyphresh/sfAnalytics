@@ -91,7 +91,7 @@
         var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
         
         
-        _.each(data, function(d) { d.key = d.key.format('mmm dd'); });
+        _.each(data, function(d) { d.key = d.key.format('MMM DD'); });
         
         console.log(data);
 
