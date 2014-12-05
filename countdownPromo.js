@@ -103,7 +103,7 @@
                 y.key('value');
             })
             .using('yAxis', function(axis) {
-                axis.ticks(d3.time.days, 1); 
+                axis.ticks(d3.time.weeks, 1); 
             })
             //.using('lineSeriesLabels', function(labels) {
             //    console.log(labels);
