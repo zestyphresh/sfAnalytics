@@ -102,7 +102,11 @@
             .y(function(y){
                 y.key('value');
             })
+            .using('yAxis', function(axis) {
+                axis.ticks(d3.time.days, 1); 
+            })
             .using('lineSeriesLabels', function(labels) {
+                console.log(labels);
                 labels.text(function(d) {
                     return accounting.formatMoney(d.value, "£", 0, ",", ".")
                 })
