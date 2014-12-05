@@ -88,10 +88,10 @@
     
     charts.weekly = function() {
         
-        var data = groups.weeklyValue.orderNatural().top(Infinity);
+        var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key; });
         console.log(data);
         
-        var chart = d4.charts.line()
+        var chart = d4.charts.column()
             .outerHeight($j('#chart-weekly').height())
             .outerWidth($j('#chart-weekly').width())
             .margin({ top: 10, right: 10, bottom: 20, left: 20 })
@@ -105,12 +105,12 @@
             .using('yAxis', function(axis) {
                 axis.ticks(d3.time.weeks, 1); 
             })
-            .using('lineSeriesLabels', function(labels) {
-                console.log(labels);
-                labels.text(function(d) {
-                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
-                })
-            })
+            //.using('lineSeriesLabels', function(labels) {
+            //    console.log(labels);
+            //    labels.text(function(d) {
+            //        return accounting.formatMoney(d.value, "£", 0, ",", ".")
+            //    })
+            //})
         ;
         
         var datum = [{ key: 'sales', values: data }]
