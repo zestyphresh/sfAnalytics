@@ -91,8 +91,10 @@
         var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key; });
         console.log(data);
         
-        var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
-        var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
+        console.log(_.min(data, 'key'));
+        
+        //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
+        //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
         
         var chart = d4.charts.column()
             .outerHeight($j('#chart-weekly').height())
