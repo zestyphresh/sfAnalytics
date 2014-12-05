@@ -114,6 +114,7 @@
             .using('lineSeriesLabels', function(labels) {
                 console.log(labels);
                 labels
+                    .displayPointValue(true)
                     .pointLabelText(function(d, datum){
                         console.log(d, datum);
                         if(d[this.y.$key] !== null) {
