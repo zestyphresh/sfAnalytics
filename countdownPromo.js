@@ -113,6 +113,7 @@
             //    axis.ticks(d3.time.weeks, 1); 
             //})
             .mixout('yAxis')
+            
         ;
         
         var datum = [{ key: 'sales', values: data }]
