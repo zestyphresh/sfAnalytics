@@ -183,7 +183,7 @@
 
         conn.sobject("Daily_Historical_Sales__c")
             .select("Account__r.Name, FY_Is_Year_To_Date__c, FY_Year__c, FY_Month_Num__c, Quantity__c, Value__c")
-            .where("Product2.Id = " + "'" + product + "'")
+            .where("Product__r.Id = " + "'" + product + "'")
             .on('record', function(record) {
                 records.push(record);
             })
