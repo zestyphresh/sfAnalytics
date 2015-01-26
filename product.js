@@ -43,7 +43,7 @@
         
         var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
         
-        _.each(data, function(d) { d.key = d.key.format('YYYY MMM'); });
+        _.each(data, function(d) { d.key = d.key.format('YYYY-MM-DD'); });
         
         data.splice(-1,1);
         
@@ -55,7 +55,7 @@
             bindto: '#chart-weekly',
             data: {
                 x: 'key',
-                xFormat: '%Y %b',
+                xFormat: '%Y-%m-%d',
                 json: data,
                 keys: {
                     value: ['value'],
@@ -65,7 +65,7 @@
                 x: {
                     type: 'timeseries',
                     tick: {
-                        format: '%Y %b'
+                        format: '%Y-%m-%d'
                     }
                 }
             }
