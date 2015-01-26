@@ -31,7 +31,7 @@
             //values.totalVolumes();
             //charts.salesperson();
             //charts.weekly();
-            //tables.product();
+            tables.yearlySales();
             
 
         })
@@ -114,28 +114,23 @@
            
     };
     
-    tables.product = function() {
+    tables.yearlySales = function() {
         
-        var data = _.sortBy(groups.productMatrix.top(Infinity), function(d) { return d.value.total; });
+        var data = _.sortBy(groups.yearlySales.top(Infinity), function(d) { return d.key; });
         console.log(data);
       
-        var _columns = [{"data": "key", "title": "Product"},
-                        {"data": "value.total", "title": "Total"},
-                        {"data": "value.SteveGent", "title": "SG"},
-                        {"data": "value.MarkPugh", "title": "MP"}, 
-                        {"data": "value.BrianMurphy", "title": "BM"},                
-                        {"data": "value.StevenHooper", "title": "SH"},                    
-                        {"data": "value.TracyBoorman", "title": "TB"},                
-                        {"data": "value.PhilLacy", "title": "PL"},                      
-                        {"data": "value.BrianRobertson", "title": "BR"},        
-                        {"data": "value.NorrieCurrie", "title": "NC"},
-                        {"data": "value.MatthewKettleborough", "title": "MK"}
+        var _columns = [{"data": "key", "title": "Year"},
+                        {"data": "value.ytdQty", "title": "YTD Quantity"},
+                        {"data": "value.ytdVal", "title": "YTD Value"},
+                        {"data": "value.fullQty", "title": "Full Year Quantity"}, 
+                        {"data": "value.fullVal", "title": "Full Year Value"}
+
         ];
 
         var table = $j('#table-matrix').dataTable({
             'data' : data,
-            'paging' : true,
-            'order': [[ 1, 'desc' ]],
+            'paging' : false,
+            'order': [[0, 'asc' ]],
             'dom' : 'ftip',
             'columns' : _columns,
             'columnDefs' : [
