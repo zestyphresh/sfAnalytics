@@ -58,6 +58,7 @@
                 xFormat: '%Y-%m-%d',
                 json: data,
                 keys: {
+                    x: 'key',
                     value: ['value'],
                 }
             },
