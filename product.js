@@ -45,14 +45,18 @@
         
         _.each(data, function(d) { d.key = d.key.format('YYYY MMM'); });
         
+        var data2 = data.pop();
+        
         console.log(data);
+        
+        console.log(data2);
 
         var chart = c3.generate({
             bindto: '#chart-weekly',
             data: {
                 x: 'key',
                 xFormat: '%Y %b',
-                json: data.pop(),
+                json: data2,
                 keys: {
                     value: ['value'],
                 }
