@@ -52,7 +52,7 @@
             data: {
                 x: 'key',
                 xFormat: '%Y %b',
-                json: data,
+                json: data.pop(),
                 keys: {
                     value: ['value'],
                 }
