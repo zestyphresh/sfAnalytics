@@ -56,7 +56,7 @@
             data: {
                 x: 'key',
                 xFormat: '%Y %b',
-                json: data2,
+                json: data,
                 keys: {
                     value: ['value'],
                 }
