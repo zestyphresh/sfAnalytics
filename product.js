@@ -45,11 +45,11 @@
         
         _.each(data, function(d) { d.key = d.key.format('YYYY MMM'); });
         
-        var data2 = data.pop();
+        data.splice(-1,1);
         
         console.log(data);
         
-        console.log(data2);
+        //console.log(data2);
 
         var chart = c3.generate({
             bindto: '#chart-weekly',
