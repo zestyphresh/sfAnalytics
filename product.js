@@ -44,6 +44,7 @@
         var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
         
         _.each(data, function(d) { d.key = d.key.format('YYYY MMM'); });
+        _.dropRight(data);
         
         console.log(data);
 
@@ -52,7 +53,7 @@
             data: {
                 x: 'key',
                 xFormat: '%Y %b',
-                json: _.dropRight(data),
+                json: data,
                 keys: {
                     value: ['value'],
                 }
@@ -65,57 +66,11 @@
                     }
                 }
             }
+            
         });
         
-
-           
     };
     
-    charts.weekly = function() {
-        
-        var data = _.sortBy(groups.weeklyValue.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
-        
-        
-        _.each(data, function(d) { d.key = d.key.format('MMM DD'); });
-        
-        console.log(data);
-
-        //var minDate = moment(_.min(data, 'key').key).subtract(7, 'days').toDate();
-        //var maxDate = moment(_.max(data, 'key').key).add(7, 'days').toDate();
-        
-        var chart = d4.charts.column()
-            .outerHeight($j('#chart-weekly').height())
-            .outerWidth($j('#chart-weekly').width())
-            .margin({ top: 10, right: 10, bottom: 20, left: 20 })
-            .x(function(x){
-                //x.scale('time');
-                //x.min(minDate);
-                //x.max(maxDate)
-                x.key('key');
-            })
-            .y(function(y){
-                y.key('value');
-            })
-            .valueKey('value')
-            //.using('yAxis', function(axis) {
-            //    axis.ticks(d3.time.weeks, 1); 
-            //})
-            .mixout('yAxis')
-            .using('barLabels', function(labels) {
-                labels.text(function(d) {
-                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
-                })
-            })
-        ;
-        
-        var datum = [{ key: 'sales', values: data }]
-        
-        d3.select('#chart-weekly')
-            .datum(data)
-            .call(chart)
-        ;
-           
-    };
     
     tables.yearlySales = function() {
         
