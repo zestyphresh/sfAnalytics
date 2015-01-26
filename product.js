@@ -19,7 +19,7 @@
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.year = _data.dimension(function(d) { return d.FY_Year__c; });
-            dims.month = _date.dimension(function(d) { return moment([d.FY_Year__c, d.FY_Month_Num__c]); })
+            dims.month = _data.dimension(function(d) { return moment([d.FY_Year__c, d.FY_Month_Num__c]); })
             
             //groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             //groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
@@ -39,37 +39,6 @@
         })
         .done();
 
-    charts.salesperson = function() {
-        
-        var data = _.sortBy(groups.salespersonValue.top(Infinity), function(d) { return d.value; });
-        console.log(data);
-
-        var chart = d4.charts.row()
-            .outerHeight($j('#chart-salesperson').height())
-            .outerWidth($j('#chart-salesperson').width())
-            .margin({ top: 10, right: 50, bottom: 20, left: 140 })
-            .x(function(x){
-                x.key('value');
-            })
-            .y(function(y){
-                y.key('key');
-            })
-            .valueKey('value')
-            .mixout(['xAxis'])
-            .using('barLabels', function(labels) {
-                labels.text(function(d) {
-                    return accounting.formatMoney(d.value, "£", 0, ",", ".")
-                })
-            })
-        ;
-
-        d3.select('#chart-salesperson')
-            .datum(data)
-            .call(chart)
-        ;
-
-    };
-    
     charts.monthly2 = function() {
         
         var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
