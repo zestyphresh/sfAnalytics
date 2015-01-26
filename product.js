@@ -19,9 +19,11 @@
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.year = _data.dimension(function(d) { return d.FY_Year__c; });
+            dims.month = _date.dimension(function(d) { return moment([d.FY_Year__c, d.FY_Month_Num__c]); })
             
             //groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             //groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
+            groups.monthlySales = dims.month.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             groups.yearlySales = dims.year.group().reduce(yearlySalesMatrix.reduceAdd, yearlySalesMatrix.reduceSubract, yearlySalesMatrix.reduceInit);
             
             //values.sales = dims.dummy.group().reduceSum(function(d) { return d.Value__c; });
@@ -30,7 +32,7 @@
             //values.totalSales();
             //values.totalVolumes();
             //charts.salesperson();
-            //charts.weekly();
+            charts.monthly2();
             tables.yearlySales();
             
 
@@ -66,6 +68,38 @@
             .call(chart)
         ;
 
+    };
+    
+    charts.monthly2 = function() {
+        
+        var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
+        
+        _.each(data, function(d) { d.key = d.key.format('YYYY MMM'); });
+        
+        console.log(data);
+
+        var chart = c3.generate({
+            bindto: '#chart-weekly',
+            data: {
+                x: 'key',
+                xFormat: '%Y %b',
+                json: data,
+                keys: {
+                    value: ['value'],
+                }
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y %b'
+                    }
+                }
+            }
+        });
+        
+
+           
     };
     
     charts.weekly = function() {
