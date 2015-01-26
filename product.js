@@ -124,18 +124,37 @@
                         {"data": "value.ytdVal", "title": "YTD Value"},
                         {"data": "value.fullQty", "title": "Full Year Quantity"}, 
                         {"data": "value.fullVal", "title": "Full Year Value"}
-
         ];
-
+        
+        var _columnDefs = [{    'targets' : [1,3], 
+                                'render' : function ( data, type, row, meta ) {
+                                    switch (type) {
+                                        case 'display':
+                                            return accounting.formatNumber(data);
+                                            break;
+                                    }
+                                    return data;
+                                }
+                            },
+                            {    'targets' : [2,4], 
+                                'render' : function ( data, type, row, meta ) {
+                                    switch (type) {
+                                        case 'display':
+                                            return accounting.formatMoney(data, "£", 0, ",", ".");
+                                            break;
+                                    }
+                                    return data;
+                                },
+                            }
+        ]
+                            
         var table = $j('#table-matrix').dataTable({
             'data' : data,
             'paging' : false,
             'order': [[0, 'asc' ]],
             'dom' : 'ftip',
             'columns' : _columns,
-            'columnDefs' : [
-                { "width": "40%", "targets": 0 }
-            ]
+            'columnDefs' : _columnDefs
         });
         
     };

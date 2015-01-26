@@ -149,6 +149,8 @@
                         {"data": "value.NorrieCurrie", "title": "NC"},
                         {"data": "value.MatthewKettleborough", "title": "MK"}
         ];
+        
+
 
         var table = $j('#table-matrix').dataTable({
             'data' : data,
