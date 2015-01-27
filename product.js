@@ -43,7 +43,11 @@
         
         var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
         
-        _.each(data, function(d) { d.key = d.key.format('YYYY-MM-DD'); });
+        _.each(data, function(d) { 
+            console.log(d.key);
+            d.key = d.key.format('YYYY-MM-DD'); 
+            console.log(d.key);
+        });
         
         data.splice(-1,1);
         
