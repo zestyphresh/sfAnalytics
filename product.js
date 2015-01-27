@@ -71,9 +71,9 @@
                 }
             },
             regions: [
-                {start: '2010-02-01', end: '2010-12-31'},
-                {start: '2012-02-01', end: '2012-12-31'},
-                {start: '2014-02-01', end: '2014-12-31'},
+                {start: new Date(2010,1,1), end: new Date(2010,12,31)},
+                {start: new Date(2012,1,1), end: new Date(2012,12,31)},
+                {start: new Date(2014,1,1), end: new Date(2014,12,31)},
             ]
         });
         
