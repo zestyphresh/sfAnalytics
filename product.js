@@ -19,7 +19,7 @@
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
             dims.year = _data.dimension(function(d) { return d.FY_Year__c; });
-            dims.month = _data.dimension(function(d) { return moment({year : d.FY_Year__c, month : d.FY_Month_Num__c, day : 1}); })
+            dims.month = _data.dimension(function(d) { return moment(d.FY_Year__c + '-' + d.FY_Month_Num__c, 'YYYY-M'); })
             
             //groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             //groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
