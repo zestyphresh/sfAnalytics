@@ -78,7 +78,7 @@
                 {start: new Date(2010,0,1), end: new Date(2010,11,31)},
                 {start: new Date(2012,0,1), end: new Date(2012,11,31)},
                 {start: new Date(2014,0,1), end: new Date(2014,11,31)},
-            ],
+            ]/*,
             grid: {
                 x: {
                     lines: [{value: new Date(2010,0,1), text: '2010'},
@@ -88,7 +88,7 @@
                             {value: new Date(2014,0,1), text: '2014'}
                     ]
                 }
-            }
+            }*/
         });
         
     };
