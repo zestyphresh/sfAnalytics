@@ -18,8 +18,8 @@
             _data.add(result);
             
             dims.dummy = _data.dimension(function(d) { return 'all'; });
-            dims.year = _data.dimension(function(d) { return d.FY_Year__c; });
-            dims.month = _data.dimension(function(d) { return moment(d.FY_Year__c + '-' + d.FY_Month_Num__c, 'YYYY-M'); })
+            dims.year = _data.dimension(function(d) { return d.Fiscal_Year__c; });
+            dims.month = _data.dimension(function(d) { return moment(d.Fiscal_Year__c + '-' + d.Fiscal_Month__c, 'YYYY-M'); })
             
             //groups.salespersonValue = dims.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
             //groups.weeklyValue = dims.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
@@ -144,8 +144,8 @@
         reduceAdd : function (p, v) {
 
             p.count++;
-            p.ytdQty += p.FY_Year_To_Date__c ? v.Quantity__c : 0;
-            p.ytdVal += p.FY_Year_To_Date__c ? v.Value__c : 0;
+            p.ytdQty += p.Fiscal_Year_To_Date__c ? v.Quantity__c : 0;
+            p.ytdVal += p.Fiscal_Year_To_Date__c ? v.Value__c : 0;
             p.fullQty += v.Quantity__c;
             p.fullVal += v.Value__c;
             return p;
@@ -155,8 +155,8 @@
         reduceSubtract : function (p, v) {
                 
             p.count--;
-            p.ytdQty -= p.FY_Year_To_Date__c ? v.Quantity__c : 0;
-            p.ytdVal -= p.FY_Year_To_Date__c ? v.Value__c : 0;
+            p.ytdQty -= p.Fiscal_Year_To_Date__c ? v.Quantity__c : 0;
+            p.ytdVal -= p.Fiscal_Year_To_Date__c ? v.Value__c : 0;
             p.fullQty -= v.Quantity__c;
             p.fullVal -= v.Value__c;
             return p;
@@ -176,7 +176,7 @@
         var records = [];
 
         conn.sobject("Daily_Historical_Sales__c")
-            .select("Account__r.Name, FY_Is_Year_To_Date__c, FY_Year__c, FY_Month_Num__c, Quantity__c, Value__c")
+            .select("Account__r.Name, Is_Fiscal_Year_To_Date__c, Fiscal_Year__c, Fiscal_Month__c, Quantity__c, Value__c")
             .where("Product__r.Id = " + "'" + product + "'")
             .on('record', function(record) {
                 records.push(record);
