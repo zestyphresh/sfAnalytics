@@ -41,8 +41,8 @@
 
     charts.monthly2 = function() {
         
-        //var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
-        var data = groups.monthlySales.orderNatural().top(Infinity);
+        var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
+        //var data = groups.monthlySales.orderNatural().top(Infinity);
         
         _.each(data, function(d) { d.key = d.key.format('YYYY-MM-DD'); });
         
