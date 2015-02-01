@@ -41,19 +41,11 @@
 
     charts.monthly2 = function() {
         
-        var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
+        //var data = _.sortBy(groups.monthlySales.orderNatural().top(Infinity), function(d) { return d.key.toDate(); });
         
-        _.each(data, function(d) { 
-            console.log(d.key);
-            d.key = d.key.format('YYYY-MM-DD'); 
-            console.log(d.key);
-        });
-        
-        data.splice(-1,1);
+        _.each(data, function(d) { d.key = d.key.format('YYYY-MM-DD'); });
         
         console.log(data);
-        
-        //console.log(data2);
 
         var chart = c3.generate({
             bindto: '#chart-weekly',
@@ -75,9 +67,9 @@
                 }
             },
             regions: [
-                {start: new Date(2010,0,1), end: new Date(2010,11,31)},
-                {start: new Date(2012,0,1), end: new Date(2012,11,31)},
-                {start: new Date(2014,0,1), end: new Date(2014,11,31)},
+                {start: new Date(2010,0,15), end: new Date(2010,11,15)},
+                {start: new Date(2012,0,15), end: new Date(2012,11,15)},
+                {start: new Date(2014,0,15), end: new Date(2014,11,15)},
             ]/*,
             grid: {
                 x: {
