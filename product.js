@@ -82,6 +82,12 @@
                             {value: new Date(2014,11,15), text: '2015'}
                     ]
                 }
+            },
+            subchart: {
+                show: true
+            },
+            zoom: {
+                enabled: true
             }
         });
         
