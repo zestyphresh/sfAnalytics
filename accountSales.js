@@ -4,15 +4,15 @@
     
     //VARS
     var salesforce = {};
-    var data = {};
     var chart = {};
     var table = {};
     var value = {};
     
-    salesforce.getSales().then(function(result) { 
-            
-        cf.init(result);
-            
+    Q.all(sales.getRecords(), forecast.getRecords()).then(function(resSales, resForecast) {
+        
+        sales.loadRecords(resSales);
+        forecast.loadRecords(resSales);
+
         value.totalSales();
         value.totalVolumes();
         chart.salesperson();
@@ -20,57 +20,62 @@
         table.product();
 
     }).done();
+    
+    var sales = {
         
-    salesforce.getSales = function() {
+        query : {
+            sObject : 'Daily_Historical_Sales__c',
+            select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
+            where : 'Account__r.Id = ' + "'" + accId + "'",
+            maxfetch : 100000
+        },
         
-        var deferred = Q.defer();
+        crossfilter : {
+            records : crossfilter(),
+            dims : {},
+            groups : {},
+            value : {},
+        },
         
-        var records = [];
+        getRecords : _.bind(utils.get, this),
         
-        salesforceConn.sobject("Daily_Historical_Sales__c")
-            .select("Invoice_Date__c, Value__c, Quantity__c, FY_Year__c, FY_Month_Num__c, FY_Is_Year_To_Date__c, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name")
-            .where("Account__r.Id = " + "'" + accId + "'")
-            .on('record', function(record) {
-                records.push(record);
-            })
-            .on('error', function(query) {
-                deferred.reject('error');
-            })
-            .on('end', function(err) {
-                deferred.resolve(records);
-            })
-            .run({ autoFetch : true, maxFetch : 50000 });
-            
-        return deferred.promise;
+        loadRecords : _.bind(utils.init, this)
         
     }
     
-    data.sales = {};
-    data.sales.init = function(records) {
+    var forecast = {
         
-        var _this = data.sales;
+        query : {
+            sObject : 'Forecast2__c',
+            select : 'Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Brand__c, Forecast_Type__c"',
+            where : 'Account__r.Id = ' + "'" + accId + "'",
+            maxfetch : 100000
+        },
         
-        _this.cf = crossfilter();
+        crossfilter : {
+            records : crossfilter(),
+            dims : {},
+            groups : {},
+            value : {},
+        },
         
-        _this.cf.add(records);
+        getRecords : _.bind(utils.get, this),
         
-        _this.dim = {};
-        _this.dim.dummy = _this.cf.dimension(function(d) { return 'all'; });
-        _this.dim.salesperson = _this.cf.data.dimension(function(d) { return d.Salesperson__r.Name; });
-        _this.dim.week = _this.cf.data.dimension(function(d) { return moment(d.Invoice_Date__c).startOf('week'); });
-        _this.dim.product = _this.cf.data.dimension(function(d) { return d.Product__r.Product_Code_Name__c; });
-        
-        _this.group = {};    
-        _this.group.salespersonValue = _this.dim.salesperson.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
-        _this.group.weeklyValue = _this.dim.week.group().reduceSum(function(d) { return d.Value__c.toFixed(0); });
-        _this.group.productMatrix = _this.dim.product.group().reduce(cf.reduce.productMatrix.reduceAdd, cf.reduce.productMatrix.reduceSubract, cf.reduce.productMatrix.reduceInit);
-        
-        _this.value = {};    
-        _this.value.sales = _this.dim.dummy.group().reduceSum(function(d) { return d.Value__c; });
-        _this.value.volume = _this.dim.dummy.group().reduceSum(function(d) { return d.Quantity__c; });
+        loadRecords : _.bind(utils.init, this)
         
     }
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     value.totalSales = function() {
         
         var data = dims.dummy.group().reduceSum(function(d) { return d.Value__c; }).top(1)[0];
@@ -214,6 +219,40 @@
                     'PhilLacy' : 0, 'BrianRobertson': 0, 'NorrieCurrie': 0, 'MatthewKettleborough': 0};
         }
     };   
+    
+    
+    //Common Functions
+    var utils = {};
+    
+    utils.get = function() {
+        
+        var deferred = Q.defer();
+            
+        var records = [];
+            
+        salesforceConn.sobject(this.query.sObject)
+            .select(thisquery..select)
+            .where(thisquery..where)
+            .on('record', function(record) {
+                records.push(record);
+            })
+            .on('error', function(query) {
+                deferred.reject('error');
+            })
+            .on('end', function(err) {
+                deferred.resolve(records);
+            })
+            .run({ autoFetch : true, maxFetch : this.query.maxFetch });
+            
+        return deferred.promise;
+            
+    };
+    
+    utils.init = function(result) {
+        
+        this.crossfilter.records.add(result); 
+        
+    };
         
 
 

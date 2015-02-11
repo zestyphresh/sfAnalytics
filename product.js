@@ -63,7 +63,7 @@
                 x: {
                     type: 'timeseries',
                     tick: {
-                        format: '%Y-%m-%d'
+                        format: '%Y-%b'
                     }
                 }
             },
