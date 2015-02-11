@@ -74,7 +74,7 @@
             ],
             grid: {
                 x: {
-                    lines: [{value: new Date(2010,11,15), text: '2010'},
+                    lines: [{value: new Date(2009,11,15), text: '2010'},
                             {value: new Date(2010,11,15), text: '2011'},
                             {value: new Date(2011,11,15), text: '2012'},
                             {value: new Date(2012,11,15), text: '2013'},
