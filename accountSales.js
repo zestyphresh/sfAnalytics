@@ -9,27 +9,24 @@
     var chart = {};
     var table = {};
     var value = {};
-    
-    var sales = new mdlSales();
-    var forecast = new mdlForecast();
-    
-    Q.all(utils.soql.call(sales), utils.soql.call(forecast)).then(function(resSales, resForecast) {
+
+    Q.all(soql.call(sales), soql.call(forecast)).then(function(resSales, resForecast) {
         
-        utils.init.apply(sales, resSales);
-        utils.init.apply(forecast, resForecast);
+        init.apply(sales, resSales);
+        init.apply(forecast, resForecast);
 
     }).done();
     
-    var mdlSales = function() {
+    var sales = {
         
-        query = {
+        query : {
             sObject : 'Daily_Historical_Sales__c',
             select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
             where : 'Account__r.Id = ' + "'" + accId + "'",
             maxfetch : 100000
-        }
+        },
         
-        crossfilter = {
+        crossfilter : {
             records : crossfilter(),
             dims : {},
             groups : {},
@@ -38,16 +35,16 @@
 
     }
     
-    var mdlForecast = function() {
+    var forecast = {
         
-        query = {
+        query : {
             sObject : 'Forecast2__c',
             select : 'Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Brand__c, Forecast_Type__c"',
             where : 'Account__r.Id = ' + "'" + accId + "'",
             maxfetch : 100000
-        }
+        },
         
-        crossfilter = {
+        crossfilter : {
             records : crossfilter(),
             dims : {},
             groups : {},
@@ -56,9 +53,9 @@
 
     }
 
-    var utils = function() {
+    //var utils = function() {
         
-        soql = function() {
+        var soql = function() {
         
             var deferred = Q.defer();
                 
@@ -82,13 +79,13 @@
             
         }
     
-        init = function(result) {
+        var init = function(result) {
         
             this.crossfilter.records.add(result); 
         
         }
         
-    }
+    //}
         
 
 
