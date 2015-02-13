@@ -17,16 +17,16 @@
 
     }).done();
     
-    var sales = {
+    var sales = function() {
         
-        query : {
+        query = {
             sObject : 'Daily_Historical_Sales__c',
             select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
             where : 'Account__r.Id = ' + "'" + accId + "'",
             maxfetch : 100000
-        },
+        }
         
-        crossfilter : {
+        crossfilter = {
             records : crossfilter(),
             dims : {},
             groups : {},
@@ -35,16 +35,16 @@
 
     }
     
-    var forecast = {
+    var forecast = function() {
         
-        query : {
+        query = {
             sObject : 'Forecast2__c',
             select : 'Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Brand__c, Forecast_Type__c"',
             where : 'Account__r.Id = ' + "'" + accId + "'",
             maxfetch : 100000
-        },
+        }
         
-        crossfilter : {
+        crossfilter = {
             records : crossfilter(),
             dims : {},
             groups : {},
@@ -53,9 +53,9 @@
 
     }
 
-    var utils = {
+    var utils = function() {
         
-        soql : function() {
+        soql = function() {
         
             var deferred = Q.defer();
                 
@@ -77,9 +77,9 @@
                 
             return deferred.promise;
             
-        },
+        }
     
-        init : function(result) {
+        init = function(result) {
         
             this.crossfilter.records.add(result); 
         
