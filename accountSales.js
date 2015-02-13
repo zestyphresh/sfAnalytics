@@ -9,13 +9,6 @@
     var chart = {};
     var table = {};
     var value = {};
-
-    Q.all(soql.call(sales), soql.call(forecast)).then(function(resSales, resForecast) {
-        
-        init.apply(sales, resSales);
-        init.apply(forecast, resForecast);
-
-    }).done();
     
     var sales = {
         
@@ -52,6 +45,13 @@
         }
 
     }
+    
+    Q.all(soql.call(sales), soql.call(forecast)).then(function(resSales, resForecast) {
+        
+        init.apply(sales, resSales);
+        init.apply(forecast, resForecast);
+
+    }).done();
 
     //var utils = function() {
         
