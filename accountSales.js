@@ -7,7 +7,6 @@
     var chart = {};
     var table = {};
     var value = {};
-    var utils = {};
     
     Q.all(utils.get.call(sales), utils.get.call(forecast)).then(function(resSales, resForecast) {
         
@@ -52,36 +51,39 @@
 
     }
 
-    //Common Functions
-    utils.get = function() {
+    var utils = {
         
-        var deferred = Q.defer();
+        get : function() {
+        
+            var deferred = Q.defer();
+                
+            var records = [];
+                
+            salesforceConn.sobject(this.query.sObject)
+                .select(this.query.select)
+                .where(this.query.where)
+                .on('record', function(record) {
+                    records.push(record);
+                })
+                .on('error', function(query) {
+                    deferred.reject('error');
+                })
+                .on('end', function(err) {
+                    deferred.resolve(records);
+                })
+                .run({ autoFetch : true, maxFetch : this.query.maxFetch });
+                
+            return deferred.promise;
             
-        var records = [];
-            
-        salesforceConn.sobject(this.query.sObject)
-            .select(this.query.select)
-            .where(this.query.where)
-            .on('record', function(record) {
-                records.push(record);
-            })
-            .on('error', function(query) {
-                deferred.reject('error');
-            })
-            .on('end', function(err) {
-                deferred.resolve(records);
-            })
-            .run({ autoFetch : true, maxFetch : this.query.maxFetch });
-            
-        return deferred.promise;
-            
-    };
+        },
     
-    utils.init = function(result) {
+        init : function(result) {
         
-        this.crossfilter.records.add(result); 
+            this.crossfilter.records.add(result); 
         
-    };
+        }
+        
+    }
         
 
 
