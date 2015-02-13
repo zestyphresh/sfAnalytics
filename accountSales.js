@@ -7,6 +7,7 @@
     var chart = {};
     var table = {};
     var value = {};
+    var utils = {};
     
     Q.all(utils.get.call(sales), utils.get.call(forecast)).then(function(resSales, resForecast) {
         
@@ -52,8 +53,6 @@
     }
 
     //Common Functions
-    var utils = {};
-    
     utils.get = function() {
         
         var deferred = Q.defer();
