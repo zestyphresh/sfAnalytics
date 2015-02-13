@@ -10,6 +10,9 @@
     var table = {};
     var value = {};
     
+    var sales = new mdlSales();
+    var forecast = new mdlForecast();
+    
     Q.all(utils.soql.call(sales), utils.soql.call(forecast)).then(function(resSales, resForecast) {
         
         utils.init.apply(sales, resSales);
@@ -17,7 +20,7 @@
 
     }).done();
     
-    var sales = function() {
+    var mdlSales = function() {
         
         query = {
             sObject : 'Daily_Historical_Sales__c',
@@ -35,7 +38,7 @@
 
     }
     
-    var forecast = function() {
+    var mdlForecast = function() {
         
         query = {
             sObject : 'Forecast2__c',
