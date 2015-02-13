@@ -2,13 +2,15 @@
     
     $j = jQuery.noConflict();
     
+    console.log(utils);
+    
     //VARS
     var salesforce = {};
     var chart = {};
     var table = {};
     var value = {};
     
-    Q.all(utils.get.call(sales), utils.get.call(forecast)).then(function(resSales, resForecast) {
+    Q.all(utils.soql.call(sales), utils.soql.call(forecast)).then(function(resSales, resForecast) {
         
         utils.init.apply(sales, resSales);
         utils.init.apply(forecast, resForecast);
@@ -53,7 +55,7 @@
 
     var utils = {
         
-        get : function() {
+        soql : function() {
         
             var deferred = Q.defer();
                 
