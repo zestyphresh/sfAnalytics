@@ -2,7 +2,7 @@
     
     $j = jQuery.noConflict();
     
-    console.log(utils);
+    console.log(sales);
     
     //VARS
     var salesforce = {};
