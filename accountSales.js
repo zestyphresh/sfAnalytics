@@ -28,10 +28,10 @@
         
         console.log(resSales, resForecast);
         
-        data.sales = resSales;
-        data.forecast = resForecast;
+        //data.sales = resSales;
+        //data.forecast = resForecast;
         
-        grossTable();
+        //grossTable();
         
     }).done();
     
