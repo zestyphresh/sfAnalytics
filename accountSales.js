@@ -73,15 +73,15 @@
                          {"data": "sales", "title": "Gross Sales"},
                          {"data": "budget", "title": "Gross Budget"},
                          {"data": "target", "title": "Gross Target"}, 
-                         {"data": "last", "title": "2014"}
+                         {"data": "last", "title": "Last Year"}
         ];
         
         var tableColDefs = [
             {'targets' : [1,2,3,4], 
-            'render' : function (data, type, row, meta) {
+            'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
-                        return accounting.formatCurrency(data);
+                        return accounting.formatMoney(cell, "£", 0, ".", ",");
                         break;
                     }
                     return data;
