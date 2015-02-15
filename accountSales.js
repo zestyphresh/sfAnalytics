@@ -75,7 +75,7 @@
         ];
         
         var tableColDefs = [
-            {'targets' : [1,2,3,4], 
+            {'targets' : [1,2,3], 
             'render' : function ( data, type, row, meta ) {
                 switch (type) {
                     case 'display':
