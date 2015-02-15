@@ -24,9 +24,20 @@
         maxfetch : 100000
     }
         
-    Q.all( new soql(salesQuery), new soql(forecastQuery) ).then(function(resSales, resForecast) {
+    // Q.all( new soql(salesQuery), new soql(forecastQuery) ).then(function(resSales, resForecast) {
         
-        console.log(resSales, resForecast);
+    //     console.log(resSales, resForecast);
+        
+    //     //data.sales = resSales;
+    //     //data.forecast = resForecast;
+        
+    //     //grossTable();
+        
+    // }).done();
+    
+    Q.all( new soql(forecastQuery) ).then(function(resSales) {
+        
+        console.log(resSales);
         
         //data.sales = resSales;
         //data.forecast = resForecast;
