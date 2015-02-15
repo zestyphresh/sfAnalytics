@@ -74,17 +74,18 @@
                          {"data": "last", "title": "Gross Sales 2014"}
         ];
         
-        var tableColDefs = [{'targets' : [1,2,3,4], 
-                                'render' : function ( data, type, row, meta ) {
-                                    switch (type) {
-                                        case 'display':
-                                            return accounting.formatNumber(data);
-                                            break;
-                                    }
-                                    return data;
-                                }
-                            }
-        ]
+        var tableColDefs = [
+            {'targets' : [1,2,3,4], 
+            'render' : function ( data, type, row, meta ) {
+                switch (type) {
+                    case 'display':
+                        return accounting.formatNumber(data);
+                        break;
+                    }
+                    return data;
+                }
+            }
+        ];
                             
         var table = $j('#table-matrix').dataTable({
             'data' : source,
