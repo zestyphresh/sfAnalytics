@@ -49,7 +49,7 @@
             {month : 9, sales : 0, budget : 0, target : 0, last : 0},
             {month : 10, sales : 0, budget : 0, target : 0, last : 0},
             {month : 11, sales : 0, budget : 0, target : 0, last : 0},
-            {month : 12, sales : 0, budget : 0, target : 0, last : 0},
+            {month : 12, sales : 0, budget : 0, target : 0, last : 0}
         ];
         
         _.each(source, function(d) {
