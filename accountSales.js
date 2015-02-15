@@ -67,6 +67,8 @@
             });
         });
         
+        console.log(source);
+        
         var tableCols = [{"data": "month", "title": "Month"},
                          {"data": "sales", "title": "Gross Sales"},
                          {"data": "budget", "title": "Gross Budget"},
@@ -96,7 +98,7 @@
             'columnDefs' : tableColDefs
         });
         
-        console.log(source);
+        
     }
 
 
