@@ -92,7 +92,7 @@
         var table = $j('#table-matrix').dataTable({
             'data' : source,
             'paging' : false,
-            'order': [[0, 'desc' ]],
+            'order': [[0, 'asc' ]],
             'dom' : 'ftip',
             'columns' : tableCols,
             'columnDefs' : tableColDefs
