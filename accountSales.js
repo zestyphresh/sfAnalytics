@@ -26,10 +26,10 @@
     
     Q.allSettled([new soql(salesQuery), new soql(forecastQuery)]).spread(function (resSales, resForecast) {
         
-        console.log(resSales.value, resForecast.value);
-        
         data.sales = resSales.value;
         data.forecast = resForecast.value;
+        
+        console.log(data);
         
         grossTable();
         
