@@ -23,29 +23,18 @@
         where : 'Account__r.Id = ' + "'" + accId + "'",
         maxfetch : 100000
     }
-        
-    // Q.all( new soql(salesQuery), new soql(forecastQuery) ).then(function(resSales, resForecast) {
-        
-    //     console.log(resSales, resForecast);
-        
-    //     //data.sales = resSales;
-    //     //data.forecast = resForecast;
-        
-    //     //grossTable();
-        
-    // }).done();
     
-    Q.all( new soql(forecastQuery) ).then(function(resSales) {
+    Q.allSettled([new soql(salesQuery), new soql(forecastQuery)]).spread(function (resSales, resForecast) {
         
-        console.log(resSales);
+        console.log(resSales, resForecast);
         
-        //data.sales = resSales;
-        //data.forecast = resForecast;
+        data.sales = resSales;
+        data.forecast = resForecast;
         
-        //grossTable();
+        grossTable();
         
     }).done();
-    
+        
     function grossTable() {
         
         var source = [
