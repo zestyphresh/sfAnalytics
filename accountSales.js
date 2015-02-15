@@ -67,6 +67,34 @@
             });
         });
         
+        var tableCols = [{"data": "month", "title": "Month"},
+                         {"data": "sales", "title": "Gross Sales"},
+                         {"data": "budget", "title": "Gross Budget"},
+                         {"data": "target", "title": "Gross Target"}, 
+                         {"data": "last", "title": "Gross Sales 2014"}
+        ];
+        
+        var tableColDefs = [{'targets' : [1,2,3,4], 
+                                'render' : function ( data, type, row, meta ) {
+                                    switch (type) {
+                                        case 'display':
+                                            return accounting.formatNumber(data);
+                                            break;
+                                    }
+                                    return data;
+                                }
+                            }
+        ]
+                            
+        var table = $j('#table-matrix').dataTable({
+            'data' : source,
+            'paging' : false,
+            'order': [[0, 'desc' ]],
+            'dom' : 'ftip',
+            'columns' : tableCols,
+            'columnDefs' : tableColDefs
+        });
+        
         console.log(source);
     }
 
