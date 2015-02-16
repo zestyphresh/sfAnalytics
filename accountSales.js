@@ -129,9 +129,11 @@
                         format: function (d) { return accounting.formatMoney(d); }
                     }
                 }
-            },
-            onresize : this.resize()
+            }
         });
+        
+        $j( window ).resize(function() { chart.resize(); });
+        
     }
 
 
