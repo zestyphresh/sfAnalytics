@@ -118,6 +118,12 @@
                 keys: {
                     x: 'month',
                     value: ['sales', 'budget', 'target', 'last'],
+                },
+                names: {
+                    sales : '2015 Sales',
+                    budget : '2015 Budget',
+                    target : '2015 Target',
+                    last : '2014 Sales'
                 }
             },
             axis: {
@@ -127,8 +133,10 @@
                 y : {
                     tick: {
                         format: function (d) { return accounting.formatMoney(d); }
-                    }
+                    },
+                    min : 0
                 }
+                
             }
         });
         
