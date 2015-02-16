@@ -1,6 +1,10 @@
 (function(salesforceConn, accId) {
     
     $j = jQuery.noConflict();
+    
+    $j(function() {
+        $( "#tabs" ).tabs();
+    });
 
     //VARS
     var salesforce = {};
