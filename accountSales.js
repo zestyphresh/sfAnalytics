@@ -191,7 +191,7 @@
             
             console.log(e, settings);
             
-            console.log(table.rows({filter:'applied'}));
+            console.log(table.rows({filter: 'applied'}).data().toArray());
             
         });  
     
