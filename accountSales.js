@@ -31,7 +31,7 @@
         
         console.log(data);
         
-        grossTable();
+        grossTableChart();
         
     }).done();
         
