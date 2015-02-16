@@ -176,6 +176,7 @@
             {'targets': [4,5],
             'className': 'dt-right'}
         ];
+        //test
                             
         var table = $j('#table-productSales').DataTable({
             'data' : source,
