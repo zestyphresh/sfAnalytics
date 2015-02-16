@@ -123,6 +123,11 @@
             axis: {
                 x: {
                     type: 'category'
+                },
+                y : {
+                    tick: {
+                        format: function (d) { return accounting.formatMoney(d); }
+                    }
                 }
             },
             onresize : chart.resize()
