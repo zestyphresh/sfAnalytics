@@ -35,6 +35,7 @@
         console.log(data);
         
         grossTableChart();
+        productSales();
         
     }).done();
         
@@ -141,6 +142,47 @@
         });
         
         $j( window ).resize(function() { chart.resize(); });
+        
+    }
+    
+    function productSales() {
+        
+        var source = _.sortBy(data.sales, function(d) {
+            return moment(d.Invoice_Date__c).toDate();
+        });
+
+        var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
+                         {"data": "Product__r.Family", "title": "Category"},
+                         {"data": "Product__r.Product_Code_Name__c", "title": "Product"},
+                         {"data": "Quantity__c", "title": "Quantity"},
+                         {"data": "Value__c", "title": "Gross Value"},
+                         {"data": "Promotion__r.Name", "title": "Promotion"}
+        ];
+        
+        var tableColDefs = [
+            {'targets' : [4], 
+            'render' : function (cell, type, row, meta) {
+                switch (type) {
+                    case 'display':
+                        return accounting.formatMoney(cell);
+                        break;
+                    }
+                    return data;
+                }
+            },
+            {'targets': [3,4],
+            'className': 'dt-right'}
+        ];
+                            
+        var table = $j('#table-productSales').dataTable({
+            'data' : source,
+            'paging' : true,
+            'ordering' : true,
+            "order": [[0,'desc']],
+            'dom' : 'ftp',
+            'columns' : tableCols,
+            'columnDefs' : tableColDefs
+        });
         
     }
 
