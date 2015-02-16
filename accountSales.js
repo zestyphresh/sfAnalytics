@@ -110,7 +110,7 @@
                 json: source,
                 keys: {
                     x: 'month',
-                    value: ['sales, budget, target, last'],
+                    value: ['sales', 'budget', 'target', 'last'],
                 }
             },
             axis: {
