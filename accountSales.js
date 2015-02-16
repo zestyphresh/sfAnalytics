@@ -158,8 +158,8 @@
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
                          {"data": "Product__r.Name", "title": "Product Name"},
                          {"data": "Quantity__c", "title": "Quantity"},
-                         {"data": "Value__c", "title": "Gross Value"}//,
-                         //{"data": "Promotion__r.Name", "title": "Promotion"}
+                         {"data": "Value__c", "title": "Gross Value"},
+                         {"data": "Promotion__r.Name", "title": "Promotion"}
         ];
         
         var tableColDefs = [
@@ -173,7 +173,7 @@
                     return data;
                 }
             },
-            {'targets': [5,6],
+            {'targets': [4,5],
             'className': 'dt-right'}
         ];
                             
