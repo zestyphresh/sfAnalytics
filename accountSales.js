@@ -98,6 +98,7 @@
         var table = $j('#table-matrix').dataTable({
             'data' : source,
             'paging' : false,
+            "order": [],
             'dom' : 't',
             'columns' : tableCols,
             'columnDefs' : tableColDefs
