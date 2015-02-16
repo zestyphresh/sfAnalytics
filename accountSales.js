@@ -191,7 +191,7 @@
             
             console.log(e, settings);
             
-            console.log(table.rows({order: "applied", search: "applied", page: "all"}).data());
+            console.log(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
             
         });  
     
