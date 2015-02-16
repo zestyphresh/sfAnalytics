@@ -187,7 +187,13 @@
             'columnDefs' : tableColDefs
         });
         
-    }
+        table.on('search.dt', function (e, settings) {
+            
+            console.log(e, settings);
+            
+            console.log(table.rows({filter:'applied'}));
+            
+        });    
 
 
     function soql(query) {
