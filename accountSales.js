@@ -150,6 +150,8 @@
         var source = _.sortBy(data.sales, function(d) {
             return moment(d.Invoice_Date__c).toDate();
         });
+        
+        console.log(source);
 
         var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
                          {"data": "Product__r.Family", "title": "Category"},
