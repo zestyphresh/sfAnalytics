@@ -193,7 +193,9 @@
             
             console.log(table.rows({filter:'applied'}));
             
-        });    
+        });  
+    
+    }
 
 
     function soql(query) {
