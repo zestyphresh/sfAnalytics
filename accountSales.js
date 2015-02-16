@@ -130,7 +130,7 @@
                     }
                 }
             },
-            onresize : chart.resize()
+            onresize : this.resize()
         });
     }
 
