@@ -35,7 +35,7 @@
         
     }).done();
         
-    function grossTable() {
+    function grossTableChart() {
         
         var source = [
             {monthName : 'January', month : 1, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
@@ -75,11 +75,11 @@
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "sales", "title": "Gross Sales"},
                          {"data": "budget", "title": "Gross Budget"},
-                         {"data": "vsBudget", "title": "Gross Budget"},
+                         {"data": "vsBudget", "title": "vs Sales"},
                          {"data": "target", "title": "Gross Target"},
-                         {"data": "vsTarget", "title": "Gross Budget"},
+                         {"data": "vsTarget", "title": "vs Sales"},
                          {"data": "last", "title": "Last Year"},
-                         {"data": "vsLast", "title": "Gross Budget"}
+                         {"data": "vsLast", "title": "vs Sales"}
         ];
         
         var tableColDefs = [
@@ -98,13 +98,27 @@
         var table = $j('#table-matrix').dataTable({
             'data' : source,
             'paging' : false,
-            'order': [[0, 'asc' ]],
-            'dom' : 'ftip',
+            'dom' : 't',
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
         
-        
+        var chart = c3.generate({
+            bindto: '#chart-grossSales',
+            data: {
+                x: 'monthName',
+                json: source,
+                keys: {
+                    x: 'month',
+                    value: ['sales, budget, target, last'],
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category'
+                }
+            }
+        });
     }
 
 
