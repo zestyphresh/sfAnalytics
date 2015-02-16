@@ -15,7 +15,7 @@
     
     var salesQuery = {
         sObject : 'Daily_Historical_Sales__c',
-        select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
+        select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
         where : 'Account__r.Id = ' + "'" + accId + "'",
         maxfetch : 100000
     };
@@ -155,7 +155,8 @@
 
         var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
                          {"data": "Product__r.Family", "title": "Category"},
-                         {"data": "Product__r.Product_Code_Name__c", "title": "Product"},
+                         {"data": "Product__r.Part_Code__c", "title": "Product Code"},
+                         {"data": "Product__r.Name", "title": "Product Name"},
                          {"data": "Quantity__c", "title": "Quantity"},
                          {"data": "Value__c", "title": "Gross Value"},
                          {"data": "Promotion__r.Name", "title": "Promotion"}
