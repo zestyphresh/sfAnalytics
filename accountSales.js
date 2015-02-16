@@ -134,7 +134,8 @@
                     tick: {
                         format: function (d) { return accounting.formatMoney(d); }
                     },
-                    min : 0
+                    min : 0,
+                    center: 0
                 }
                 
             }
