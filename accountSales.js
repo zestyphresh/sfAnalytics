@@ -203,7 +203,7 @@
                 xFormat: '%Y-%m-%d',
                 json: source,
                 keys: {
-                    x: 'key',
+                    x: 'Invoice_Date__c',
                     value: ['Value__c'],
                 }
             },
