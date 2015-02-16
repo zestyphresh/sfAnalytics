@@ -192,9 +192,30 @@
             
             console.log(e, settings);
             
-            console.log(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
+            chart.load(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
             
-        });  
+        });
+        
+        var chart = c3.generate({
+            bindto: '#chartWeeklySales',
+            data: {
+                x: 'Invoice_Date__c',
+                xFormat: '%Y-%m-%d',
+                json: source,
+                keys: {
+                    x: 'key',
+                    value: ['Value__c'],
+                }
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format: '%Y-%b'
+                    }
+                }
+            }
+        });
     
     }
 
