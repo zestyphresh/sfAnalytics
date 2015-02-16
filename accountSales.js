@@ -2,9 +2,7 @@
     
     $j = jQuery.noConflict();
     
-    $j(function() {
-        $( "#tabs" ).tabs();
-    });
+    $j( "#tabs" ).tabs();
 
     //VARS
     var salesforce = {};
