@@ -158,12 +158,12 @@
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
                          {"data": "Product__r.Name", "title": "Product Name"},
                          {"data": "Quantity__c", "title": "Quantity"},
-                         {"data": "Value__c", "title": "Gross Value"},
-                         {"data": "Promotion__r.Name", "title": "Promotion"}
+                         {"data": "Value__c", "title": "Gross Value"}//,
+                         //{"data": "Promotion__r.Name", "title": "Promotion"}
         ];
         
         var tableColDefs = [
-            {'targets' : [4], 
+            {'targets' : [5], 
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
@@ -173,7 +173,7 @@
                     return data;
                 }
             },
-            {'targets': [3,4],
+            {'targets': [5,6],
             'className': 'dt-right'}
         ];
                             
