@@ -2,6 +2,7 @@
     
     $j = jQuery.noConflict();
     
+    //load tabs
     $j( "#tabs" ).tabs();
 
     //VARS
