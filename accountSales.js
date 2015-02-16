@@ -124,7 +124,8 @@
                 x: {
                     type: 'category'
                 }
-            }
+            },
+            onresize : chart.resize()
         });
     }
 
