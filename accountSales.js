@@ -18,14 +18,14 @@
         select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
         where : 'Account__r.Id = ' + "'" + accId + "'",
         maxfetch : 100000
-    }
+    };
         
     var forecastQuery = {
         sObject : 'Forecast2__c',
         select : 'Fiscal_Year__c, Fiscal_Month__c, Gross_Value__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Brand__c, Forecast_Type__c',
         where : 'Account__r.Id = ' + "'" + accId + "'",
         maxfetch : 100000
-    }
+    };
     
     Q.allSettled([new soql(salesQuery), new soql(forecastQuery)]).spread(function (resSales, resForecast) {
         
@@ -90,17 +90,20 @@
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
-                        return accounting.formatMoney(cell, "£", 0, ".", ",");
+                        return accounting.formatMoney(cell);
                         break;
                     }
                     return data;
                 }
-            }
+            },
+            {'targets': [1,2,3,4,5,6,7],
+            'className': 'dt-right'}
         ];
                             
         var table = $j('#table-matrix').dataTable({
             'data' : source,
             'paging' : false,
+            'ordering' : false,
             "order": [],
             'dom' : 't',
             'columns' : tableCols,
@@ -163,6 +166,23 @@
         
     //}
         
-
+    accounting.settings = {
+    	currency: {
+    		symbol : "£",   // default currency symbol is '$'
+    		format: {
+            	pos : "%s%v",
+            	neg : "-%s%v",
+            	zero: "%s0"
+            },
+    		decimal : ".",
+    		thousand: ",",
+    		precision : 0
+    	},
+    	number: {
+    		precision : 0,
+    		thousand: ",",
+    		decimal : "."
+    	}
+    }
 
 })(conn, accId);
