@@ -177,7 +177,7 @@
             'className': 'dt-right'}
         ];
                             
-        var table = $j('#table-productSales').dataTable({
+        var table = $j('#table-productSales').DataTable({
             'data' : source,
             'paging' : true,
             'ordering' : true,
