@@ -3,8 +3,8 @@
     $j = jQuery.noConflict();
     
     //load tabs
-    $j( "#tabs" ).tabs();
-
+    $j( "#tabs" ).responsiveTabs();
+    
     //VARS
     var salesforce = {};
     var chart = {};
