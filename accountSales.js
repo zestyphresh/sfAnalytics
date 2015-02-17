@@ -191,13 +191,15 @@
             
             console.log(e, settings);
             
-            chart.load({
-                json : chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
-                keys: {
-                    x: 'key',
-                    value: ['values'],
-                }
-            });
+            createChart(chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()));
+            
+            // chart.load({
+            //     json : chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
+            //     keys: {
+            //         x: 'key',
+            //         value: ['values'],
+            //     }
+            // });
             
         });
         
@@ -213,33 +215,38 @@
             return chartData;
             
         }
+        
+        createChart();
+        
+        function createChart(source) {
 
-        //update above event as data should be specified in object json ; , keys 
-        var chart = c3.generate({
-            bindto: '#chartWeeklySales',
-            data: {
-                x: 'key',
-                xFormat: '%Y-%m-%d',
-                json: chartData(source),
-                keys: {
+            //update above event as data should be specified in object json ; , keys 
+            var chart = c3.generate({
+                bindto: '#chartWeeklySales',
+                data: {
                     x: 'key',
-                    value: ['values'],
-                },
-                type : 'bar'
-            },
-            axis: {
-                x: {
-                    type: 'timeseries',
-                    tick: {
-                        format: '%Y-%b'
+                    xFormat: '%Y-%m-%d',
+                    json: chartData(source),
+                    keys: {
+                        x: 'key',
+                        value: ['values'],
                     },
-                    extent: ['2010-01-01', '2015-12-01']
+                    type : 'bar'
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: '%Y-%b'
+                        },
+                        extent: ['2010-01-01', '2015-12-01']
+                    }
+                },
+                bar: {
+                    zerobased: true
                 }
-            },
-            bar: {
-                zerobased: true
-            }
-        });
+            });
+        }
     
     }
 
