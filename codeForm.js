@@ -39,6 +39,14 @@
     }
 
     function createTable(id, data) {
+        
+        _.each(data, function(d) {
+            
+            d.Retail_Barcode__c = d.Retail_Barcode__c ? "P" : "O";
+            d.Inner_Transit_Barcode__c = d.Inner_Transit_Barcode__c ? "P" : "O";
+            d.Outer_Transit_Barcode__c = d.Outer_Transit_Barcode__c ? "P" : "O";
+            
+        });
 
         var _columns = [{"data": "Part_Code__c", "title": "Code"},
                         {"data": "Long_Name__c", "title": "Description"},
