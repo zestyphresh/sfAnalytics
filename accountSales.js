@@ -191,7 +191,31 @@
             
             console.log(e, settings);
             
-            createChart(chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()));
+            var chart = c3.generate({
+                bindto: '#chartWeeklySales',
+                data: {
+                    x: 'key',
+                    xFormat: '%Y-%m-%d',
+                    json: chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
+                    keys: {
+                        x: 'key',
+                        value: ['values'],
+                    },
+                    type : 'bar'
+                },
+                axis: {
+                    x: {
+                        type: 'timeseries',
+                        tick: {
+                            format: '%Y-%b'
+                        },
+                        extent: ['2010-01-01', '2015-12-01']
+                    }
+                },
+                bar: {
+                    zerobased: true
+                }
+            });
             
             // chart.load({
             //     json : chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
@@ -216,9 +240,6 @@
             
         }
         
-        createChart();
-        
-        function createChart(source) {
 
             //update above event as data should be specified in object json ; , keys 
             var chart = c3.generate({
@@ -246,7 +267,6 @@
                     zerobased: true
                 }
             });
-        }
     
     }
 
