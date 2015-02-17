@@ -191,13 +191,13 @@
             
             console.log(e, settings);
             
-            chart.load(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
+            //chart.load(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
             
         });
         
         var chartData = d3.nest()
             .key(function(d) { return moment(d.Fiscal_Year__c + '-' + d.Fiscal_Month__c, 'YYYY-M'); })
-            .rollup(function(d) { return d3.sum(d, function(i) {return i.Value__c; });
+            .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); });
             
         console.log(chartData);
 
