@@ -202,8 +202,6 @@
             
         console.log(chartData);
 
-        var chartData = _(source);
-        
         //update above event as data should be specified in object json ; , keys 
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
