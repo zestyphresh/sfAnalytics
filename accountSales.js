@@ -232,8 +232,12 @@
                     type: 'timeseries',
                     tick: {
                         format: '%Y-%b'
-                    }
+                    },
+                    extent: ['2010-01-01', '2015-12-01']
                 }
+            },
+            bar: {
+                zerobased: true
             }
         });
     
