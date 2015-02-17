@@ -209,11 +209,15 @@
                         tick: {
                             format: '%Y-%b'
                         },
-                        extent: ['2010-01-01', '2015-12-01']
+                        min : new date(2010,0,1),
+                        max : new date(2015,11,1)
+                    },
+                    y : {
+                        tick: {
+                            format: function (d) { return accounting.formatMoney(d); }
+                        },
+                        padding : {bottom: 0}
                     }
-                },
-                bar: {
-                    zerobased: true
                 }
             });
             
