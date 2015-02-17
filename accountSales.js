@@ -195,24 +195,31 @@
             
         });
         
-        var chartData = d3.nest()
-            .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
-            .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); })
-            .entries(source);
+        function chartData(source) {
+        
+            var chartData = d3.nest()
+                .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
+                .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); })
+                .entries(source);
             
-        console.log(chartData);
+            console.log(chartData);
+            
+            return chartData;
+            
+        }
 
         //update above event as data should be specified in object json ; , keys 
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
             data: {
-                x: 'Invoice_Date__c',
+                x: 'key',
                 xFormat: '%Y-%m-%d',
-                json: source,
+                json: chartData(source),
                 keys: {
-                    x: 'Invoice_Date__c',
-                    value: ['Value__c'],
-                }
+                    x: 'key',
+                    value: ['values'],
+                },
+                type : 'bar'
             },
             axis: {
                 x: {
