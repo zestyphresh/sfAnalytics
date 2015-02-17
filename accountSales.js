@@ -191,7 +191,13 @@
             
             console.log(e, settings);
             
-            //chart.load(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
+            chart.load({
+                json : chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
+                keys: {
+                    x: 'key',
+                    value: ['values'],
+                }
+            });
             
         });
         
