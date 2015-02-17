@@ -264,8 +264,8 @@
                         tick: {
                             format: '%Y-%b'
                         },
-                        min : new date(2010,0,1),
-                        max : new date(2015,11,1)
+                        min : new Date(2010,0,1),
+                        max : new Date(2015,11,1)
                     },
                     y : {
                         tick: {
