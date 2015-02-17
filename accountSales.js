@@ -196,7 +196,7 @@
         });
         
         var chartData = d3.nest()
-            .key(function(d) { return moment(d.Fiscal_Year__c + '-' + d.Fiscal_Month__c, 'YYYY-M'); })
+            .key(function(d) { return new Date(d.Fiscal_Year__c, d.Fiscal_Month__c - 1, 1).format('YYYY-MM-DD'); })
             .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); })
             .entries(source);
             
