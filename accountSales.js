@@ -195,6 +195,15 @@
             
         });
         
+        var chartData = d3.nest()
+            .key(function(d) { return moment(d.Fiscal_Year__c + '-' + d.Fiscal_Month__c, 'YYYY-M'); })
+            .rollup(function(d) { return d3.sum(d, function(i) {return i.Value__c; });
+            
+        console.log(chartData);
+
+        var chartData = _(source);
+        
+        //update above event as data should be specified in object json ; , keys 
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
             data: {
