@@ -196,7 +196,7 @@
         });
         
         var chartData = d3.nest()
-            .key(function(d) { return new Date(d.Fiscal_Year__c, d.Fiscal_Month__c - 1, 1).format('YYYY-MM-DD'); })
+            .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
             .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); })
             .entries(source);
             
