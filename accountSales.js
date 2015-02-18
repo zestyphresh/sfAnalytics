@@ -125,7 +125,7 @@
                 x: 'monthName',
                 json: source,
                 keys: {
-                    x: 'month',
+                    x: 'monthName',
                     value: ['sales', 'budget', 'target', 'last'],
                 },
                 names: {
