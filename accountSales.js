@@ -15,7 +15,7 @@
     
     var salesQuery = {
         sObject : 'Daily_Historical_Sales__c',
-        select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
+        select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Gross_Credits__c, Gross_Despatches__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
         where : 'Account__r.Id = ' + "'" + accId + "'",
         maxfetch : 100000
     };
@@ -42,21 +42,27 @@
     function grossTableChart() {
         
         var source = [
-            {monthName : 'January', month : 1, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'February', month : 2, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'March', month : 3, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'April', month : 4, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'May', month : 5, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'June', month : 6, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'July', month : 7, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'August', month : 8, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'September', month : 9, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'October', month : 10, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'November', month : 11, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'December', month : 12, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
+            {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'February', month : 2, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'March', month : 3, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'April', month : 4, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'May', month : 5, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'June', month : 6, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'July', month : 7, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'August', month : 8, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'September', month : 9, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'October', month : 10, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'November', month : 11, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+            {monthName : 'December', month : 12, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
         ];
         
         _.each(source, function(d) {
+            d.credits = d3.sum(data.sales, function(s) { 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Gross_Credits__c : 0; 
+            });
+            d.despatches = d3.sum(data.sales, function(s) { 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Gross_Despatches__c : 0; 
+            });
             d.sales = d3.sum(data.sales, function(s) { 
                 return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Value__c : 0; 
             });
@@ -77,6 +83,8 @@
         console.log(source);
         
         var tableCols = [{"data": "monthName", "title": "Month"},
+                         {"data": "credits", "title": "Gross Credits"},
+                         {"data": "despatches", "title": "Gross Despatches"},
                          {"data": "sales", "title": "Gross Sales"},
                          {"data": "budget", "title": "Gross Budget"},
                          {"data": "vsBudget", "title": "vs Sales"},
@@ -87,7 +95,7 @@
         ];
         
         var tableColDefs = [
-            {'targets' : [1,2,3,4,5,6,7], 
+            {'targets' : [1,2,3,4,5,6,7,8,9], 
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
@@ -97,7 +105,7 @@
                     return data;
                 }
             },
-            {'targets': [1,2,3,4,5,6,7],
+            {'targets': [1,2,3,4,5,6,7,8,9],
             'className': 'dt-right'}
         ];
                             
@@ -158,8 +166,7 @@
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
                          {"data": "Product__r.Name", "title": "Product Name"},
                          {"data": "Quantity__c", "title": "Quantity"},
-                         {"data": "Value__c", "title": "Gross Value"},
-                         {"data": "Promotion__r.Name", "title": "Promotion"}
+                         {"data": "Value__c", "title": "Gross Value"}
         ];
         
         var tableColDefs = [
@@ -222,14 +229,6 @@
                 }
             });
             
-            // chart.load({
-            //     json : chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
-            //     keys: {
-            //         x: 'key',
-            //         value: ['values'],
-            //     }
-            // });
-            
         });
         
         function chartData(source) {
@@ -277,6 +276,8 @@
                     }
                 }
             });
+            
+            chart.flush();
     
     }
 
