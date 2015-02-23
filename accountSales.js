@@ -65,8 +65,6 @@
             {monthName : 'November', month : 11, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
             {monthName : 'December', month : 12, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
         ];
-        
-
 
         _.each(source, function(d) {
             d.credits = d3.sum(data.sales, function(s) { 
@@ -92,8 +90,6 @@
             d.vsLast = d.sales - d.last;
         });
         
-        console.log(data.fiscal.PeriodNum__c);
-        
         var yearToDate = {
             credits : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; }), 
             despatches : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
@@ -107,9 +103,34 @@
         yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
         yearToDate.vsLast = yearToDate.sales - yearToDate.last;
         
-        console.log(yearToDate);
+        var fullYear = {
+            credits : d3.sum(source, function(s) { return s.credits; }), 
+            despatches : d3.sum(source, function(s) { return s.despatches; }), 
+            sales : d3.sum(source, function(s) { return s.sales; }), 
+            budget : d3.sum(source, function(s) { return s.budget; }), 
+            target : d3.sum(source, function(s) { return s.target; }), 
+            last : d3.sum(source, function(s) { return s.last; }), 
+        };
+        
+        fullYear.vsBudget = fullYear.sales - fullYear.budget;
+        fullYear.vsTarget = fullYear.sales - fullYear.target; 
+        fullYear.vsLast = fullYear.sales - fullYear.last;
         
         console.log(source);
+        
+        var ytdTr = '<tr>';
+        tr+= '<th>Year To Date</th>';
+        tr+= '<th>'+yearToDate.credits+'</th>';
+        tr+= '<th>'+yearToDate.despatches+'</th>';
+        tr+= '<th>'+yearToDate.sales+'</th>';
+        tr+= '<th>'+yearToDate.budget+'</th>';
+        tr+= '<th>'+yearToDate.vsBudget+'</th>';
+        tr+= '<th>'+yearToDate.target+'</th>';
+        tr+= '<th>'+yearToDate.vsTarget+'</th>';
+        tr+= '<th>'+yearToDate.last+'</th>';
+        tr+= '<th>'+yearToDate.vsLast+'</th>';
+        tr+= '</tr>';
+        $('#table-matrix tfoot').append(tr);
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
