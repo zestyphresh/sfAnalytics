@@ -119,6 +119,42 @@
         fullYear.vsTarget = fullYear.sales - fullYear.target; 
         fullYear.vsLast = fullYear.sales - fullYear.last;
         
+        var ytdchart = c3.generate({
+            bindto: '#ytd-summary-chart',
+            data: {
+                //x: 'monthName',
+                json: [yearToDate],
+                keys: {
+                    //x: 'monthName',
+                    value: ['sales', 'budget', 'target', 'last']
+                },
+                names: {
+                    sales : '2015 Sales',
+                    budget : '2015 Budget',
+                    target : '2015 Target',
+                    last : '2014 Sales'
+                },
+                types: {
+                    sales : 'bar',
+                    budget : 'bar',
+                    target : 'bar',
+                    last : 'bar'
+                }
+            },
+            axis: {
+                x: {
+                    type: 'category'
+                },
+                y : {
+                    tick: {
+                        format: function (d) { return accounting.formatMoney(d); }
+                    },
+                    padding : {bottom: 0}
+                }
+                
+            }
+        });
+        
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
                          {"data": "despatches", "title": "Gross Despatches"},
