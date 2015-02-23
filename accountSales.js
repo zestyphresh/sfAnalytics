@@ -130,7 +130,7 @@
         ytdTr+= '<th>'+yearToDate.last+'</th>';
         ytdTr+= '<th>'+yearToDate.vsLast+'</th>';
         ytdTr+= '</tr>';
-        $('#table-matrix tfoot').append(ytdTr);
+        $j('#table-matrix tfoot').append(ytdTr);
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
