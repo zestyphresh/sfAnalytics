@@ -30,16 +30,14 @@
     };
     
     var dateQuery = {
-        sObject : 'Fiscal_Settings__c',
+        sObject : 'FY_Settings__c',
         select : 'PeriodNum__c, PeriodYear__c',
         where : 'SetupOwnerId = ' + "'" + orgId + "'",
         maxfetch : 10
     };
     
     Q.allSettled([new soql(salesQuery), new soql(forecastQuery), new soql(dateQuery)]).spread(function (resSales, resForecast, resDate) {
-        
-        console.log(resDate);
-        
+
         data.sales = resSales.value;
         data.forecast = resForecast.value;
         data.fiscal = resDate.value;
