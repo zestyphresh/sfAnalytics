@@ -92,6 +92,8 @@
             d.vsLast = d.sales - d.last;
         });
         
+        console.log(data.fiscal.PeriodNum__c);
+        
         var yearToDate = {
             credits : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; }), 
             despatches : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
