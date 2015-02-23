@@ -139,7 +139,8 @@
                     budget : 'bar',
                     target : 'bar',
                     last : 'bar'
-                }
+                },
+                labels: true
             },
             axis: {
                 x: {
