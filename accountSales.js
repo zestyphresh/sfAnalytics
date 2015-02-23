@@ -66,6 +66,20 @@
             {monthName : 'December', month : 12, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
         ];
         
+        var yearToDate = {
+            credits : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; }), 
+            despatches : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
+            sales : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; }), 
+            budget : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; }), 
+            vsBudget : this.sales - this.budget, 
+            target : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.target : 0; }), 
+            vsTarget : this.sales - this.target, 
+            last : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.last : 0; }), 
+            vsLast : this.sales - this.last
+        };
+        
+        console.log(yearToDate);
+
         _.each(source, function(d) {
             d.credits = d3.sum(data.sales, function(s) { 
                 return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Gross_Credits__c : 0; 
