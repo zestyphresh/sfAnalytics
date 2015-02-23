@@ -40,7 +40,7 @@
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
-        data.fiscal = resDate.value;
+        data.fiscal = resDate.value[0];
         
         console.log(data);
         
