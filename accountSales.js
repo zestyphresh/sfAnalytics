@@ -254,7 +254,8 @@
                     x: {
                         type: 'timeseries',
                         tick: {
-                            format : '%b',
+                            //format : '%b'
+                            format : function (e) { return moment(e).format('MMM').slice(0, 1); }
                         },
                         min : new Date(2010,0,1),
                         max : new Date(2015,11,1),
