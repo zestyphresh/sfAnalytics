@@ -44,12 +44,15 @@
         
         console.log(data);
         
-        grossTableChart();
+        createGrossSummary();
+        
         productSales();
         
     }).done();
         
-    function grossTableChart() {
+    
+        
+    function createGrossSummary() {
         
         var source = [
             {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
@@ -115,22 +118,6 @@
         fullYear.vsBudget = fullYear.sales - fullYear.budget;
         fullYear.vsTarget = fullYear.sales - fullYear.target; 
         fullYear.vsLast = fullYear.sales - fullYear.last;
-        
-        console.log(source);
-        
-        var ytdTr = '<tr>';
-        ytdTr+= '<th>Year To Date</th>';
-        ytdTr+= '<th>'+yearToDate.credits+'</th>';
-        ytdTr+= '<th>'+yearToDate.despatches+'</th>';
-        ytdTr+= '<th>'+yearToDate.sales+'</th>';
-        ytdTr+= '<th>'+yearToDate.budget+'</th>';
-        ytdTr+= '<th>'+yearToDate.vsBudget+'</th>';
-        ytdTr+= '<th>'+yearToDate.target+'</th>';
-        ytdTr+= '<th>'+yearToDate.vsTarget+'</th>';
-        ytdTr+= '<th>'+yearToDate.last+'</th>';
-        ytdTr+= '<th>'+yearToDate.vsLast+'</th>';
-        ytdTr+= '</tr>';
-        $j('#table-matrix tfoot').append(ytdTr);
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
