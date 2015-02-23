@@ -255,10 +255,13 @@
                         type: 'timeseries',
                         tick: {
                             format : '%b',
-                            culling :false
                         },
                         min : new Date(2010,0,1),
-                        max : new Date(2015,11,1)
+                        max : new Date(2015,11,1),
+                        padding: {
+                            left: 0,
+                            right: 0
+                        }
                     },
                     y : {
                         tick: {
