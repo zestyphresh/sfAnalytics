@@ -135,7 +135,7 @@
                 type: 'bar',
                 labels: {
                     format: function (d) { return accounting.formatMoney(d); }
-                }
+                }/////////////////////////////////////////////////////////
             },
             axis: {
                 x: {
