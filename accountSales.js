@@ -237,6 +237,8 @@
             
         });
         
+        generateChart();
+        
         function chartData(source) {
         
             var chartData = d3.nest()
