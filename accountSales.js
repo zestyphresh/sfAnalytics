@@ -106,7 +106,9 @@
                 }
             },
             {'targets': [1,2,3,4,5,6,7,8,9],
-            'className': 'dt-right'}
+            'className': 'dt-right'},
+            {'targets': [1,4,6,8],
+            'className': 'border-left'}
         ];
                             
         var table = $j('#table-matrix').dataTable({
@@ -202,38 +204,9 @@
         
         table.on('search.dt', function (e, settings) {
             
-            console.log(e, settings);
+            //table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            var chart = c3.generate({
-                bindto: '#chartWeeklySales',
-                data: {
-                    x: 'key',
-                    xFormat: '%Y-%m-%d',
-                    json: chartData(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()),
-                    keys: {
-                        x: 'key',
-                        value: ['values'],
-                    },
-                    type : 'bar'
-                },
-                axis: {
-                    x: {
-                        type: 'timeseries',
-                        tick: {
-                            format: '%Y-%b'
-                        },
-                        min : new Date(2010,0,1),
-                        max : new Date(2015,11,1)
-                    },
-                    y : {
-                        tick: {
-                            format: function (d) { return accounting.formatMoney(d); }
-                        },
-                        padding : {bottom: 0},
-                        min : 0
-                    }
-                }
-            });
+            generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
             
         });
         
@@ -327,9 +300,7 @@
         this.values = {};
     
     }
-        
-    //}
-        
+
     accounting.settings = {
     	currency: {
     		symbol : "£",   // default currency symbol is '$'
