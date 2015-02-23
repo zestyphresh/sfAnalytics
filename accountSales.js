@@ -254,7 +254,7 @@
                     x: {
                         type: 'timeseries',
                         tick: {
-                            format: '%Y-%b'
+                            format: '%m'
                         },
                         min : new Date(2010,0,1),
                         max : new Date(2015,11,1)
