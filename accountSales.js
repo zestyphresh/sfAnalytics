@@ -139,7 +139,8 @@
             },
             axis: {
                 x: {
-                    type: 'category'
+                    type: 'category',
+                    padding : { left : 5, right : 5 }
                 },
                 y : {
                     tick: {
