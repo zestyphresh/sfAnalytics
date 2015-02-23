@@ -237,14 +237,14 @@
             
         });
         
-        generateChart();
+        generateChart(source);
         
-        function chartData(source) {
+        function chartData(data) {
         
             var chartData = d3.nest()
                 .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
                 .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); })
-                .entries(source);
+                .entries(data);
             
             console.log(chartData);
             
@@ -252,7 +252,7 @@
             
         }  
         
-        function generateChart() {
+        function generateChart(data) {
         
             //update above event as data should be specified in object json ; , keys 
             var chart = c3.generate({
@@ -260,7 +260,7 @@
                 data: {
                     x: 'key',
                     xFormat: '%Y-%m-%d',
-                    json: chartData(source),
+                    json: chartData(data),
                     keys: {
                         x: 'key',
                         value: ['values'],
