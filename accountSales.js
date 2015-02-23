@@ -122,10 +122,8 @@
         var ytdchart = c3.generate({
             bindto: '#ytd-summary-chart',
             data: {
-                //x: 'monthName',
                 json: [yearToDate],
                 keys: {
-                    //x: 'monthName',
                     value: ['sales', 'budget', 'target', 'last']
                 },
                 names: {
