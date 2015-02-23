@@ -250,7 +250,7 @@
             
             return chartData;
             
-        }
+        }  
         
         function generateChart() {
         
