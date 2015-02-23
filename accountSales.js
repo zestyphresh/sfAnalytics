@@ -108,7 +108,7 @@
             {'targets': [1,2,3,4,5,6,7,8,9],
             'className': 'dt-right'},
             {'targets': [1,4,6,8],
-            'className': 'border-left'}
+            'className': 'borderLeft'}
         ];
                             
         var table = $j('#table-matrix').dataTable({
