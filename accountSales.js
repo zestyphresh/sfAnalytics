@@ -134,12 +134,7 @@
                     target : '2015 Target',
                     last : '2014 Sales'
                 },
-                types: {
-                    sales : 'bar',
-                    budget : 'bar',
-                    target : 'bar',
-                    last : 'bar'
-                },
+                type: 'bar',
                 labels: true
             },
             axis: {
