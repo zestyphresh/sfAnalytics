@@ -5,6 +5,8 @@
     //load tabs
     $j( "#tabs" ).responsiveTabs();
     
+    var orgID = '00Db0000000ZVQP';
+    
     //VARS
     var salesforce = {};
     var chart = {};
@@ -27,10 +29,18 @@
         maxfetch : 100000
     };
     
-    Q.allSettled([new soql(salesQuery), new soql(forecastQuery)]).spread(function (resSales, resForecast) {
+    var dateQuery = {
+        sObject : 'Fiscal_Settings__c',
+        select : 'PeriodNum__c, PeriodYear__c',
+        where : 'SetupOwnerId = ' + "'" + orgId + "'",
+        maxfetch : 1
+    };
+    
+    Q.allSettled([new soql(salesQuery), new soql(forecastQuery), new soql(dateQuery)]).spread(function (resSales, resForecast, resDate) {
         
         data.sales = resSales.value;
         data.forecast = resForecast.value;
+        data.fiscal = resDate.value;
         
         console.log(data);
         
