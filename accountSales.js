@@ -38,6 +38,8 @@
     
     Q.allSettled([new soql(salesQuery), new soql(forecastQuery), new soql(dateQuery)]).spread(function (resSales, resForecast, resDate) {
         
+        console.log(resDate);
+        
         data.sales = resSales.value;
         data.forecast = resForecast.value;
         data.fiscal = resDate.value;
