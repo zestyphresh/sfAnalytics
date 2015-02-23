@@ -119,18 +119,18 @@
         console.log(source);
         
         var ytdTr = '<tr>';
-        tr+= '<th>Year To Date</th>';
-        tr+= '<th>'+yearToDate.credits+'</th>';
-        tr+= '<th>'+yearToDate.despatches+'</th>';
-        tr+= '<th>'+yearToDate.sales+'</th>';
-        tr+= '<th>'+yearToDate.budget+'</th>';
-        tr+= '<th>'+yearToDate.vsBudget+'</th>';
-        tr+= '<th>'+yearToDate.target+'</th>';
-        tr+= '<th>'+yearToDate.vsTarget+'</th>';
-        tr+= '<th>'+yearToDate.last+'</th>';
-        tr+= '<th>'+yearToDate.vsLast+'</th>';
-        tr+= '</tr>';
-        $('#table-matrix tfoot').append(tr);
+        ytdTr+= '<th>Year To Date</th>';
+        ytdTr+= '<th>'+yearToDate.credits+'</th>';
+        ytdTr+= '<th>'+yearToDate.despatches+'</th>';
+        ytdTr+= '<th>'+yearToDate.sales+'</th>';
+        ytdTr+= '<th>'+yearToDate.budget+'</th>';
+        ytdTr+= '<th>'+yearToDate.vsBudget+'</th>';
+        ytdTr+= '<th>'+yearToDate.target+'</th>';
+        ytdTr+= '<th>'+yearToDate.vsTarget+'</th>';
+        ytdTr+= '<th>'+yearToDate.last+'</th>';
+        ytdTr+= '<th>'+yearToDate.vsLast+'</th>';
+        ytdTr+= '</tr>';
+        $('#table-matrix tfoot').append(ytdTr);
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
