@@ -5,7 +5,7 @@
     //load tabs
     $j( "#tabs" ).responsiveTabs();
     
-    var orgID = '00Db0000000ZVQP';
+    var orgId = '00Db0000000ZVQP';
     
     //VARS
     var salesforce = {};
