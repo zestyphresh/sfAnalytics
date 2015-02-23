@@ -171,6 +171,8 @@
             'columnDefs' : tableColDefs
         });
         
+        //////
+        
         var chart = c3.generate({
             bindto: '#chart-grossSales',
             data: {
