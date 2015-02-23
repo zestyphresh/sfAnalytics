@@ -106,7 +106,7 @@
             vsLast : this.sales - this.last
         };
         
-        console.log(yearToDate);  //
+        console.log(yearToDate);
         
         console.log(source);
         
