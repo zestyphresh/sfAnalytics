@@ -133,7 +133,9 @@
                     last : '2014 Sales'
                 },
                 type: 'bar',
-                labels: true
+                labels: {
+                    format: function (d) { return accounting.formatMoney(d); }
+                }
             },
             axis: {
                 x: {
