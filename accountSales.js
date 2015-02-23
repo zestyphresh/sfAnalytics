@@ -99,12 +99,13 @@
             despatches : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
             sales : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; }), 
             budget : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; }), 
-            vsBudget : this.sales - this.budget, 
             target : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.target : 0; }), 
-            vsTarget : this.sales - this.target, 
             last : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.last : 0; }), 
-            vsLast : this.sales - this.last
         };
+        
+        yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
+        yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
+        yearToDate.vsLast = yearToDate.sales - yearToDate.last;
         
         console.log(yearToDate);
         
