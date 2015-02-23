@@ -33,7 +33,7 @@
         sObject : 'Fiscal_Settings__c',
         select : 'PeriodNum__c, PeriodYear__c',
         where : 'SetupOwnerId = ' + "'" + orgId + "'",
-        maxfetch : 1
+        maxfetch : 10
     };
     
     Q.allSettled([new soql(salesQuery), new soql(forecastQuery), new soql(dateQuery)]).spread(function (resSales, resForecast, resDate) {
