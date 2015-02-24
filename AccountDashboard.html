@@ -1,0 +1,140 @@
+<html>
+    <head>       
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+
+        <link rel="stylesheet" type="text/css" href="./purecss/0.5.0/pure.css" />
+        <link rel="stylesheet" type="text/css" href="./jqueryResponsiveTabs/1.4.3/css/responsive-tabs.css" />
+        <link rel="stylesheet" type="text/css" href="./jqueryResponsiveTabs/1.4.3/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="./datatables/1.10.4/media/css/jquery.dataTables.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.9/c3.css" />
+    
+        <style>
+               
+            /* stops overflow on mobile/desktop */      
+            html, body {
+                max-width: 100% !important;
+                overflow-x: hidden !important;
+                height: 100%;
+            }
+            
+            #tab1, #tab2, #tab3, #tabsummary {
+                height: 720px;
+            }
+            
+            .pure-g > div {
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+            
+            .l-box {
+                padding: 1em;
+            }
+                        
+            .headline {
+                font-size : 2em;
+                text-align : left;
+                color: steelblue;
+            }
+            
+            .borderLeft {
+                border-left: 1px solid #111111;
+            }
+    
+        </style>   
+        
+        <script type='text/javascript' src="./jquery/2.1.1/jquery-2.1.1.js"></script>
+        <script type='text/javascript' src="./jqueryResponsiveTabs/1.4.3/js/jquery.responsiveTabs.js"></script>
+        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jsforce/1.4.0/jsforce.js"></script>
+        <script type='text/javascript' src="./datatables/1.10.4/media/js/jquery.dataTables.js"></script>
+        <script type='text/javascript' src="./datatables/1.10.4/extensions/TableTools/js/dataTables.tableTools.js"></script>
+        <script type='text/javascript' src="./crossfilter/1.3.11/crossfilter.js"></script>
+        <script type='text/javascript' src="./d3/3.4.13/d3.js"></script>
+        <script type='text/javascript' src="./moment/2.8.3/moment.js"></script>
+        <script type='text/javascript' src="./q/1.1.1/q.js"></script>
+        <script type='text/javascript' src="./accounting/0.3.2/accounting.js"></script>
+        <script type='text/javascript' src="./lodash/2.4.1/lodash.js"></script>
+        <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.9/c3.js"></script>
+
+    </head>
+    
+    <body>
+    
+    <div id="container">
+    
+        <div id="tabs">
+        
+            <ul>
+                <li><a href="#tabsummary">Summary</a></li>
+                <li><a href="#tab1">Gross Sales by Month</a></li>
+                <li><a href="#tab2">Product Sales</a></li>
+                <li><a href="#tab3">Opportunities</a></li>
+            </ul>
+            
+            <div id="tabsummary">
+                <div class="pure-g">
+                    <div class="pure-u-1-2 l-box">
+                        <div id="ytd-summary-chart"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tab1">
+                <div class="pure-g">
+                    <div class="pure-u-1-1 l-box">
+                        <table id="table-matrix" class="row-border order-column hover compact">
+                            <thead>
+                                <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+                            </thead>
+                            <tfoot>
+                            </tfoot>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="pure-u-1-1 l-box">
+                        <div id="chart-grossSales"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tab2">
+                <div class="pure-g">
+                    <div class="pure-u-1-1 l-box">
+                        <table id="table-productSales" class="display compact">
+                            <thead><th></th><th></th><th></th><th></th><th></th><th></th></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="pure-u-1-1 l-box">
+                        <div id="chartWeeklySales"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tab3">
+                <div class="pure-g">
+                    <div class="pure-u-1-1 l-box">
+                        <p>Work In Progress</p>
+                    </div>
+                </div>
+            </div> 
+        
+        </div>
+        
+    </div>    
+    
+       
+    </body>
+    
+      
+    
+    <script>  
+        //var conn = new jsforce.Connection({ accessToken: '{!$API.Session_Id}' });
+        //var accId = '001b000000H8OXu';
+        var conn = 'test';
+        var accId = 'test';
+    </script>
+    
+    <script type='text/javascript' src="./accountSales.js" />
+</html>
