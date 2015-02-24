@@ -42,7 +42,7 @@
         data.forecast = resForecast.value;
         data.fiscal = resDate.value[0];
         
-        console.log(data);
+        console.log(JSON.stringify(data));
         
         createGrossSummary();
         
