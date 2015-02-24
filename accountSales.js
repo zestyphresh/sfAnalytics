@@ -127,15 +127,15 @@
                     value: ['sales', 'budget', 'target', 'last']
                 },
                 names: {
-                    sales : '2015 Sales',
-                    budget : '2015 Budget',
-                    target : '2015 Target',
-                    last : '2014 Sales'
+                    sales : 'Sales',
+                    budget : 'Budget',
+                    target : 'Target',
+                    last : 'Last Year'
                 },
                 type: 'bar',
                 labels: {
-                    format: function (d, id, i, j) { console.log(d, id, i, j); return accounting.formatMoney(d); }
-                }/////////////////////////////////////////////////////////
+                    format: function (d, id, i, j) { return accounting.formatMoney(d); }
+                }
             },
             axis: {
                 x: {
