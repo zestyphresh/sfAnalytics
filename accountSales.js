@@ -1,5 +1,7 @@
 (function(salesforceConn, accId) {
     
+    var test = true;
+    
     $j = jQuery.noConflict();
     
     //load tabs
