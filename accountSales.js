@@ -8,13 +8,7 @@
     $j( "#tabs" ).responsiveTabs();
     
     var orgId = '00Db0000000ZVQP';
-    
-    //VARS
-    var salesforce = {};
-    var chart = {};
-    var table = {};
-    var value = {};
-    
+
     var data = {};
     
     var salesQuery = {
