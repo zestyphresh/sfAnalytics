@@ -138,6 +138,7 @@
                 }
             },
             axis: {
+                rotated: true,
                 x: {
                     type: 'category',
                     show : false
