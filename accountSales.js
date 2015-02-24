@@ -106,6 +106,8 @@
         //yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
         //yearToDate.vsLast = yearToDate.sales - yearToDate.last;
         
+        console.log(yearToDate);
+        
         var fullYear = {
             credits : d3.sum(source, function(s) { return s.credits; }), 
             despatches : d3.sum(source, function(s) { return s.despatches; }), 
@@ -123,7 +125,7 @@
             bindto: '#ytd-summary-chart',
             data: {
                 x: 'type',
-                json: [yearToDate],
+                json: yearToDate,
                 keys: {
                     x : 'type',
                     value: ['value']
