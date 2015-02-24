@@ -134,14 +134,16 @@
                 },
                 type: 'bar',
                 labels: {
-                    format: function (d) { return accounting.formatMoney(d); }
+                    format: function (v, id, i, j) { 
+                        
+                        return id + '<br />' + accounting.formatMoney(v); 
+                    }
                 }
             },
             axis: {
                 rotated: true,
                 x: {
                     type: 'category',
-                    show : false
                 },
                 y : {
                     tick: {
