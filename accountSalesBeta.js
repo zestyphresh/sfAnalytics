@@ -91,21 +91,21 @@
             
             console.log(data, comp());
             
-            this.credits = d3.sum(data, function(d) { return comp() ? d.credits : 0; }), 
-            this.despatches = d3.sum(data, function(d) {return comp() ? d.despatches : 0; }), 
-            this.sales = d3.sum(data, function(d) {return comp() ? d.sales : 0; }), 
-            this.budget = d3.sum(data, function(d) {return comp() ? d.budget : 0; }), 
-            this.target = d3.sum(data, function(d) {return comp() ? d.target : 0; }), 
-            this.last = d3.sum(data, function(d) {return comp() ? d.last : 0; }),
+            this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }), 
+            this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; }), 
+            this.sales = d3.sum(data, function(d) {return comp(d.month) ? d.sales : 0; }), 
+            this.budget = d3.sum(data, function(d) {return comp(d.month) ? d.budget : 0; }), 
+            this.target = d3.sum(data, function(d) {return comp(d.month) ? d.target : 0; }), 
+            this.last = d3.sum(data, function(d) {return comp(d.month) ? d.last : 0; }),
             this.vsBudget = this.sales - this.budget;
             this.vsTarget = this.sales - this.target; 
             this.vsLast = this.sales - this.last;
         };
         
-        var yearToDateSummary = new summaryDataTemplate(source, function() { return s.month < data.fiscal.PeriodNum__c; });
-        var lastPeriodSummary = new summaryDataTemplate(source, function() { return s.month = data.fiscal.PeriodNum__c - 1; });
-        var lastPeriodSummary = new summaryDataTemplate(source, function() { return s.month = data.fiscal.PeriodNum__c; });
-        var fullYearSummary = new summaryDataTemplate(source, function() { return true; });
+        var yearToDateSummary = new summaryDataTemplate(source, function(month) { return month < data.fiscal.PeriodNum__c; });
+        var lastPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
+        var lastPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c; });
+        var fullYearSummary = new summaryDataTemplate(source, function(month) { return true; });
         
         console.log(yearToDateSummary);
         
