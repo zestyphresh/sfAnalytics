@@ -93,14 +93,14 @@
             d.vsLast = d.sales - d.last;
         });
         
-        var yearToDate = {
-            credits : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; }), 
-            despatches : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
-            sales : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; }), 
-            budget : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; }), 
-            target : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.target : 0; }), 
-            last : d3.sum(source, function(s) { return s.month < data.fiscal.PeriodNum__c ? s.last : 0; }), 
-        };
+        var yearToDate = [
+            {type : 'Credits', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; })}, 
+            {type : 'Despatches', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; })}, 
+            {type : 'Sales', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; })}, 
+            {type : 'Budget', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; })}, 
+            {type : 'Target', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.target : 0; })}, 
+            {type : 'Last', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; })}, 
+        ];
         
         yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
         yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
@@ -122,9 +122,10 @@
         var ytdchart = c3.generate({
             bindto: '#ytd-summary-chart',
             data: {
+                x: 'type',
                 json: [yearToDate],
                 keys: {
-                    value: ['sales', 'budget', 'target', 'last']
+                    value: ['value']
                 },
                 names: {
                     sales : 'Sales',
@@ -134,10 +135,7 @@
                 },
                 type: 'bar',
                 labels: {
-                    format: function (v, id, i, j) { 
-                        
-                        return id + '<br />' + accounting.formatMoney(v); 
-                    }
+                    format: function (v, id) {return accounting.formatMoney(v);}
                 }
             },
             axis: {
