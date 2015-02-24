@@ -1,7 +1,5 @@
 (function(salesforceConn, accId) {
     
-    var test = true;
-    
     $j = jQuery.noConflict();
     
     //load tabs
@@ -37,8 +35,6 @@
         data.sales = resSales.value;
         data.forecast = resForecast.value;
         data.fiscal = resDate.value[0];
-        
-        console.log(JSON.stringify(data));
         
         createGrossSummary();
         
@@ -95,7 +91,7 @@
             {type : 'Sales', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; })}, 
             {type : 'Budget', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; })}, 
             {type : 'Target', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.target : 0; })}, 
-            {type : 'Last', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; })}, 
+            {type : 'Last', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; })}
         ];
         
         //yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
@@ -338,7 +334,6 @@
     
     }
 
-
     function soql(query) {
             
         this.query = query;
@@ -392,5 +387,5 @@
     		decimal : "."
     	}
     }
-
+    
 })(conn, accId);
