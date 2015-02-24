@@ -84,6 +84,8 @@
             });
             d.vsLast = d.sales - d.last;
         });
+        
+        console.log(source);
 
         function summaryDataTemplate(data, comp) {
             
