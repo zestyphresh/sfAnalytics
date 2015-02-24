@@ -84,34 +84,53 @@
             });
             d.vsLast = d.sales - d.last;
         });
-        
-        var yearToDate = [
-            {type : 'Credits', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; })}, 
-            {type : 'Despatches', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; })}, 
-            {type : 'Sales', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; })}, 
-            {type : 'Budget', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; })}, 
-            {type : 'Target', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.target : 0; })}, 
-            {type : 'Last', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; })}
-        ];
-        
-        //yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
-        //yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
-        //yearToDate.vsLast = yearToDate.sales - yearToDate.last;
-        
-        console.log(yearToDate);
-        
-        var fullYear = {
-            credits : d3.sum(source, function(s) { return s.credits; }), 
-            despatches : d3.sum(source, function(s) { return s.despatches; }), 
-            sales : d3.sum(source, function(s) { return s.sales; }), 
-            budget : d3.sum(source, function(s) { return s.budget; }), 
-            target : d3.sum(source, function(s) { return s.target; }), 
-            last : d3.sum(source, function(s) { return s.last; }), 
+
+        function summaryDataTemplate(data, comp) {
+            this.credits = d3.sum(data, function(d) { return comp() ? d.credits : 0; }), 
+            this.despatches = d3.sum(data, function(d) {return comp() ? d.despatches : 0; }), 
+            this.sales = d3.sum(data, function(d) {return comp() ? d.sales : 0; }), 
+            this.budget = d3.sum(data, function(d) {return comp() ? d.budget : 0; }), 
+            this.target = d3.sum(data, function(d) {return comp() ? d.target : 0; }), 
+            this.last = d3.sum(data, function(d) {return comp() ? d.last : 0; }),
+            this.vsBudget = this.sales - this.budget;
+            this.vsTarget = this.sales - this.target; 
+            this.vsLast = this.sales - this.last;
         };
         
-        fullYear.vsBudget = fullYear.sales - fullYear.budget;
-        fullYear.vsTarget = fullYear.sales - fullYear.target; 
-        fullYear.vsLast = fullYear.sales - fullYear.last;
+        var yearToDateSummary = new summaryDataTemplate(source, function() { return s.month < data.fiscal.PeriodNum__c; });
+        var lastPeriodSummary = new summaryDataTemplate(source, function() { return s.month = data.fiscal.PeriodNum__c - 1; });
+        var lastPeriodSummary = new summaryDataTemplate(source, function() { return s.month = data.fiscal.PeriodNum__c; });
+        var fullYearSummary = new summaryDataTemplate(source, function() { return true; });
+        
+        console.log(yearToDateSummary);
+        
+        // dataFor.YearToDateSummaryChart = {
+        //     Credits : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; }), 
+        //     Despatches : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
+        //     Sales : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; }), 
+        //     Budget : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; }), 
+        //     Target : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.target : 0; }), 
+        //     Last : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; }),
+        // };
+        
+        // yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
+        // yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
+        // yearToDate.vsLast = yearToDate.sales - yearToDate.last;
+        
+        // console.log(yearToDate);
+        
+        // var fullYear = {
+        //     credits : d3.sum(source, function(s) { return s.credits; }), 
+        //     despatches : d3.sum(source, function(s) { return s.despatches; }), 
+        //     sales : d3.sum(source, function(s) { return s.sales; }), 
+        //     budget : d3.sum(source, function(s) { return s.budget; }), 
+        //     target : d3.sum(source, function(s) { return s.target; }), 
+        //     last : d3.sum(source, function(s) { return s.last; }), 
+        // };
+        
+        // fullYear.vsBudget = fullYear.sales - fullYear.budget;
+        // fullYear.vsTarget = fullYear.sales - fullYear.target; 
+        // fullYear.vsLast = fullYear.sales - fullYear.last;
         
         var ytdchart = c3.generate({
             bindto: '#ytd-summary-chart',
