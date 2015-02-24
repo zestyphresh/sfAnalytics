@@ -102,9 +102,9 @@
             {type : 'Last', value : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; })}, 
         ];
         
-        yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
-        yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
-        yearToDate.vsLast = yearToDate.sales - yearToDate.last;
+        //yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
+        //yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
+        //yearToDate.vsLast = yearToDate.sales - yearToDate.last;
         
         var fullYear = {
             credits : d3.sum(source, function(s) { return s.credits; }), 
@@ -119,7 +119,7 @@
         fullYear.vsTarget = fullYear.sales - fullYear.target; 
         fullYear.vsLast = fullYear.sales - fullYear.last;
         
-        /* var ytdchart = c3.generate({
+        var ytdchart = c3.generate({
             bindto: '#ytd-summary-chart',
             data: {
                 x: 'type',
@@ -146,10 +146,10 @@
                 }
                 
             },
-            //interaction: {
-            //    enabled: false
-            //}
-        }); */
+            interaction: {
+                enabled: false
+            }
+        });
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
