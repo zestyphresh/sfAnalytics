@@ -153,9 +153,9 @@
                 }
                 
             },
-            interaction: {
-                enabled: false
-            }
+            //interaction: {
+            //    enabled: false
+            //}
         });
         
         var tableCols = [{"data": "monthName", "title": "Month"},
