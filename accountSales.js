@@ -119,7 +119,7 @@
         fullYear.vsTarget = fullYear.sales - fullYear.target; 
         fullYear.vsLast = fullYear.sales - fullYear.last;
         
-        var ytdchart = c3.generate({
+        /* var ytdchart = c3.generate({
             bindto: '#ytd-summary-chart',
             data: {
                 x: 'type',
@@ -149,7 +149,7 @@
             //interaction: {
             //    enabled: false
             //}
-        });
+        }); */
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
