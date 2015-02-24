@@ -88,9 +88,6 @@
         console.log(source);
 
         function summaryDataTemplate(data, comp) {
-            
-            console.log(data, comp());
-            
             this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }), 
             this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; }), 
             this.sales = d3.sum(data, function(d) {return comp(d.month) ? d.sales : 0; }), 
