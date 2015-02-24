@@ -125,13 +125,8 @@
                 x: 'type',
                 json: [yearToDate],
                 keys: {
+                    x : 'type',
                     value: ['value']
-                },
-                names: {
-                    sales : 'Sales',
-                    budget : 'Budget',
-                    target : 'Target',
-                    last : 'Last Year'
                 },
                 type: 'bar',
                 labels: {
