@@ -134,10 +134,9 @@
                 }
             },
             axis: {
-                rotated: true,
+                rotated: false,
                 x: {
                     type: 'category',
-                    categories: ['1','2','3','4','5','6']
                 },
                 y : {
                     tick: {
