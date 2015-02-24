@@ -134,7 +134,7 @@
                 },
                 type: 'bar',
                 labels: {
-                    format: function (d) { return accounting.formatMoney(d); }
+                    format: function (d, id, i, j) { consol;e.log(d, id, i, j); return accounting.formatMoney(d); }
                 }/////////////////////////////////////////////////////////
             },
             axis: {
