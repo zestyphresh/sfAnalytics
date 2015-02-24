@@ -140,6 +140,9 @@
             axis: {
                 x: {
                     type: 'category',
+                    tick : {
+                        count : 0
+                    }
                 },
                 y : {
                     tick: {
