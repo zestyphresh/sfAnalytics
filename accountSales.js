@@ -149,6 +149,9 @@
                     padding : {bottom: 0}
                 }
                 
+            },
+            interaction: {
+                enabled: false
             }
         });
         
