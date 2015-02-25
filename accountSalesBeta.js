@@ -381,6 +381,7 @@
                         tick: {
                             format : function (e) { return moment(e).format('MMM').slice(0, 1); },
                             fit : true,
+                            culling : false,
                             values : generateTicks()
                         },
                         min : new Date(2010,0,1),
