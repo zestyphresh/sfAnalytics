@@ -332,16 +332,11 @@
             
             var data = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            //generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
-            
-            productChart.load({
-                json : chartData(data),
-                unload: true
-            });
+            generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
 
         });
         
-        var productChart = generateChart(source);
+        generateChart(source);
         
         function chartData(data) {
         
@@ -400,8 +395,6 @@
             });
             
             chart.flush();
-            
-            return chart;
         
         }
     
