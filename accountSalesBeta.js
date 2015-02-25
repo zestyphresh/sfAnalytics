@@ -118,7 +118,7 @@
             bindto: '#ytd-summary-chart',
             data: {
                 x: 'type',
-                json: summaryToChart(YearToDateSummary),
+                json: summaryToChart(yearToDateSummary),
                 keys: {
                     x : 'type',
                     value: ['value']
