@@ -152,6 +152,9 @@
                 },
                 interaction: {
                     enabled: false
+                },
+                legend: {
+                    hide: true
                 }
             });
             
