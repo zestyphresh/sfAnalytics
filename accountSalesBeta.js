@@ -135,7 +135,8 @@
                     type: 'bar',
                     labels: {
                         format: function (v, id) {return accounting.formatMoney(v);}
-                    }
+                    },
+                    color: function (color, d) { console.log(color, d); }
                 },
                 axis: {
                     rotated: false,
