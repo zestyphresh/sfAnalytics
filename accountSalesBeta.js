@@ -105,7 +105,7 @@
         var currentPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c; });
         var fullYearSummary = new summaryDataTemplate(source, function(month) { return true; });
         
-        console.log(yearToDateSUmmary, lastPeriodSummary, currentPeriodSummary, fullYearSummary);
+        //console.log(yearToDateSummary, lastPeriodSummary, currentPeriodSummary, fullYearSummary);
         
         function summaryToChart(data) {
             return [
