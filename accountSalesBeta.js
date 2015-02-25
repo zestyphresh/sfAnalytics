@@ -115,38 +115,47 @@
                 {type : 'Last', value : data.last}
             ]
         }
+        
+        summaryChart('#current-summary-chart', currentPeriodSummary);
+        summaryChart('#last-summary-chart', lastPeriodSummary);
+        summaryChart('#ytd-summary-chart', yearToDateSummary);
+        summaryChart('#full-summary-chart', fullYearSummary);
+        
+        function summaryChart(selector, data) {
 
-        var ytdchart = c3.generate({
-            bindto: '#ytd-summary-chart',
-            data: {
-                x: 'type',
-                json: summaryToChart(yearToDateSummary),
-                keys: {
-                    x : 'type',
-                    value: ['value']
-                },
-                type: 'bar',
-                labels: {
-                    format: function (v, id) {return accounting.formatMoney(v);}
-                }
-            },
-            axis: {
-                rotated: false,
-                x: {
-                    type: 'category',
-                },
-                y : {
-                    tick: {
-                        format: function (d) { return accounting.formatMoney(d); }
+            var chart = c3.generate({
+                bindto: selector,
+                data: {
+                    x: 'type',
+                    json: summaryToChart(data),
+                    keys: {
+                        x : 'type',
+                        value: ['value']
                     },
-                    padding : {bottom: 0}
+                    type: 'bar',
+                    labels: {
+                        format: function (v, id) {return accounting.formatMoney(v);}
+                    }
+                },
+                axis: {
+                    rotated: false,
+                    x: {
+                        type: 'category',
+                    },
+                    y : {
+                        tick: {
+                            format: function (d) { return accounting.formatMoney(d); }
+                        },
+                        padding : {bottom: 0}
+                    }
+                    
+                },
+                interaction: {
+                    enabled: false
                 }
-                
-            },
-            interaction: {
-                enabled: false
-            }
-        });
+            });
+            
+        }
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
