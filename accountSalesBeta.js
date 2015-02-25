@@ -195,10 +195,10 @@
                     return data;
                 }
             },
-            {'targets': [1,2,3,4,5,6,7,8,9],
+            {'targets': [2,3,5,7,9],
             'className': 'dt-right'},
             {'targets': [1,4,6,8],
-            'className': 'borderLeft'}
+            'className': 'dt-right borderLeft'}
         ];
                             
         var table = $j('#table-summary').dataTable({
