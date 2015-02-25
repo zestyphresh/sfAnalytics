@@ -136,7 +136,16 @@
                     labels: {
                         format: function (v, id) {return accounting.formatMoney(v);}
                     },
-                    color: function (color, d) { console.log(color, d); }
+                    color: function (color, d) { 
+                        console.log(color, d); 
+                        switch (d.x) {
+                            case 0 : return '#6C95BF';
+                            case 1 : return '#F5A631';
+                            case 2 : return '#C9297A';
+                            case 3 : return '#639D00';
+                            default : return '#AAAAAA';
+                        }
+                    }
                 },
                 axis: {
                     rotated: false,
