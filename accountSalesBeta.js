@@ -86,7 +86,8 @@
         });
         
         console.log(source);
-
+        
+        //These functions can probably be shortened - d3.sum maybe doesn't lend itself when reuse is necessary
         function summaryDataTemplate(data, comp) {
             this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }), 
             this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; }), 
@@ -104,41 +105,20 @@
         var lastPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c; });
         var fullYearSummary = new summaryDataTemplate(source, function(month) { return true; });
         
-        console.log(yearToDateSummary);
-        
-        // dataFor.YearToDateSummaryChart = {
-        //     Credits : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.credits : 0; }), 
-        //     Despatches : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.despatches : 0; }), 
-        //     Sales : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.sales : 0; }), 
-        //     Budget : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.budget : 0; }), 
-        //     Target : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.target : 0; }), 
-        //     Last : d3.sum(source, function(s) {return s.month < data.fiscal.PeriodNum__c ? s.last : 0; }),
-        // };
-        
-        // yearToDate.vsBudget = yearToDate.sales - yearToDate.budget;
-        // yearToDate.vsTarget = yearToDate.sales - yearToDate.target; 
-        // yearToDate.vsLast = yearToDate.sales - yearToDate.last;
-        
-        // console.log(yearToDate);
-        
-        // var fullYear = {
-        //     credits : d3.sum(source, function(s) { return s.credits; }), 
-        //     despatches : d3.sum(source, function(s) { return s.despatches; }), 
-        //     sales : d3.sum(source, function(s) { return s.sales; }), 
-        //     budget : d3.sum(source, function(s) { return s.budget; }), 
-        //     target : d3.sum(source, function(s) { return s.target; }), 
-        //     last : d3.sum(source, function(s) { return s.last; }), 
-        // };
-        
-        // fullYear.vsBudget = fullYear.sales - fullYear.budget;
-        // fullYear.vsTarget = fullYear.sales - fullYear.target; 
-        // fullYear.vsLast = fullYear.sales - fullYear.last;
-        
+        function summaryToChart(data) {
+            return [
+                {type : 'Sales', value : data.sales},
+                {type : 'Budget', value : data.budget},
+                {type : 'Target', value : data.taregt},
+                {type : 'Last', value : data.last}
+            ]
+        }
+
         var ytdchart = c3.generate({
             bindto: '#ytd-summary-chart',
             data: {
                 x: 'type',
-                json: yearToDate,
+                json: summaryToChart(YearTOD),
                 keys: {
                     x : 'type',
                     value: ['value']
