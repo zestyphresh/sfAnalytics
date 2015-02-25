@@ -372,7 +372,7 @@
                         type: 'timeseries',
                         tick: {
                             format : function (e) { return moment(e).format('MMM').slice(0, 1); },
-                            count : 60
+                            fit : true
                         },
                         min : new Date(2010,0,1),
                         max : new Date(2015,11,1),
@@ -391,7 +391,7 @@
                 },
                 bar: {
                     width: {
-                        ratio : 0.2
+                        ratio : 0.7
                     }
                 }
             });
