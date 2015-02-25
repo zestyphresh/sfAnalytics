@@ -106,8 +106,6 @@
         var currentPeriodSummary = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
         var fullYearSummary = new summaryDataTemplate('Full Year', source, function(month) { return true; });
         
-        //console.log(yearToDateSummary, lastPeriodSummary, currentPeriodSummary, fullYearSummary);
-        
         function summaryToChart(data) {
             return [
                 {type : 'Sales', value : data.sales},
@@ -168,6 +166,8 @@
                     hide: true
                 }
             });
+            
+            chart.flush();
             
         }
         
@@ -234,10 +234,10 @@
                     return data;
                 }
             },
-            {'targets': [1,2,3,4,5,6,7,8,9],
+            {'targets': [2,3,5,7,9],
             'className': 'dt-right'},
             {'targets': [1,4,6,8],
-            'className': 'borderLeft'}
+            'className': 'dt-right borderLeft'}
         ];
                             
         var table = $j('#table-matrix').dataTable({
@@ -371,9 +371,10 @@
                     x: {
                         type: 'timeseries',
                         tick: {
-                            //format : '%b'
+                            fit : true,
                             format : function (e) { return moment(e).format('MMM').slice(0, 1); },
-                            culling : false
+                            culling : false,
+                            count : 60
                         },
                         min : new Date(2010,0,1),
                         max : new Date(2015,11,1),
