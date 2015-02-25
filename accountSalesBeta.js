@@ -391,7 +391,7 @@
                 },
                 bar: {
                     width: {
-                        ratio: 0.2;
+                        ratio : 0.2
                     }
                 }
             });
