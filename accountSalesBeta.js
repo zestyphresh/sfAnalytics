@@ -355,7 +355,7 @@
             var result = [];
             var start = moment('2010-01-01');
             for (i=0;i<=59;i++) {
-                result.push(start.add(i, 'months').format('YYY-MM-DD'));
+                result.push(start.add(i, 'months').format('YYYY-MM-DD'));
             }
             console.log(result);
             return result;
