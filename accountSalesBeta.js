@@ -331,13 +331,18 @@
         
         table.on('search.dt', function (e, settings) {
             
-            //table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
+            var data = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
+            //generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
             
+            chart.load({
+                json : chartData(data),
+                unload: true
+            });
+
         });
         
-        generateChart(source);
+        var productChart = generateChart(source);
         
         function chartData(data) {
         
@@ -354,7 +359,6 @@
         
         function generateChart(data) {
         
-            //update above event as data should be specified in object json ; , keys 
             var chart = c3.generate({
                 bindto: '#chartWeeklySales',
                 data: {
@@ -397,6 +401,8 @@
             });
             
             chart.flush();
+            
+            return chart;
         
         }
     
