@@ -136,7 +136,6 @@
                         format: function (v, id) {return accounting.formatMoney(v);}
                     },
                     color: function (color, d) { 
-                        console.log(color, d); 
                         switch (d.x) {
                             case 0 : return '#6C95BF';
                             case 1 : return '#F5A631';
