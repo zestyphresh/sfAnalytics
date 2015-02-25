@@ -102,14 +102,16 @@
         
         var yearToDateSummary = new summaryDataTemplate(source, function(month) { return month < data.fiscal.PeriodNum__c; });
         var lastPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
-        var lastPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c; });
+        var currentPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c; });
         var fullYearSummary = new summaryDataTemplate(source, function(month) { return true; });
+        
+        console.log(yearToDateSUmmary, lastPeriodSummary, currentPeriodSummary, fullYearSummary);
         
         function summaryToChart(data) {
             return [
                 {type : 'Sales', value : data.sales},
                 {type : 'Budget', value : data.budget},
-                {type : 'Target', value : data.taregt},
+                {type : 'Target', value : data.target},
                 {type : 'Last', value : data.last}
             ]
         }
