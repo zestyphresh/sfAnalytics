@@ -349,7 +349,17 @@
             
             return chartData;
             
-        }  
+        }
+        
+        function generateTicks() {
+            var result = [];
+            var start = moment('2010-01-01');
+            for (i=0;i<=59;i++) {
+                result.push(start.add(i, 'months').format('YYY-MM-DD'));
+            }
+            console.log(result);
+            return result;
+        }
         
         function generateChart(data) {
         
@@ -370,7 +380,8 @@
                         type: 'timeseries',
                         tick: {
                             format : function (e) { return moment(e).format('MMM').slice(0, 1); },
-                            fit : true
+                            fit : true,
+                            values : generateTicks()
                         },
                         min : new Date(2010,0,1),
                         max : new Date(2015,11,1),
