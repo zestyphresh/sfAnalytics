@@ -371,9 +371,7 @@
                     x: {
                         type: 'timeseries',
                         tick: {
-                            fit : true,
                             format : function (e) { return moment(e).format('MMM').slice(0, 1); },
-                            culling : false,
                             count : 60
                         },
                         min : new Date(2010,0,1),
@@ -389,6 +387,11 @@
                         },
                         padding : {bottom: 0},
                         min : 0
+                    }
+                },
+                bar: {
+                    width: {
+                        ratio: 0.2;
                     }
                 }
             });
