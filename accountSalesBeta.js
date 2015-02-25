@@ -335,7 +335,7 @@
             
             //generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
             
-            chart.load({
+            productChart.load({
                 json : chartData(data),
                 unload: true
             });
