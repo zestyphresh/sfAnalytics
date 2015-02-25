@@ -88,22 +88,23 @@
         console.log(source);
         
         //These functions can probably be shortened - d3.sum maybe doesn't lend itself when reuse is necessary
-        function summaryDataTemplate(data, comp) {
-            this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }), 
-            this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; }), 
-            this.sales = d3.sum(data, function(d) {return comp(d.month) ? d.sales : 0; }), 
-            this.budget = d3.sum(data, function(d) {return comp(d.month) ? d.budget : 0; }), 
-            this.target = d3.sum(data, function(d) {return comp(d.month) ? d.target : 0; }), 
-            this.last = d3.sum(data, function(d) {return comp(d.month) ? d.last : 0; }),
+        function summaryDataTemplate(period, data, comp) {
+            this.period = period;
+            this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }); 
+            this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; });
+            this.sales = d3.sum(data, function(d) {return comp(d.month) ? d.sales : 0; });
+            this.budget = d3.sum(data, function(d) {return comp(d.month) ? d.budget : 0; }); 
+            this.target = d3.sum(data, function(d) {return comp(d.month) ? d.target : 0; }); 
+            this.last = d3.sum(data, function(d) {return comp(d.month) ? d.last : 0; });
             this.vsBudget = this.sales - this.budget;
             this.vsTarget = this.sales - this.target; 
             this.vsLast = this.sales - this.last;
         };
         
-        var yearToDateSummary = new summaryDataTemplate(source, function(month) { return month < data.fiscal.PeriodNum__c; });
-        var lastPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
-        var currentPeriodSummary = new summaryDataTemplate(source, function(month) { return month == data.fiscal.PeriodNum__c; });
-        var fullYearSummary = new summaryDataTemplate(source, function(month) { return true; });
+        var yearToDateSummary = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
+        var lastPeriodSummary = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
+        var currentPeriodSummary = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
+        var fullYearSummary = new summaryDataTemplate('Full Year', source, function(month) { return true; });
         
         //console.log(yearToDateSummary, lastPeriodSummary, currentPeriodSummary, fullYearSummary);
         
@@ -169,6 +170,46 @@
             });
             
         }
+        
+        var tableColsSummary = [
+            {"data": "period", "title": "Period"},
+            {"data": "credits", "title": "Gross Credits"},
+            {"data": "despatches", "title": "Gross Despatches"},
+            {"data": "sales", "title": "Gross Sales"},
+            {"data": "budget", "title": "Gross Budget"},
+            {"data": "vsBudget", "title": "vs Sales"},
+            {"data": "target", "title": "Gross Target"},
+            {"data": "vsTarget", "title": "vs Sales"},
+            {"data": "last", "title": "Last Year"},
+            {"data": "vsLast", "title": "vs Sales"}
+        ];
+        
+        var tableColDefsSummary = [
+            {'targets' : [1,2,3,4,5,6,7,8,9], 
+            'render' : function (cell, type, row, meta) {
+                switch (type) {
+                    case 'display':
+                        return accounting.formatMoney(cell);
+                        break;
+                    }
+                    return data;
+                }
+            },
+            {'targets': [1,2,3,4,5,6,7,8,9],
+            'className': 'dt-right'},
+            {'targets': [1,4,6,8],
+            'className': 'borderLeft'}
+        ];
+                            
+        var table = $j('#table-summary').dataTable({
+            'data' : [currentPeriodSummary, lastPeriodSummary, yearToDateSummary, fullYearSummary],
+            'paging' : false,
+            'ordering' : false,
+            "order": [],
+            'dom' : 't',
+            'columns' : tableColsSummary,
+            'columnDefs' : tableColDefsSummary
+        });
         
         var tableCols = [{"data": "monthName", "title": "Month"},
                          {"data": "credits", "title": "Gross Credits"},
@@ -244,9 +285,7 @@
                 
             }
         });
-        
-        $j( window ).resize(function() { chart.resize(); });
-        
+
     }
     
     function productSales() {
