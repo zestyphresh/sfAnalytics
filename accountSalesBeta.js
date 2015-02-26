@@ -353,7 +353,7 @@
         
         function generateTicks() {
             var result = [];
-            for (i=0;i<=59;i++) {
+            for (i=0;i<=71;i++) {
                 result.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
             }
             console.log(result);
