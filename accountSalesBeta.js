@@ -339,10 +339,20 @@
             var data = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
             generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
+            
+            productChart.load({
+                x: 'key',
+                json: chartData(data),
+                keys: {
+                    x: 'key',
+                    value: ['values'],
+                },
+                type : 'bar'
+            })
 
         });
         
-        generateChart(source);
+        var productChart = generateChart(source);
         
         function chartData(data) {
         
@@ -423,6 +433,8 @@
             });
             
             chart.flush();
+            
+            return chart;
         
         }
     
