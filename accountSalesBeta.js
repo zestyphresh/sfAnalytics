@@ -256,7 +256,7 @@
                 json: source,
                 keys: {
                     x: 'monthName',
-                    value: ['sales', 'budget', 'target', 'last'],
+                    value: ['sales', 'target', 'budget', 'last'],
                 },
                 names: {
                     sales : '2015 Sales',
@@ -269,6 +269,12 @@
                     budget : 'line',
                     target : 'line',
                     last : 'line'
+                },
+                colors: {
+                    sales : '#6C95BF',
+                    budget : '#F5A631',
+                    target : '#C9297A',
+                    last : '#639D00'
                 }
             },
             axis: {
