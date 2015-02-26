@@ -338,7 +338,7 @@
             
             var data = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            //generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());
+            //generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());  
             
             productChart.load({
                 x: 'key',
