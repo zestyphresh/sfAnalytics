@@ -427,7 +427,8 @@
                 },
                 bar: {
                     width: 8
-                }
+                },
+                onresize : function() { this.flush; }
             });
             
             chart.flush();
