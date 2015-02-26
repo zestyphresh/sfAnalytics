@@ -1,4 +1,4 @@
-(function() {
+
 
     function soql(query) {
             
@@ -26,4 +26,3 @@
         
     }
     
-})();
