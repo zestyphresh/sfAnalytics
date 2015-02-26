@@ -271,10 +271,10 @@
                     last : 'line'
                 },
                 colors: {
-                    sales : '#6C95BF',
-                    budget : '#F5A631',
+                    sales : '#91BDEB',
+                    budget : '#AA6600',
                     target : '#C9297A',
-                    last : '#639D00'
+                    last : '#4E7B00'
                 }
             },
             axis: {
