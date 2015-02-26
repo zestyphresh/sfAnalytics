@@ -426,9 +426,7 @@
                     }
                 },
                 bar: {
-                    width: {
-                        ratio : 0.7
-                    }
+                    width: 8
                 }
             });
             
