@@ -1,4 +1,4 @@
-var soql = {
+var soql2 = {
 
     multipart : function(query) {
             
