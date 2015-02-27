@@ -1,4 +1,4 @@
-(function(salesforceConn, accId, accType) {
+(function(salesforceConn, accId, accType, soql) {
     
     $j = jQuery.noConflict();
     
@@ -30,7 +30,7 @@
         maxfetch : 10
     };
     
-    Q.allSettled([new soql(salesQuery), new soql(forecastQuery), new soql(dateQuery)]).spread(function (resSales, resForecast, resDate) {
+    Q.allSettled([new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resSales, resForecast, resDate) {
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
@@ -469,4 +469,4 @@
     	}
     }
     
-})(conn, accId, accType);
+})(conn, accId, accType, soql);

@@ -1,6 +1,6 @@
+var soql = {
 
-
-    function soql(query) {
+    multipart : function(query) {
             
         this.query = query;
         
@@ -25,4 +25,6 @@
         return deferred.promise;
         
     }
+    
+}
     
