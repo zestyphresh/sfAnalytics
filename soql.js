@@ -1,6 +1,8 @@
-var soql2 = {
+var SOQL = (function(conn) {
+    
+    var module = function () {};
 
-    multipart : function(query) {
+    module.multipart = function(query) {
             
         this.query = query;
         
@@ -8,7 +10,7 @@ var soql2 = {
                 
         var records = [];
                 
-        salesforceConn.sobject(this.query.sObject)
+        conn.sobject(this.query.sObject)
             .select(this.query.select)
             .where(this.query.where)
             .on('record', function(record) {
@@ -26,5 +28,6 @@ var soql2 = {
         
     }
     
-}
+    return module;
     
+}(conn))

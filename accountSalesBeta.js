@@ -1,4 +1,4 @@
-(function(salesforceConn, accId, accType, soql) {
+(function(accId, accType, soql) {
     
     $j = jQuery.noConflict();
     
@@ -30,7 +30,7 @@
         maxfetch : 10
     };
     
-    Q.allSettled([new soql(salesQuery), new soql(forecastQuery), new soql(dateQuery)]).spread(function (resSales, resForecast, resDate) {
+    Q.allSettled([new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resSales, resForecast, resDate) {
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
@@ -41,8 +41,6 @@
         productSales();
         
     }).done();
-        
-    
         
     function createGrossSummary() {
         
@@ -449,32 +447,6 @@
         this.values = {};
     
     }
-    
-    var soql = function(query) {
-            
-        this.query = query;
-        
-        var deferred = Q.defer();
-                
-        var records = [];
-                
-        salesforceConn.sobject(this.query.sObject)
-            .select(this.query.select)
-            .where(this.query.where)
-            .on('record', function(record) {
-                records.push(record);
-            })
-            .on('error', function(query) {
-                deferred.reject('error');
-            })
-            .on('end', function(err) {
-                deferred.resolve(records);
-            })
-            .run({ autoFetch : true, maxFetch : this.query.maxFetch });
-            
-        return deferred.promise;
-        
-    }
 
     accounting.settings = {
     	currency: {
@@ -495,4 +467,4 @@
     	}
     }
     
-})(conn, accId, accType, soql);
+})(accId, accType, SOQL);
