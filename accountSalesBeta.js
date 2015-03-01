@@ -118,7 +118,7 @@
         
         return result;
         
-    }
+    };
     
     var salesByMonthNet = function() {
         
@@ -146,7 +146,7 @@
         
         return result;
         
-    }
+    };
     
     var salesByPeriod = function(source) {
         
@@ -169,7 +169,7 @@
             this.vsBudget = this.sales - this.budget;
             this.vsTarget = this.sales - this.target; 
             this.vsLast = this.sales - this.last;
-        };
+        }
         
         result.yearToDate = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
         result.lastPeriod = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
@@ -178,9 +178,11 @@
         
         return result;
         
-    }
+    };
     
     var summarySalesChart = function(selector, data) {
+        
+        console.log(data);
         
         var chartData = [
             {type : 'Sales', value : data.sales},
@@ -189,7 +191,7 @@
             {type : 'Last', value : data.last}
         ];
         
-        console.log('FUNCTION summarySalesChart', data, chartData);
+        //console.log('FUNCTION summarySalesChart', data, chartData);
         
         c3.generate({
             bindto: selector,
@@ -239,7 +241,6 @@
         });
         
     }
-
         
     var periodSummaryTable = function(selector, data) {
         
