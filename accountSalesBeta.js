@@ -149,10 +149,15 @@
     
     var salesByPeriod = function(source) {
         
+        console.log('FUNCTION salesByPeriod', source);
+        
         var result = {};
         
         //These functions can probably be shortened - d3.sum maybe doesn't lend itself when reuse is necessary
         function summaryDataTemplate(period, data, comp) {
+            
+            console.log('FUNCTION salesByPeriod summaryDataTemplate', period, data, comp);
+            
             this.period = period;
             this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }); 
             this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; });
@@ -182,6 +187,8 @@
             {type : 'Target', value : data.target},
             {type : 'Last', value : data.last}
         ];
+        
+        console.log('FUNCTION summarySalesChart', data, chartData);
         
         c3.generate({
             bindto: selector,
