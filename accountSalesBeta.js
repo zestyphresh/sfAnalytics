@@ -41,7 +41,8 @@
         var grossPeriodSales = salesByPeriod(grossSales);
         var netPeriodSales = salesByPeriod(netSales);
         
-        console.log(grossSales,netSales, grossPeriodSales, netPeriodSales);
+        //console.log(grossSales, netSales);
+        console.log(grossPeriodSales, netPeriodSales);
         
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
@@ -205,7 +206,7 @@
                 },
                 color: function (color, d) { 
                     
-                    console.log('FUNCTION summarySalesChart chart.color', color, d);
+                    //console.log('FUNCTION summarySalesChart chart.color', color, d);
                     
                     switch (d.x) {
                         case 0 : return '#6C95BF';
