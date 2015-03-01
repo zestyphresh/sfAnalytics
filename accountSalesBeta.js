@@ -29,61 +29,123 @@
         where : 'SetupOwnerId = ' + "'" + orgId + "'",
         maxfetch : 10
     };
-    
+
     Q.allSettled([new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resSales, resForecast, resDate) {
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
         data.fiscal = resDate.value[0];
         
-        createGrossSummary();
+        var grossSales = salesByMonthGross();
+        var netSales = salesByMonthNet();
+        var grossPeriodSales = salesByPeriod(grossSales);
+        var netPeriodSales = salesByPeriod(netSales);
         
-        productSales();
+        //tabGrossSummary
+        summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
+        summarySalesChart('#grossSummaryLastChart', grossPeriodSales.lastPeriod);
+        summarySalesChart('#grossSummaryYearChart', grossPeriodSales.yearToDate);
+        summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
+        periodSummaryTable('#grossSummaryTable', grossPeriodSales);
+        
+        //tanNetSUmmary
+        summarySalesChart('#netSummaryCurrentChart', netPeriodSales.currentPeriod);
+        summarySalesChart('#netSummaryLastChart', netPeriodSales.lastPeriod);
+        summarySalesChart('#netSummaryYearChart', netPeriodSales.yearToDate);
+        summarySalesChart('#netSummaryFullChart', netPeriodSales.fullYear);
+        periodSummaryTable('#netSummaryTable', netPeriodSales);
+        
+        //tabGrossByMonth
+        monthlySalesChart('#grossByMonthChart', grossSales);
+        monthlySalesTable('#grossByMonthTable', grossSales);
+        
+        //tabNetByMonth
+        monthlySalesChart('#netByMonthChart', netSales);
+        monthlySalesTable('#netByMonthTable', netSales);
         
     }).done();
+    
+    var thisYear = 2015,
+        lastYear = 2014;
         
-    function createGrossSummary() {
+    var dataTemplatebyMonth = [
+        {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'February', month : 2, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'March', month : 3, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'April', month : 4, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'May', month : 5, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'June', month : 6, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'July', month : 7, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'August', month : 8, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'September', month : 9, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'October', month : 10, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'November', month : 11, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
+        {monthName : 'December', month : 12, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
+    ];
         
-        var source = [
-            {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'February', month : 2, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'March', month : 3, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'April', month : 4, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'May', month : 5, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'June', month : 6, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'July', month : 7, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'August', month : 8, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'September', month : 9, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'October', month : 10, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'November', month : 11, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
-            {monthName : 'December', month : 12, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
-        ];
+    var salesByMonthGross = function() {
+        
+        var result = _.extend({}, dataTemplatebyMonth);
 
-        _.each(source, function(d) {
+        _.each(result, function(d) {
             d.credits = d3.sum(data.sales, function(s) { 
-                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Gross_Credits__c : 0; 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear ? s.Gross_Credits__c : 0; 
             });
             d.despatches = d3.sum(data.sales, function(s) { 
-                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Gross_Despatches__c : 0; 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear ? s.Gross_Despatches__c : 0; 
             });
             d.sales = d3.sum(data.sales, function(s) { 
-                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 ? s.Value__c : 0; 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear ? s.Value__c : 0; 
             });
             d.budget = d3.sum(data.forecast, function(s) {
-                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 && s.Forecast_Type__c == 'Budget' ? s.Gross_Value__c : 0; 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear && s.Forecast_Type__c == 'Budget' ? s.Gross_Value__c : 0; 
+            });
+            d.target = d3.sum(data.forecast, function(s) {
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target')? s.Gross_Value__c : 0;
+            });
+            d.last = d3.sum(data.sales, function(s) {
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == lastYear ? s.Value__c : 0;
             });
             d.vsBudget = d.sales - d.budget;
-            d.target = d3.sum(data.forecast, function(s) {
-                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2015 && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target')? s.Gross_Value__c : 0;
-            });
             d.vsTarget = d.sales - d.target;
-            d.last = d3.sum(data.sales, function(s) {
-                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == 2014 ? s.Value__c : 0;
-            });
             d.vsLast = d.sales - d.last;
         });
         
-        console.log(source);
+        return result;
+        
+    }
+    
+    var salesByMonthNet = function() {
+        
+        var result = _.extend({}, dataTemplatebyMonth);
+
+        _.each(result, function(d) {
+            d.credits = 0;
+            d.despatches = 0;
+            d.sales = d3.sum(data.sales, function(s) { 
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear ? s.Net_Value__c : 0; 
+            });
+            d.budget = d3.sum(data.forecast, function(s) {
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear && s.Forecast_Type__c == 'Budget' ? s.Net_Value__c : 0; 
+            });
+            d.target = d3.sum(data.forecast, function(s) {
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == thisYear && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target')? s.Net_Value__c : 0;
+            });
+            d.last = d3.sum(data.sales, function(s) {
+                return s.Fiscal_Month__c == d.month && s.Fiscal_Year__c == lastYear ? s.Net_Value__c : 0;
+            });
+            d.vsBudget = d.sales - d.budget;
+            d.vsTarget = d.sales - d.target;
+            d.vsLast = d.sales - d.last;
+        });
+        
+        return result;
+        
+    }
+    
+    var salesByPeriod = function(source) {
+        
+        var result = {};
         
         //These functions can probably be shortened - d3.sum maybe doesn't lend itself when reuse is necessary
         function summaryDataTemplate(period, data, comp) {
@@ -99,89 +161,89 @@
             this.vsLast = this.sales - this.last;
         };
         
-        var yearToDateSummary = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
-        var lastPeriodSummary = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
-        var currentPeriodSummary = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
-        var fullYearSummary = new summaryDataTemplate('Full Year', source, function(month) { return true; });
+        result.yearToDate = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
+        result.lastPeriod = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
+        result.currentPeriod = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
+        result.fullYear = new summaryDataTemplate('Full Year', source, function(month) { return true; });
         
-        function summaryToChart(data) {
-            return [
-                {type : 'Sales', value : data.sales},
-                {type : 'Budget', value : data.budget},
-                {type : 'Target', value : data.target},
-                {type : 'Last', value : data.last}
-            ]
-        }
+        return result;
         
-        summaryChart('#current-summary-chart', currentPeriodSummary);
-        summaryChart('#last-summary-chart', lastPeriodSummary);
-        summaryChart('#ytd-summary-chart', yearToDateSummary);
-        summaryChart('#full-summary-chart', fullYearSummary);
+    }
+    
+    var summarySalesChart = function(selector, data) {
         
-        function summaryChart(selector, data) {
-
-            var chart = c3.generate({
-                bindto: selector,
-                data: {
-                    x: 'type',
-                    json: summaryToChart(data),
-                    keys: {
-                        x : 'type',
-                        value: ['value']
-                    },
-                    type: 'bar',
-                    labels: {
-                        format: function (v, id) {return accounting.formatMoney(v);}
-                    },
-                    color: function (color, d) { 
-                        switch (d.x) {
-                            case 0 : return '#6C95BF';
-                            case 1 : return '#F5A631';
-                            case 2 : return '#C9297A';
-                            case 3 : return '#639D00';
-                            default : return '#AAAAAA';
-                        }
+        var chartData = [
+            {type : 'Sales', value : data.sales},
+            {type : 'Budget', value : data.budget},
+            {type : 'Target', value : data.target},
+            {type : 'Last', value : data.last}
+        ];
+        
+        c3.generate({
+            bindto: selector,
+            data: {
+                x: 'type',
+                json: summaryToChart(data),
+                keys: {
+                    x : 'type',
+                    value: ['value']
+                },
+                type: 'bar',
+                labels: {
+                    format: function (v, id) {return accounting.formatMoney(v);}
+                },
+                color: function (color, d) { 
+                    switch (d.x) {
+                        case 0 : return '#6C95BF';
+                        case 1 : return '#F5A631';
+                        case 2 : return '#C9297A';
+                        case 3 : return '#639D00';
+                        default : return '#AAAAAA';
                     }
-                },
-                axis: {
-                    rotated: false,
-                    x: {
-                        type: 'category',
-                    },
-                    y : {
-                        tick: {
-                            format: function (d) { return accounting.formatMoney(d); }
-                        },
-                        padding : {bottom: 0}
-                    }
-                    
-                },
-                interaction: {
-                    enabled: false
-                },
-                legend: {
-                    hide: true
                 }
-            });
+            },
+            axis: {
+                rotated: false,
+                x: {
+                    type: 'category',
+                },
+                y : {
+                    tick: {
+                        format: function (d) { return accounting.formatMoney(d); }
+                    },
+                    padding : {bottom: 0}
+                }
+                
+            },
+            interaction: {
+                enabled: false
+            },
+            legend: {
+                hide: true
+            }
+        });
             
-            chart.flush();
-            
-        }
+        chart.flush();
         
-        var tableColsSummary = [
+    }
+
+        
+    var periodSummaryTable = function(selector, data) {
+
+        var tableCols = [
             {"data": "period", "title": "Period"},
-            {"data": "credits", "title": "Gross Credits"},
-            {"data": "despatches", "title": "Gross Despatches"},
-            {"data": "sales", "title": "Gross Sales"},
-            {"data": "budget", "title": "Gross Budget"},
+            {"data": "credits", "title": "Credits"},
+            {"data": "despatches", "title": "Despatches"},
+            {"data": "sales", "title": "Sales"},
+            {"data": "budget", "title": "Budget"},
             {"data": "vsBudget", "title": "vs Sales"},
-            {"data": "target", "title": "Gross Target"},
+            {"data": "target", "title": "Target"},
             {"data": "vsTarget", "title": "vs Sales"},
             {"data": "last", "title": "Last Year"},
             {"data": "vsLast", "title": "vs Sales"}
         ];
         
-        var tableColDefsSummary = [
+        var tableColDefs = [
             {'targets' : [1,2,3,4,5,6,7,8,9], 
             'render' : function (cell, type, row, meta) {
                 switch (type) {
@@ -198,23 +260,27 @@
             'className': 'dt-right borderLeft'}
         ];
                             
-        var table = $j('#table-summary').dataTable({
-            'data' : [currentPeriodSummary, lastPeriodSummary, yearToDateSummary, fullYearSummary],
+        var table = $j(selector).dataTable({
+            'data' : data,
             'paging' : false,
             'ordering' : false,
             "order": [],
             'dom' : 't',
-            'columns' : tableColsSummary,
-            'columnDefs' : tableColDefsSummary
+            'columns' : tableCols,
+            'columnDefs' : tableColDefs
         });
         
+    }
+    
+    var monthlySalesTable = function(selector, data) {
+        
         var tableCols = [{"data": "monthName", "title": "Month"},
-                         {"data": "credits", "title": "Gross Credits"},
-                         {"data": "despatches", "title": "Gross Despatches"},
-                         {"data": "sales", "title": "Gross Sales"},
-                         {"data": "budget", "title": "Gross Budget"},
+                         {"data": "credits", "title": "Credits"},
+                         {"data": "despatches", "title": "Despatches"},
+                         {"data": "sales", "title": "Sales"},
+                         {"data": "budget", "title": "Budget"},
                          {"data": "vsBudget", "title": "vs Sales"},
-                         {"data": "target", "title": "Gross Target"},
+                         {"data": "target", "title": "Target"},
                          {"data": "vsTarget", "title": "vs Sales"},
                          {"data": "last", "title": "Last Year"},
                          {"data": "vsLast", "title": "vs Sales"}
@@ -237,8 +303,8 @@
             'className': 'dt-right borderLeft'}
         ];
                             
-        var table = $j('#table-matrix').dataTable({
-            'data' : source,
+        var table = $j(selector).dataTable({
+            'data' : data,
             'paging' : false,
             'ordering' : false,
             "order": [],
@@ -247,11 +313,15 @@
             'columnDefs' : tableColDefs
         });
         
+    }
+    
+    var monthlySalesChart = function(selector, data) {
+        
         var chart = c3.generate({
-            bindto: '#chart-grossSales',
+            bindto: selector,
             data: {
                 x: 'monthName',
-                json: source,
+                json: data,
                 keys: {
                     x: 'monthName',
                     value: ['sales', 'target', 'budget', 'last'],
