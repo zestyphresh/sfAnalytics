@@ -245,6 +245,12 @@
     var periodSummaryTable = function(selector, data) {
         
         //console.log(data);
+        
+        var tableData = [];
+        tableData.push(data.currentPeriod);
+        tableData.push(data.lastPeriod);
+        tableData.push(data.YearToDate);
+        tableData.push(data.fullYear);
 
         var tableCols = [
             {"data": "period", "title": "Period"},
