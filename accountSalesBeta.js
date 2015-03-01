@@ -283,7 +283,7 @@
         ];
                             
         var table = $j(selector).dataTable({
-            'data' : data,
+            'data' : tableData,
             'paging' : false,
             'ordering' : false,
             "order": [],
