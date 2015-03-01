@@ -182,7 +182,7 @@
     
     var summarySalesChart = function(selector, data) {
         
-        console.log(data);
+        //console.log(data);
         
         var chartData = [
             {type : 'Sales', value : data.sales},
