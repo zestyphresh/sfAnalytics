@@ -183,7 +183,7 @@
             bindto: selector,
             data: {
                 x: 'type',
-                json: summaryToChart(data),
+                json: chartData,
                 keys: {
                     x : 'type',
                     value: ['value']
