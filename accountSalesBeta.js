@@ -222,8 +222,6 @@
                 hide: true
             }
         });
-            
-        chart.flush();
         
     }
 
@@ -317,7 +315,7 @@
     
     var monthlySalesChart = function(selector, data) {
         
-        var chart = c3.generate({
+        c3.generate({
             bindto: selector,
             data: {
                 x: 'monthName',
