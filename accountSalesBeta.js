@@ -242,6 +242,8 @@
 
         
     var periodSummaryTable = function(selector, data) {
+        
+        console.log(data);
 
         var tableCols = [
             {"data": "period", "title": "Period"},
