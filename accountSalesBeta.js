@@ -48,7 +48,7 @@
         summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
         summarySalesChart('#grossSummaryLastChart', grossPeriodSales.lastPeriod);
         summarySalesChart('#grossSummaryYearChart', grossPeriodSales.yearToDate);
-        //summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
+        summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
         //periodSummaryTable('#grossSummaryTable', grossPeriodSales);
         
         //tanNetSUmmary
