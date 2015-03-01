@@ -90,7 +90,7 @@
         
     var salesByMonthGross = function() {
         
-        var result = _.extend({}, dataTemplatebyMonth);
+        var result = _.cloneDeep(dataTemplatebyMonth);
 
         _.each(result, function(d) {
             d.credits = d3.sum(data.sales, function(s) { 
