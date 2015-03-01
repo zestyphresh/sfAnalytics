@@ -247,7 +247,7 @@
         var tableData = [];
         tableData.push(data.currentPeriod);
         tableData.push(data.lastPeriod);
-        tableData.push(data.YearToDate);
+        tableData.push(data.yearToDate);
         tableData.push(data.fullYear);
         
         console.log(tableData);
