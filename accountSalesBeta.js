@@ -48,22 +48,22 @@
         summarySalesChart('#grossSummaryLastChart', grossPeriodSales.lastPeriod);
         summarySalesChart('#grossSummaryYearChart', grossPeriodSales.yearToDate);
         summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
-        periodSummaryTable('#grossSummaryTable', grossPeriodSales);
+        //periodSummaryTable('#grossSummaryTable', grossPeriodSales);
         
         //tanNetSUmmary
         summarySalesChart('#netSummaryCurrentChart', netPeriodSales.currentPeriod);
         summarySalesChart('#netSummaryLastChart', netPeriodSales.lastPeriod);
         summarySalesChart('#netSummaryYearChart', netPeriodSales.yearToDate);
         summarySalesChart('#netSummaryFullChart', netPeriodSales.fullYear);
-        periodSummaryTable('#netSummaryTable', netPeriodSales);
+        //periodSummaryTable('#netSummaryTable', netPeriodSales);
         
         //tabGrossByMonth
-        monthlySalesChart('#grossByMonthChart', grossSales);
-        monthlySalesTable('#grossByMonthTable', grossSales);
+        //monthlySalesChart('#grossByMonthChart', grossSales);
+        //monthlySalesTable('#grossByMonthTable', grossSales);
         
         //tabNetByMonth
-        monthlySalesChart('#netByMonthChart', netSales);
-        monthlySalesTable('#netByMonthTable', netSales);
+        //monthlySalesChart('#netByMonthChart', netSales);
+        //monthlySalesTable('#netByMonthTable', netSales);
         
 
         
