@@ -249,6 +249,8 @@
         tableData.push(data.lastPeriod);
         tableData.push(data.YearToDate);
         tableData.push(data.fullYear);
+        
+        console.log(tableData);
 
         var tableCols = [
             {"data": "period", "title": "Period"},
