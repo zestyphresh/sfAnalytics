@@ -47,7 +47,7 @@
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
         summarySalesChart('#grossSummaryLastChart', grossPeriodSales.lastPeriod);
-        //summarySalesChart('#grossSummaryYearChart', grossPeriodSales.yearToDate);
+        summarySalesChart('#grossSummaryYearChart', grossPeriodSales.yearToDate);
         //summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
         //periodSummaryTable('#grossSummaryTable', grossPeriodSales);
         
