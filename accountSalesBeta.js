@@ -149,14 +149,14 @@
     
     var salesByPeriod = function(source) {
         
-        console.log('FUNCTION salesByPeriod', source);
+        //console.log('FUNCTION salesByPeriod', source);
         
         var result = {};
         
         //These functions can probably be shortened - d3.sum maybe doesn't lend itself when reuse is necessary
         function summaryDataTemplate(period, data, comp) {
             
-            console.log('FUNCTION salesByPeriod summaryDataTemplate', period, data, comp);
+            //console.log('FUNCTION salesByPeriod summaryDataTemplate', period, data, comp);
             
             this.period = period;
             this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }); 
@@ -204,6 +204,9 @@
                     format: function (v, id) {return accounting.formatMoney(v);}
                 },
                 color: function (color, d) { 
+                    
+                    console.log('FUNCTION summarySalesChart chart.color', color, d);
+                    
                     switch (d.x) {
                         case 0 : return '#6C95BF';
                         case 1 : return '#F5A631';
