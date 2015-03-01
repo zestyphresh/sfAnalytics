@@ -41,6 +41,8 @@
         var grossPeriodSales = salesByPeriod(grossSales);
         var netPeriodSales = salesByPeriod(netSales);
         
+        console.log(grossSales,netSales, grossPeriodSales, netPeriodSales);
+        
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
         summarySalesChart('#grossSummaryLastChart', grossPeriodSales.lastPeriod);
@@ -62,6 +64,8 @@
         //tabNetByMonth
         monthlySalesChart('#netByMonthChart', netSales);
         monthlySalesTable('#netByMonthTable', netSales);
+        
+
         
     }).done();
     
@@ -338,7 +342,6 @@
                 },
                 colors: {
                     sales : '#91BDEB',
-                    budget : '#AA6600',
                     target : '#C9297A',
                     last : '#4E7B00'
                 }
@@ -359,6 +362,7 @@
 
     }
     
+    /*
     function productSales() {
         
         var source = _.sortBy(data.sales, function(d) {
@@ -515,6 +519,8 @@
         this.values = {};
     
     }
+    
+    */
 
     accounting.settings = {
     	currency: {
