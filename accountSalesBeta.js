@@ -41,7 +41,7 @@
         var grossPeriodSales = salesByPeriod(grossSales);
         var netPeriodSales = salesByPeriod(netSales);
         
-        //console.log(grossSales, netSales);
+        console.log(grossSales, netSales);
         console.log(grossPeriodSales, netPeriodSales);
         
         //tabGrossSummary
