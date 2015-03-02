@@ -62,12 +62,12 @@
         periodSummaryTable('#netSummaryTable', netPeriodSales);
         
         //tabGrossByMonth
-        //monthlySalesChart('#grossByMonthChart', grossSales);
-        //monthlySalesTable('#grossByMonthTable', grossSales);
+        monthlySalesChart('#grossByMonthChart', grossSales);
+        monthlySalesTable('#grossByMonthTable', grossSales);
         
         //tabNetByMonth
-        //monthlySalesChart('#netByMonthChart', netSales);
-        //monthlySalesTable('#netByMonthTable', netSales);
+        monthlySalesChart('#netByMonthChart', netSales);
+        monthlySalesTable('#netByMonthTable', netSales);
         
 
         
@@ -192,7 +192,6 @@
         ];
         
         //console.log('FUNCTION summarySalesChart', data, chartData);
-        console.log($j(selector).width(), $j(selector).height(), $j(selector).actual('width'), $j(selector).actual('height'));
         
         c3.generate({
             bindto : selector,
