@@ -564,19 +564,6 @@
     
     }
 
-
-    
-    var crossfilter = function(records) {
-    
-        this.crossfilter = new crossfilter(records);
-        this.dims = {};
-        this.groups = {};
-        this.values = {};
-    
-    }
-    
-    */
-
     accounting.settings = {
     	currency: {
     		symbol : "£",   // default currency symbol is '$'
