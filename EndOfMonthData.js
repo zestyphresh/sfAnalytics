@@ -37,10 +37,10 @@
 
     Q.allSettled([new soql.multipart(accountQuery), new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resAccount, resSales, resForecast, resDate) {
         
-        result = resAccount.value;
-        sales = resSales.value;
-        forecast = resForecast.value;
-        fiscal = resDate.value[0];
+        var result = resAccount.value;
+        var sales = resSales.value;
+        var forecast = resForecast.value;
+        var fiscal = resDate.value[0];
         
         _.each(result, function(acc) {
 
