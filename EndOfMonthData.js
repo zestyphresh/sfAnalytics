@@ -81,8 +81,7 @@
             'ordering' : false,
             "order": [],
             'dom' : 't',
-            'columns' : tableCols,
-            'columnDefs' : tableColDefs
+            'columns' : tableCols
         });
         
     }).done();
