@@ -9,7 +9,7 @@
 
     var accountQuery = {
         sObject : 'Account',
-        select : 'Id, Owner, Account_Code__c, Name, Parent_Name__c, Group_Name__c, Sub_Sector__c, NMBS_Member__c',
+        select : 'Id, Owner.Name, Account_Code__c, Name, Parent_Name__c, Group_Name__c, Sub_Sector__c, NMBS_Member__c',
         where : 'Sector__c != ' + "'" + 'Other' + "'",
         maxfetch : 20000
     };
@@ -58,7 +58,7 @@
 
         var tableCols = [
             {"data": "Id", "title": "Id"},
-            {"data": "Owner", "title": "Owner"},
+            {"data": "Owner.Name", "title": "Owner"},
             {"data": "Account_Code__c", "title": "Code"},
             {"data": "Name", "title": "Name"},
             {"data": "Parent_Name__c", "title": "Parent"},
