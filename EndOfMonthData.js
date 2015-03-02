@@ -10,7 +10,7 @@
     var accountQuery = {
         sObject : 'Account',
         select : 'Id, Owner.Name, Account_Code__c, Name, Parent_Name__c, Group_Name__c, Sub_Sector__c, NMBS_Member__c',
-        where : 'Sector__c != ' + "'" + 'Other' + "'",
+        where : null,
         maxfetch : 20000
     };
     
