@@ -60,9 +60,9 @@
             acc.budgetL = d3.sum(forecast, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true && s.Forecast_Type__c == 'Budget' ? s.Net_Value__c : 0; })
             acc.targetL = d3.sum(forecast, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target') ? s.Net_Value__c : 0; })
         
-            i++
+            i++;
         
-        })
+        });
 
         var tableCols = [
             {"data": "Id", "title": "Id"},
