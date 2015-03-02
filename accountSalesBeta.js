@@ -464,6 +464,7 @@
             return result;
         }
 
+        /*
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
             data: {
@@ -563,6 +564,7 @@
             chartUpdate(tableData, 'Quantity__c');
             
         });
+        */
     
     }
 
