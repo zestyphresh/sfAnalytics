@@ -192,6 +192,7 @@
         ];
         
         //console.log('FUNCTION summarySalesChart', data, chartData);
+        console.log($j(selector).width(), $j(selector).height());
         
         c3.generate({
             bindto : selector,
