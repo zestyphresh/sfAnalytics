@@ -11,21 +11,21 @@
         sObject : 'Account',
         select : 'Id, Owner.Name, Account_Code__c, Name, Parent_Name__c, Group_Name__c, Sub_Sector__c, NMBS_Member__c',
         where : null,
-        maxfetch : 20000
+        maxfetch : 500
     };
     
     var salesQuery = {
         sObject : 'Daily_Historical_Sales__c',
         select : 'Account__r.Id, Fiscal_Year__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c',
         where : 'Fiscal_Year__c >= 2014',
-        maxfetch : 300000
+        maxfetch : 10000
     };
         
     var forecastQuery = {
         sObject : 'Forecast2__c',
         select : 'Account__r.Id, Fiscal_Year__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Type__c',
         where : 'Fiscal_Year__c = 2015',
-        maxfetch : 200000
+        maxfetch : 1000
     };
     
     var dateQuery = {
