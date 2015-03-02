@@ -1,6 +1,9 @@
 (function(accId, accType, soql) {
     
     $j = jQuery.noConflict();
+        
+    var thisYear = 2015,
+        lastYear = 2014;
     
     //load tabs
     $j( "#tabs" ).responsiveTabs();
@@ -52,11 +55,11 @@
         periodSummaryTable('#grossSummaryTable', grossPeriodSales);
         
         //tanNetSUmmary
-        //summarySalesChart('#netSummaryCurrentChart', netPeriodSales.currentPeriod);
-        //summarySalesChart('#netSummaryLastChart', netPeriodSales.lastPeriod);
-        //summarySalesChart('#netSummaryYearChart', netPeriodSales.yearToDate);
-        //summarySalesChart('#netSummaryFullChart', netPeriodSales.fullYear);
-        //periodSummaryTable('#netSummaryTable', netPeriodSales);
+        summarySalesChart('#netSummaryCurrentChart', netPeriodSales.currentPeriod);
+        summarySalesChart('#netSummaryLastChart', netPeriodSales.lastPeriod);
+        summarySalesChart('#netSummaryYearChart', netPeriodSales.yearToDate);
+        summarySalesChart('#netSummaryFullChart', netPeriodSales.fullYear);
+        periodSummaryTable('#netSummaryTable', netPeriodSales);
         
         //tabGrossByMonth
         //monthlySalesChart('#grossByMonthChart', grossSales);
@@ -69,10 +72,7 @@
 
         
     }).done();
-    
-    var thisYear = 2015,
-        lastYear = 2014;
-        
+
     var dataTemplatebyMonth = [
         {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
         {monthName : 'February', month : 2, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
