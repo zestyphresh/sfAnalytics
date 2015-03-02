@@ -14,7 +14,7 @@
     
     var salesQuery = {
         sObject : 'Daily_Historical_Sales__c',
-        select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Gross_Credits__c, Gross_Despatches__c, Value__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
+        select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Gross_Credits__c, Gross_Despatches__c, Value__c, Gross_Sales_Price_Per_Item__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
         where : 'Account__r.Id = ' + "'" + accId + "'",
         maxfetch : 100000
     };
@@ -345,6 +345,10 @@
         
         c3.generate({
             bindto: selector,
+            size : {
+                width : $j(selector).actual('width'),
+                height : 320
+            },
             data: {
                 x: 'monthName',
                 json: data,
@@ -386,29 +390,40 @@
 
     }
     
-    /*
-    function productSales() {
+    
+    function productSales(data) {
         
-        var source = _.sortBy(data.sales, function(d) {
+        var tableData = _.sortBy(data, function(d) {
             return moment(d.Invoice_Date__c).toDate();
         });
         
-        console.log(source);
-
         var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
                          {"data": "Product__r.Family", "title": "Category"},
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
                          {"data": "Product__r.Name", "title": "Product Name"},
                          {"data": "Quantity__c", "title": "Quantity"},
-                         {"data": "Value__c", "title": "Gross Value"}
+                         {"data": "Value__c", "title": "Gross Value"},
+                         {"data": "Gross_Sales_Price_Per_Item__c", "title": "Sales Price Per Item"},
+                         {"data": "Promotion__r.Name", "title": "Promotion"},
+                         
         ];
         
         var tableColDefs = [
-            {'targets' : [5], 
+            {'targets' : [5,6], 
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
                         return accounting.formatMoney(cell);
+                        break;
+                    }
+                    return data;
+                }
+            },
+            {'targets' : [7], 
+            'render' : function (cell, type, row, meta) {
+                switch (type) {
+                    case 'display':
+                        return cell == undefined ? '': cell;
                         break;
                     }
                     return data;
@@ -419,7 +434,7 @@
         ];
                             
         var table = $j('#table-productSales').DataTable({
-            'data' : source,
+            'data' : tableData,
             'paging' : true,
             'ordering' : true,
             "order": [[0,'desc']],
@@ -427,109 +442,125 @@
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
+
+        var chartData = function(data, value) {
         
-        table.on('search.dt', function (e, settings) {
+            var chartData = d3.nest()
+                .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
+                .rollup(function(d) { return d3.sum(d, function(i) { return i[value]; }); })
+                .entries(data);
+
+            return chartData;
             
-            var data = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
-            
-            //generateChart(table.rows({order: "applied", search: "applied", page: "all"}).data().toArray());  
-            
-            productChart.load({
+        }
+        
+        var ticks = function() {
+            var result = [];
+            for (i=0;i<=71;i++) {
+                result.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
+            }
+            return result;
+        }
+
+        var chart = c3.generate({
+            bindto: '#chartWeeklySales',
+            data: {
                 x: 'key',
-                json: chartData(data),
+                xFormat: '%Y-%m-%d',
+                json: chartData(tableData, 'Value__c'),
+                keys: {
+                    x: 'key',
+                    value: ['values'],
+                },
+                type : 'bar'
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: {
+                        format : function (e) { return moment(e).format('MMM').slice(0, 1); },
+                        fit : true,
+                        culling : false,
+                        values : ticks
+                    },
+                    min : new Date(2009,11,1),
+                    max : new Date(2016,01,1),
+                    padding: {
+                        left: 0,
+                        right: 0
+                    }
+                },
+                y : {
+                    tick: {
+                        format: function (d) { return accounting.formatMoney(d); }
+                    },
+                    padding : {bottom: 0},
+                    min : 0
+                }
+            },
+            grid: {
+                x: {
+                    lines: [{value: new Date(2010,11,15), text: '2010'},
+                            {value: new Date(2011,11,15), text: '2011'},
+                            {value: new Date(2012,11,15), text: '2012'},
+                            {value: new Date(2013,11,15), text: '2013'},
+                            {value: new Date(2014,11,15), text: '2014'},
+                            {value: new Date(2015,11,15), text: '2015'},
+                    ]
+                }
+            },
+            bar: {
+                width: 8
+            }
+        });
+        
+        var chartUpdate = function(data, value) {
+            
+            chart.load({
+                x: 'key',
+                json: chartData(data, value),
                 keys: {
                     x: 'key',
                     value: ['values'],
                 },
                 type : 'bar'
             })
+            
+        }
+
+        table.on('search.dt', function (e, settings) {
+            
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
+            
+            chartUpdate(tableData, 'Value__c');
 
         });
         
-        var productChart = generateChart(source);
-        
-        function chartData(data) {
-        
-            var chartData = d3.nest()
-                .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
-                .rollup(function(d) { return d3.sum(d, function(i) { return i.Value__c; }); })
-                .entries(data);
+        $j('#grossSales').click(function() {
             
-            console.log(chartData);
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            return chartData;
+            chartUpdate(tableData, 'Value__c');
             
-        }
+        });
         
-        function generateTicks() {
-            var result = [];
-            for (i=0;i<=71;i++) {
-                result.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
-            }
-            console.log(result);
-            return result;
-        }
         
-        function generateChart(data) {
-        
-            var chart = c3.generate({
-                bindto: '#chartWeeklySales',
-                data: {
-                    x: 'key',
-                    xFormat: '%Y-%m-%d',
-                    json: chartData(data),
-                    keys: {
-                        x: 'key',
-                        value: ['values'],
-                    },
-                    type : 'bar'
-                },
-                axis: {
-                    x: {
-                        type: 'timeseries',
-                        tick: {
-                            format : function (e) { return moment(e).format('MMM').slice(0, 1); },
-                            fit : true,
-                            culling : false,
-                            values : generateTicks()
-                        },
-                        min : new Date(2009,11,1),
-                        max : new Date(2016,01,1),
-                        padding: {
-                            left: 0,
-                            right: 0
-                        }
-                    },
-                    y : {
-                        tick: {
-                            format: function (d) { return accounting.formatMoney(d); }
-                        },
-                        padding : {bottom: 0},
-                        min : 0
-                    }
-                },
-                grid: {
-                    x: {
-                        lines: [{value: new Date(2010,11,15), text: '2010'},
-                                {value: new Date(2011,11,15), text: '2011'},
-                                {value: new Date(2012,11,15), text: '2012'},
-                                {value: new Date(2013,11,15), text: '2013'},
-                                {value: new Date(2014,11,15), text: '2014'},
-                                {value: new Date(2015,11,15), text: '2015'},
-                        ]
-                    }
-                },
-                bar: {
-                    width: 8
-                },
-                onresize : function() { chart.flush; }
-            });
+        $j('#netSales').click(function() {
             
-            chart.flush();
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            return chart;
+            chartUpdate(tableData, 'Net_Value__c');
+            
+        });
         
-        }
+        
+        $j('#quantity').click(function() {
+            
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
+            
+            chartUpdate(tableData, 'Quantity__c');
+            
+        });
     
     }
 
