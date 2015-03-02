@@ -70,7 +70,7 @@
         monthlySalesTable('#netByMonthTable', netSales);
         
         //tabProductSales
-        productSales();
+        productSales(data.sales);
         
 
         
@@ -392,7 +392,6 @@
         });
 
     }
-    
     
     function productSales(data) {
         
