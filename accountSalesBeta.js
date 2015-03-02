@@ -69,6 +69,9 @@
         monthlySalesChart('#netByMonthChart', netSales);
         monthlySalesTable('#netByMonthTable', netSales);
         
+        //tabProductSales
+        productSales();
+        
 
         
     }).done();
