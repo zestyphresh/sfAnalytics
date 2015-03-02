@@ -198,7 +198,7 @@
             bindto : selector,
             size : {
                 width : $j(selector).width(),
-                height : $j(selector).height()
+                height : 320
             },
             data : {
                 x: 'type',
