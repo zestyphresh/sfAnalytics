@@ -44,15 +44,15 @@
         
         _.each(result, function(acc) {
 
-            acc.sales = d3.sum(sales, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Year_To_Date__c == true ? s.Net_Value__c : 0; })
-            acc.last = d3.sum(sales, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2014 && s.Is_Fiscal_Year_To_Date__c == true ? s.Net_Value__c : 0; })
-            acc.budget = d3.sum(forecast, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Year_To_Date__c == true && s.Forecast_Type__c == 'Budget' ? s.Net_Value__c : 0; })
-            acc.target = d3.sum(forecast, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Year_To_Date__c == true && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target') ? s.Net_Value__c : 0; })
+            acc.sales = d3.sum(sales, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Year_To_Date__c == true ? s.Net_Value__c : 0; })
+            acc.last = d3.sum(sales, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2014 && s.Is_Fiscal_Year_To_Date__c == true ? s.Net_Value__c : 0; })
+            acc.budget = d3.sum(forecast, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Year_To_Date__c == true && s.Forecast_Type__c == 'Budget' ? s.Net_Value__c : 0; })
+            acc.target = d3.sum(forecast, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Year_To_Date__c == true && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target') ? s.Net_Value__c : 0; })
             
-            acc.salesL = d3.sum(sales, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true ? s.Net_Value__c : 0; })
-            acc.lastL = d3.sum(sales, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2014 && s.Is_Fiscal_Last_Period__c == true ? s.Net_Value__c : 0; })
-            acc.budgetL = d3.sum(forecast, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true && s.Forecast_Type__c == 'Budget' ? s.Net_Value__c : 0; })
-            acc.targetL = d3.sum(forecast, function(s) { return s.account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target') ? s.Net_Value__c : 0; })
+            acc.salesL = d3.sum(sales, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true ? s.Net_Value__c : 0; })
+            acc.lastL = d3.sum(sales, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2014 && s.Is_Fiscal_Last_Period__c == true ? s.Net_Value__c : 0; })
+            acc.budgetL = d3.sum(forecast, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true && s.Forecast_Type__c == 'Budget' ? s.Net_Value__c : 0; })
+            acc.targetL = d3.sum(forecast, function(s) { return s.Account__r.Id == acc.Id && s.Fiscal_Year__c == 2015 && s.Is_Fiscal_Last_Period__c == true && (s.Forecast_Type__c == 'Budget' || s.Forecast_Type__c == 'Target') ? s.Net_Value__c : 0; })
         
         })
 
