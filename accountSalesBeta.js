@@ -194,8 +194,12 @@
         //console.log('FUNCTION summarySalesChart', data, chartData);
         
         c3.generate({
-            bindto: selector,
-            data: {
+            bindto : selector,
+            size : {
+                width : $j(selector).width(),
+                height : $j(selector).height()
+            },
+            data : {
                 x: 'type',
                 json: chartData,
                 keys: {
