@@ -192,12 +192,12 @@
         ];
         
         //console.log('FUNCTION summarySalesChart', data, chartData);
-        console.log($j(selector).width(), $j(selector).height());
+        console.log($j(selector).width(), $j(selector).height(), $j(selector).actual('width'), $j(selector).actual('height'));
         
         c3.generate({
             bindto : selector,
             size : {
-                width : $j(selector).width(),
+                width : $j(selector).actual('width'),
                 height : 320
             },
             data : {
