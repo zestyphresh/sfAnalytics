@@ -399,8 +399,6 @@
             return moment(d.Invoice_Date__c).toDate();
         });
         
-        /*
-        
         var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
                          {"data": "Product__r.Family", "title": "Category"},
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
@@ -408,8 +406,7 @@
                          {"data": "Quantity__c", "title": "Quantity"},
                          {"data": "Value__c", "title": "Gross Value"},
                          {"data": "Gross_Sales_Price_Per_Item__c", "title": "Sales Price Per Item"},
-                         {"data": "Promotion__r.Name", "title": "Promotion"},
-                         
+                         {"data": "Promotion__r.Name", "title": "Promotion"}
         ];
         
         var tableColDefs = [
@@ -418,7 +415,6 @@
                 switch (type) {
                     case 'display':
                         return accounting.formatMoney(cell);
-                        break;
                     }
                     return data;
                 }
@@ -427,8 +423,7 @@
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
-                        return cell == undefined ? '': cell;
-                        break;
+                        return cell === undefined ? '': cell;
                     }
                     return data;
                 }
@@ -436,7 +431,7 @@
             {'targets': [4,5],
             'className': 'dt-right'}
         ];
-                            
+        
         var table = $j('#table-productSales').DataTable({
             'data' : tableData,
             'paging' : true,
@@ -446,10 +441,6 @@
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
-        
-        */
-        
-        /*
 
         var chartData = function(data, value) {
         
@@ -469,10 +460,7 @@
             }
             return result;
         }
-        
-        */
 
-        /*
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
             data: {
@@ -572,7 +560,6 @@
             chartUpdate(tableData, 'Quantity__c');
             
         });
-        */
     
     }
 
