@@ -557,7 +557,7 @@
             
             chartUpdate(tableData, 'Quantity__c');
             
-        });
+        });     
     
     }
 
