@@ -457,13 +457,12 @@
             
         }
         
-        var ticks = function() {
-            var result = [];
-            for (i=0;i<=71;i++) {
-                result.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
-            }
-            return result;
+        var ticks = [];
+        
+        for (i=0;i<=71;i++) {
+            ticks.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
+
 
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
