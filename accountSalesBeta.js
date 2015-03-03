@@ -423,7 +423,7 @@
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
-                        return cell === undefined ? '': cell;
+                        return cell == null ? '': cell;
                     }
                     return data;
                 }
