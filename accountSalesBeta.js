@@ -444,6 +444,8 @@
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
+        
+        /*
 
         var chartData = function(data, value) {
         
@@ -463,6 +465,8 @@
             }
             return result;
         }
+        
+        /*
 
         /*
         var chart = c3.generate({
