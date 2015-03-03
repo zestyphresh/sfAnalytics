@@ -419,15 +419,15 @@
                     return data;
                 }
             },
-            {'targets' : [7], 
-            'render' : function (cell, type, row, meta) {
-                switch (type) {
-                    case 'display':
-                        return cell == null ? '': cell;
-                    }
-                    return data;
-                }
-            },
+            //{'targets' : [7], 
+            //'render' : function (cell, type, row, meta) {
+            //    switch (type) {
+            //        case 'display':
+            //            return cell == null ? '': cell;
+            //        }
+            //        return data;
+            //    }
+            //},
             {'targets': [4,5],
             'className': 'dt-right'}
         ];
