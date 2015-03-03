@@ -30,6 +30,8 @@
         where : 'SetupOwnerId = ' + "'" + orgId + "'",
         maxfetch : 10
     };
+    
+    var data = {};
 
     Q.allSettled([new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resSales, resForecast, resDate) {
 
