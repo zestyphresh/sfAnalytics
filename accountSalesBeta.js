@@ -419,22 +419,18 @@
                     return data;
                 }
             },
-            //{'targets' : [7], 
-            //'render' : function (cell, type, row, meta) {
-            //    switch (type) {
-            //        case 'display':
-            //            return cell == null ? '': cell;
-            //        }
-            //        return data;
-            //    }
-            //},
+            {'targets' : [7], 
+            'render' : function (cell, type, row, meta) {
+                switch (type) {
+                    case 'display':
+                        return cell == null ? '': cell;
+                    }
+                    return data;
+                }
+            },
             {'targets': [4,5,6],
             'className': 'dt-right'}
         ];
-        
-        var table;
-        
-        /*
         
         var table = $j('#table-productSales').DataTable({
             'data' : tableData,
@@ -443,10 +439,8 @@
             "order": [[0,'desc']],
             'dom' : 'ftp',
             'columns' : tableCols,
-            'columnDefs' : tableColDefs
+            //'columnDefs' : tableColDefs
         });
-        
-        */
 
         var chartData = function(data, value) {
         
@@ -460,7 +454,6 @@
         }
         
         var ticks = [];
-        
         for (i=0;i<=71;i++) {
             ticks.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
