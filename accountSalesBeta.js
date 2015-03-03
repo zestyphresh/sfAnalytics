@@ -533,7 +533,7 @@
 
         });
         
-        $j('#grossSales').click(function() {
+        $j('#grossValue').click(function() {
             
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
@@ -542,7 +542,7 @@
         });
         
         
-        $j('#netSales').click(function() {
+        $j('#netValue').click(function() {
             
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
