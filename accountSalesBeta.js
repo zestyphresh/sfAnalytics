@@ -9,8 +9,6 @@
     $j( "#tabs" ).responsiveTabs();
     
     var orgId = '00Db0000000ZVQP';
-
-    var data = {};
     
     var salesQuery = {
         sObject : 'Daily_Historical_Sales__c',
@@ -196,7 +194,7 @@
         
         //console.log('FUNCTION summarySalesChart', data, chartData);
         
-        c3.generate({
+        var chart = c3.generate({
             bindto : selector,
             size : {
                 width : $j(selector).actual('width'),
@@ -246,6 +244,8 @@
                 hide: true
             }
         });
+        
+        chart.flush();
         
     }
         
@@ -441,12 +441,14 @@
             'columns' : tableCols,
             //'columnDefs' : tableColDefs
         });
+        
+        var showValue = 'Value__c';
 
-        var chartData = function(data, value) {
+        var chartData = function(data) {
         
             var chartData = d3.nest()
                 .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
-                .rollup(function(d) { return d3.sum(d, function(i) { return i[value]; }); })
+                .rollup(function(d) { return d3.sum(d, function(i) { return i[showValue]; }); })
                 .entries(data);
 
             return chartData;
@@ -458,13 +460,12 @@
             ticks.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
 
-
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
             data: {
                 x: 'key',
                 xFormat: '%Y-%m-%d',
-                json: chartData(tableData, 'Value__c'),
+                json: chartData(tableData),
                 keys: {
                     x: 'key',
                     value: ['values'],
@@ -511,11 +512,11 @@
             }
         });
         
-        var chartUpdate = function(data, value) {
+        var chartUpdate = function(data) {
             
             chart.load({
                 x: 'key',
-                json: chartData(data, value),
+                json: chartData(data),
                 keys: {
                     x: 'key',
                     value: ['values'],
@@ -524,15 +525,38 @@
             })
             
         }
+        
+        $('div').data('filter');
 
         table.on('search.dt', function (e, settings) {
             
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            chartUpdate(tableData, 'Value__c');
+            chartUpdate(tableData, showValue);
 
         });
         
+        $j('.chartWeeklySalesValue').click(function() {
+            
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
+            
+            switch ($j(this).data('show')) {
+                case 'gross':
+                    showValue = 'Value__c';
+                    break;
+                case 'gross':
+                    showValue = 'Net_Value__c';
+                    break;    
+                case 'gross':
+                    showValue = 'Quantity__c';
+                    break;
+            }
+            
+            chartUpdate(tableData);
+            
+        });
+        
+        /*
         $j('#grossValue').click(function() {
             
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
@@ -557,7 +581,8 @@
             
             chartUpdate(tableData, 'Quantity__c');
             
-        });     
+        }); 
+        */
     
     }
 
