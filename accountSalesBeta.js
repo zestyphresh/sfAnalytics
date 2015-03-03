@@ -544,9 +544,9 @@
 
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray();
             
-            console.log(this.data('show'));
+            console.log($j(this).data('show'));
             
-            switch (this.data('show')) {
+            switch ($j(this).data('show')) {
                 case 'gross':
                     showValue = 'Value__c';
                     break;
