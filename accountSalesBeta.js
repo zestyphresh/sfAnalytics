@@ -410,7 +410,7 @@
         ];
         
         var tableColDefs = [
-            {'targets' : [5,6], 
+            {'targets' : [4,5,6], 
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
@@ -428,9 +428,11 @@
             //        return data;
             //    }
             //},
-            {'targets': [4,5],
+            {'targets': [4,5,6],
             'className': 'dt-right'}
         ];
+        
+        /*
         
         var table = $j('#table-productSales').DataTable({
             'data' : tableData,
@@ -441,6 +443,8 @@
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
+        
+        */
 
         var chartData = function(data, value) {
         
