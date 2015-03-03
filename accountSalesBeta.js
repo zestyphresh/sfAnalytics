@@ -538,6 +538,8 @@
         
         $j('.chartWeeklySalesValue').click(function() {
             
+            console.log(this);
+            
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray();
             
             switch ($j(this).data('show')) {
