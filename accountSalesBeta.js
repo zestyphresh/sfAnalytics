@@ -432,6 +432,8 @@
             'className': 'dt-right'}
         ];
         
+        var table;
+        
         /*
         
         var table = $j('#table-productSales').DataTable({
