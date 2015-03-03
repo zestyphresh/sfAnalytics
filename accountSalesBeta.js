@@ -455,10 +455,10 @@
 
             return chartData;
             
-        }
+        };
         
         var ticks = [];
-        for (i=0;i<=71;i++) {
+        for (var i = 0; i <= 71; i++) {
             ticks.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
 
@@ -605,6 +605,6 @@
     		thousand: ",",
     		decimal : "."
     	}
-    }
+    };
     
 })(accId, accType, SOQL);
