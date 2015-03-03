@@ -464,6 +464,10 @@
 
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
+            size : {
+                width : $j('#chartWeeklySales').actual('width'),
+                height : 320
+            },
             data: {
                 x: 'key',
                 xFormat: '%Y-%m-%d',
