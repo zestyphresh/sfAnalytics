@@ -543,17 +543,15 @@
         $j('.chartWeeklySalesValue').click(function() {
 
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray();
-            
-            console.log($j(this).data('show'));
-            
+
             switch ($j(this).data('show')) {
                 case 'gross':
                     showValue = 'Value__c';
                     break;
-                case 'gross':
+                case 'net':
                     showValue = 'Net_Value__c';
                     break;    
-                case 'gross':
+                case 'quantity':
                     showValue = 'Quantity__c';
                     break;
             }
@@ -561,35 +559,7 @@
             chartUpdate(tableData);
             
         });
-        
-        /*
-        $j('#grossValue').click(function() {
-            
-            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
-            
-            chartUpdate(tableData, 'Value__c');
-            
-        });
-        
-        
-        $j('#netValue').click(function() {
-            
-            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
-            
-            chartUpdate(tableData, 'Net_Value__c');
-            
-        });
-        
-        
-        $j('#quantity').click(function() {
-            
-            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
-            
-            chartUpdate(tableData, 'Quantity__c');
-            
-        }); 
-        */
-    
+
     }
 
     accounting.settings = {
