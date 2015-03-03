@@ -534,7 +534,7 @@
             
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
             
-            chartUpdate(tableData, showValue);
+            chartUpdate(tableData);
 
         });
         
