@@ -524,15 +524,13 @@
                     value: ['values'],
                 },
                 type : 'bar'
-            })
+            });
             
-        }
+        };
         
-        $('div').data('filter');
-
         table.on('search.dt', function (e, settings) {
             
-            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray();
             
             chartUpdate(tableData);
 
@@ -540,7 +538,7 @@
         
         $j('.chartWeeklySalesValue').click(function() {
             
-            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray()
+            var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray();
             
             switch ($j(this).data('show')) {
                 case 'gross':
