@@ -540,6 +540,8 @@
 
             var tableData = table.rows({order: "applied", search: "applied", page: "all"}).data().toArray();
             
+            console.log(this.data('show'));
+            
             switch (this.data('show')) {
                 case 'gross':
                     showValue = 'Value__c';
