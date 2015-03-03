@@ -399,6 +399,8 @@
             return moment(d.Invoice_Date__c).toDate();
         });
         
+        /*
+        
         var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
                          {"data": "Product__r.Family", "title": "Category"},
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
@@ -445,6 +447,8 @@
             'columnDefs' : tableColDefs
         });
         
+        */
+        
         /*
 
         var chartData = function(data, value) {
@@ -466,7 +470,7 @@
             return result;
         }
         
-        /*
+        */
 
         /*
         var chart = c3.generate({
