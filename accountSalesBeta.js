@@ -393,7 +393,7 @@
             }
         });
 
-    }
+    };
     
     function productSales(data) {
         
