@@ -79,13 +79,14 @@
                 
                 return _.reduce(d, function(result, value) {
                     
-                    result.credits += value.Gross_Credits__c;
-                    result.despatches += value.Gross_Despatches__c;
-                    result.sales += value.Value__c;
+                    result.grossCredits += value.Gross_Credits__c;
+                    result.grossDespatches += value.Gross_Despatches__c;
+                    result.grossSales += value.Value__c;
+                    result.netSales += value.Net_Value__c;
                     
                     return result;
                     
-                }, { credits : 0, despatches : 0, sales : 0 })
+                }, { grossCredits : 0, grossDespatches : 0, grossSales : 0, netSales : 0 })
                 
             })
             .value();
@@ -96,6 +97,50 @@
 
         
     }).done();
+    
+    var salesByMonth = function(data, year) {
+        
+        return _.chain(data)
+            .filter(function(d) { return d.Fiscal_Year__c == year; })
+            .groupBy(function(d) { return d.Fiscal_Month__c; })
+            .mapValues(function(d) {
+                
+                return _.reduce(d, function(result, value) {
+                    
+                    result.grossCredits += value.Gross_Credits__c;
+                    result.grossDespatches += value.Gross_Despatches__c;
+                    result.grossSales += value.Value__c;
+                    result.netSales += value.Net_Value__c;
+                    
+                    return result;
+                    
+                }, { grossCredits : 0, grossDespatches : 0, grossSales : 0, netSales : 0 });
+                
+            })
+            .value();
+            
+    };
+    
+    var forecastByMonth = function(data, year) {
+        
+        return _.chain(data)
+            .filter(function(d) { return d.Fiscal_Year__c == year; })
+            .groupBy(function(d) { return d.Fiscal_Month__c; })
+            .mapValues(function(d) {
+                
+                return _.reduce(d, function(result, value) {
+                    
+                    result.grossSales += value.Value__c;
+                    result.netSales += value.Net_Value__c;
+                    
+                    return result;
+                    
+                }, { grossBudget : 0, netBudget : 0, grossTarget : 0, netTarget : 0 });
+                
+            })
+            .value();
+            
+    };
 
     var dataTemplatebyMonth = [
         {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
