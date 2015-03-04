@@ -83,7 +83,7 @@
                     result.despatches += value.Gross_Despatches__c;
                     result.sales += value.Value__c;
                     
-                }, { month : d[0].Fiscal_Month__c, credits : 0, despatches : 0, sales : 0 })
+                }, { credits : 0, despatches : 0, sales : 0 })
                 
             })
             .value();
