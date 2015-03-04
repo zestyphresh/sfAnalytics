@@ -78,11 +78,12 @@
             .map(function(d) {
                 
                 return _.reduce(d, function(result, value) {
+                    console.log(result, value);
                     result.credits += value.Gross_Credits__c;
                     result.despatches += value.Gross_Despatches__c;
                     result.sales += value.Value__c;
                     
-                }, {month : d[0].Fiscal_Month__c, credits : 0, despatches : 0, sales : 0 })
+                }, { month : d[0].Fiscal_Month__c, credits : 0, despatches : 0, sales : 0 })
                 
             })
             .value();
