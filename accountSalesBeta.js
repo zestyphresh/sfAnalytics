@@ -57,7 +57,7 @@
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
         var salesSummary = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
-        var salesByPeriod =  dataSummaryByPeriod(salesSummary);
+        //var salesByPeriod =  dataSummaryByPeriod(salesSummary);
         end = performance.now();
         console.log(end - start);
         
