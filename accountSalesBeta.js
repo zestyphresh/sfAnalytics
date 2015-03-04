@@ -57,7 +57,7 @@
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
         var salesSummary = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
-        //var salesByPeriod =  dataSummaryByPeriod(salesSummary);
+        var salesByPeriod =  dataSummaryByPeriod(salesSummary);
         end = performance.now();
         console.log(end - start);
         
@@ -178,10 +178,12 @@
         return result;
     }
     
-    /*
+    
     function dataSummaryByPeriod(data) {
         
-        var sumPeriod = function(comparator) {
+        console.log(data);
+        
+        function sumPeriod(comparator) {
             
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
@@ -228,7 +230,7 @@
         return periods;
         
     }
-    */
+    
         
     var dataTemplatebyMonth = [
         {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
