@@ -166,7 +166,7 @@
                 netSales : salesCurrent[m].netSales, 
                 netBudget : forecastCurrent[m].netBudget,
                 netTarget : forecastCurrent[m].netTarget,
-                netLast : salesPrevious[m].netSales, 
+                netLast : salesPrevious[m].netSales
             }
             
             result.grossBudgetVsSales = result.grossSales - result.grossBudget;
