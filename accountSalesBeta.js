@@ -226,31 +226,6 @@
         
     }
         
-        
-        
-        function summaryDataTemplate(period, data, comp) {
-            
-            //console.log('FUNCTION salesByPeriod summaryDataTemplate', period, data, comp);
-            
-            this.period = period;
-            this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }); 
-            this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; });
-            this.sales = d3.sum(data, function(d) {return comp(d.month) ? d.sales : 0; });
-            this.budget = d3.sum(data, function(d) {return comp(d.month) ? d.budget : 0; }); 
-            this.target = d3.sum(data, function(d) {return comp(d.month) ? d.target : 0; }); 
-            this.last = d3.sum(data, function(d) {return comp(d.month) ? d.last : 0; });
-            this.vsBudget = this.sales - this.budget;
-            this.vsTarget = this.sales - this.target; 
-            this.vsLast = this.sales - this.last;
-        }
-        
-        result.yearToDate = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
-        result.lastPeriod = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
-        result.currentPeriod = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
-        result.fullYear = new summaryDataTemplate('Full Year', source, function(month) { return true; });
-        
-    }
-
     var dataTemplatebyMonth = [
         {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
         {monthName : 'February', month : 2, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
