@@ -46,7 +46,7 @@
         var netSales = salesByMonthNet();
         end = new Date().getTime();
         
-        console.log(start - end);
+        console.log(end - start);
         
         start = new Date().getTime();
         var salesByMonth2015 = salesByMonth(data.sales, 2015);
@@ -54,7 +54,7 @@
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
         end = new Date().getTime();
         
-        console.log(start - end);
+        console.log(end - start);
         
         var grossPeriodSales = salesByPeriod(grossSales);
         var netPeriodSales = salesByPeriod(netSales);
