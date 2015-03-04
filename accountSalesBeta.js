@@ -75,7 +75,7 @@
         var salesByMonth = _.chain(data.sales)
             .filter(function(d) { return d.Fiscal_Year__c == 2015; })
             .groupBy(function(d) { return d.Fiscal_Month__c; })
-            .map(function(d) {
+            .mapValues(function(d) {
                 
                 return _.reduce(d, function(result, value) {
                     console.log(result, value);
