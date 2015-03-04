@@ -41,18 +41,18 @@
         
         var start, end;
         
-        start = new Date().getTime();
+        start = performance.now();
         var grossSales = salesByMonthGross();
         var netSales = salesByMonthNet();
-        end = new Date().getTime();
+        end = performance.now();
         
         console.log(end - start);
         
-        start = new Date().getTime();
+        start = performance.now();
         var salesByMonth2015 = salesByMonth(data.sales, 2015);
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
-        end = new Date().getTime();
+        end = performance.now();
         
         console.log(end - start);
         
