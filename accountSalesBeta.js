@@ -90,6 +90,17 @@
         {monthName : 'November', month : 11, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
         {monthName : 'December', month : 12, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0}
     ];
+    
+    var salesByMonth = _.chain(data.sales)
+        .filter(function(d) { return d.Fiscal_Year__c = 2015; })
+        .groupBy(function(d) { return d.Fiscal_Month__c; })
+        .map(function(d) {
+            console.log(d);
+            
+            var result = _.reduce(d, function(s) {
+                
+            }, {credits : 0, despatches : 0, sales : 0 })
+        });
         
     var salesByMonthGross = function() {
         
