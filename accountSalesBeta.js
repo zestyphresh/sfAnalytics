@@ -68,7 +68,7 @@
         summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
         periodSummaryTable('#grossSummaryTable', grossPeriodSales);
         
-        //tanNetSUmmary
+        //tabNetSummary
         summarySalesChart('#netSummaryCurrentChart', netPeriodSales.currentPeriod);
         summarySalesChart('#netSummaryLastChart', netPeriodSales.lastPeriod);
         summarySalesChart('#netSummaryYearChart', netPeriodSales.yearToDate);
