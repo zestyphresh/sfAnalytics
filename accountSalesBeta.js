@@ -178,6 +178,7 @@
         return result;
     }
     
+    /*
     function dataSummaryByPeriod(data) {
         
         var sumPeriod = function(comparator) {
@@ -227,6 +228,7 @@
         return periods;
         
     }
+    */
         
     var dataTemplatebyMonth = [
         {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
