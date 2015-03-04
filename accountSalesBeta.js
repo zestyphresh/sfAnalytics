@@ -328,9 +328,9 @@
             this.vsLast = this.sales - this.last;
         }
         
-        result.yearToDate = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
-        result.lastPeriod = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
-        result.currentPeriod = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
+        result.yearToDate = new summaryDataTemplate('Year To Date', source, function(month) { return month < fiscal.PeriodNum__c; });
+        result.lastPeriod = new summaryDataTemplate('Last Period', source, function(month) { return month == fiscal.PeriodNum__c - 1; });
+        result.currentPeriod = new summaryDataTemplate('Current Period', source, function(month) { return month == fiscal.PeriodNum__c; });
         result.fullYear = new summaryDataTemplate('Full Year', source, function(month) { return true; });
         
         return result;
