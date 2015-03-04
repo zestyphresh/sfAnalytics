@@ -32,12 +32,14 @@
     };
     
     var data = {};
+    
+    var fiscal = {};
 
     Q.allSettled([new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resSales, resForecast, resDate) {
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
-        data.fiscal = resDate.value[0];
+        fiscal = resDate.value[0];
         
         var start, end;
         
@@ -178,7 +180,7 @@
     
     function dataSummaryByPeriod(data) {
         
-        var sumPeriod = function(period, comparator) {
+        var sumPeriod = function(comparator) {
             
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
@@ -217,10 +219,10 @@
         };
         
         var periods = {};
-        periods.currentPeriod = sumPeriod('Current Period', function(month) { return month == data.fiscal.PeriodNum__c; });
-        periods.lastPeriod = sumPeriod('Last Period', function(month) { return month == data.fiscal.PeriodNum__c - 1; });
-        periods.yearToDate = sumPeriod('Year To Date', function(month) { return month == data.fiscal.PeriodNum__c; });
-        periods.fullYear = sumPeriod('Full Year', function(month) { return true; });
+        periods.currentPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
+        periods.lastPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c - 1; });
+        periods.yearToDate = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
+        periods.fullYear = sumPeriod(function(month) { return true; });
         
         return periods;
         
