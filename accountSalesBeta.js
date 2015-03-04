@@ -44,24 +44,20 @@
         start = performance.now();
         var grossSales = salesByMonthGross();
         var netSales = salesByMonthNet();
+        var grossPeriodSales = salesByPeriod(grossSales);
+        var netPeriodSales = salesByPeriod(netSales);
         end = performance.now();
-        
         console.log(end - start);
+        
         
         start = performance.now();
         var salesByMonth2015 = salesByMonth(data.sales, 2015);
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
-        var salesSummary = dataSummary(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
+        var salesSummary = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
+        var salesByPeriod =  dataSummaryByPeriod(salesSummary);
         end = performance.now();
-        
         console.log(end - start);
-        
-        var grossPeriodSales = salesByPeriod(grossSales);
-        var netPeriodSales = salesByPeriod(netSales);
-        
-        console.log(grossSales, netSales);
-        console.log(grossPeriodSales, netPeriodSales);
         
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
@@ -145,7 +141,7 @@
             
     };
     
-    function dataSummary(salesCurrent, salesPrevious, forecastCurrent) {
+    function dataSummaryByMonth(salesCurrent, salesPrevious, forecastCurrent) {
         
         var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -178,6 +174,81 @@
         })
         
         return result;
+    }
+    
+    function dataSummaryByPeriod(data) {
+        
+        var sumPeriod = function(period, comparator) {
+            
+            var sum = _.chain(data)
+                .filter(function(d) { return comparator(d.month); })
+                .reduce(function(result, value) {
+
+                    result.grossCredits += value.grossCredits;
+                    result.grossDespatches += value.grossDespatches; 
+                    result.grossSales += value.grossSales;
+                    result.grossBudget += value.grossBudget; 
+                    result.grossTarget += value.grossTarget; 
+                    result.grossLast += value.grossLast;
+                    result.netSales += value.netSales;
+                    result.netBudget += value.netBudget;
+                    result.netTarget += value.netTarget;
+                    result.netLast += value.netLast;
+                    result.grossBudgetVsSales = result.grossSales - result.grossBudget;
+                    result.grossTargetVsSales = result.grossSales - result.grossTarget;
+                    result.grossLastVsSales = result.grossSales - result.grossLast;
+                    result.netBudgetVsSales = result.netSales - result.netBudget;
+                    result.netTargetVsSales = result.netSales - result.netTarget; 
+                    result.netLastVsSales = result.netSales - result.netLast;
+
+                    return result;
+                    
+                },{ grossCredits : 0, grossDespatches : 0, grossSales : 0, 
+                    grossBudget : 0, grossTarget : 0, grossLast : 0, 
+                    netSales : 0, netBudget : 0, netTarget : 0, netLast : 0,
+                    grossBudgetVsSales : 0, grossTargetVsSales : 0,
+                    grossLastVsSales : 0, netBudgetVsSales : 0,
+                    netTargetVsSales : 0, netLastVsSales : 0
+                })
+                .value();
+
+            return sum;
+            
+        };
+        
+        var periods = {};
+        periods.currentPeriod = sumPeriod('Current Period', function(month) { return month == data.fiscal.PeriodNum__c; });
+        periods.lastPeriod = sumPeriod('Last Period', function(month) { return month == data.fiscal.PeriodNum__c - 1; });
+        periods.yearToDate = sumPeriod('Year To Date', function(month) { return month == data.fiscal.PeriodNum__c; });
+        periods.fullYear = sumPeriod('Full Year', function(month) { return true; });
+        
+        return periods;
+        
+    }
+        
+        
+        
+        function summaryDataTemplate(period, data, comp) {
+            
+            //console.log('FUNCTION salesByPeriod summaryDataTemplate', period, data, comp);
+            
+            this.period = period;
+            this.credits = d3.sum(data, function(d) { return comp(d.month) ? d.credits : 0; }); 
+            this.despatches = d3.sum(data, function(d) {return comp(d.month) ? d.despatches : 0; });
+            this.sales = d3.sum(data, function(d) {return comp(d.month) ? d.sales : 0; });
+            this.budget = d3.sum(data, function(d) {return comp(d.month) ? d.budget : 0; }); 
+            this.target = d3.sum(data, function(d) {return comp(d.month) ? d.target : 0; }); 
+            this.last = d3.sum(data, function(d) {return comp(d.month) ? d.last : 0; });
+            this.vsBudget = this.sales - this.budget;
+            this.vsTarget = this.sales - this.target; 
+            this.vsLast = this.sales - this.last;
+        }
+        
+        result.yearToDate = new summaryDataTemplate('Year To Date', source, function(month) { return month < data.fiscal.PeriodNum__c; });
+        result.lastPeriod = new summaryDataTemplate('Last Period', source, function(month) { return month == data.fiscal.PeriodNum__c - 1; });
+        result.currentPeriod = new summaryDataTemplate('Current Period', source, function(month) { return month == data.fiscal.PeriodNum__c; });
+        result.fullYear = new summaryDataTemplate('Full Year', source, function(month) { return true; });
+        
     }
 
     var dataTemplatebyMonth = [
