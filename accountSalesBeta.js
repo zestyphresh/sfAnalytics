@@ -157,8 +157,8 @@
             var result = {
                 monthName : monthNames[m-1], 
                 month : m, 
-                credits : salesCurrent[m].credits, 
-                despatches : salesCurrent[m].despatches, 
+                credits : salesCurrent[m].grosscredits, 
+                despatches : salesCurrent[m].grossdespatches, 
                 grossSales : salesCurrent[m].grossSales, 
                 grossBudget : forecastCurrent[m].grossBudget, 
                 grossTarget : forecastCurrent[m].grossTarget, 
