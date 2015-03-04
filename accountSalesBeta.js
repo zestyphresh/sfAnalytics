@@ -52,6 +52,7 @@
         var salesByMonth2015 = salesByMonth(data.sales, 2015);
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
+        var salesSUmmary = dataSummary(salesByMonth2015, salesByMonth2014, forecastbyMonth2015);
         end = performance.now();
         
         console.log(end - start);
@@ -143,6 +144,41 @@
             .value();
             
     };
+    
+    function dataSummary(salesCurrent, salesPrevious, forecastCurrent) {
+        
+        var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        
+        var result = [];
+        
+        _.each(months, function(m) {
+            
+            var result = {
+                monthName : monthNames[m-1], 
+                month : m, 
+                credits : salesCurrent[m].credits, 
+                despatches : salesCurrent[m].despatches, 
+                grossSales : salesCurrent[m].grossSales, 
+                grossBudget : forecastCurrent[m].grossBudget, 
+                grossTarget : forecastCurrent[m].grossTarget, 
+                grossLast : salesPrevious[m].grossSales, 
+                netSales : salesCurrent[m].netSales, 
+                netBudget : forecastCurrent[m].netBudget,
+                netTarget : forecastCurrent[m].netTarget,
+                netLast : salesPrevious[m].netSales, 
+            }
+            
+            result.grossBudgetVsSales = result.grossSales - result.grossBudget;
+            result.grossTargetVsSales = result.grossSales - result.grossTarget;
+            result.grossLastVsSales = result.grossSales - result.grossLast;
+            result.netBudgetVsSales = result.netSales - result.netBudget;
+            result.netTargetVsSales = result.netSales - result.netTarget; 
+            result.netLastVsSales = result.netSales - result.netLast;
+        })
+        
+        return result;
+    }
 
     var dataTemplatebyMonth = [
         {monthName : 'January', month : 1, credits : 0, despatches : 0, sales : 0, budget : 0, vsBudget : 0, target : 0, vsTarget : 0, last : 0, vsLast : 0},
