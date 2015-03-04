@@ -73,16 +73,22 @@
         productSales(data.sales);
         
         var salesByMonth = _.chain(data.sales)
-        .filter(function(d) { console.log(d); return d.Fiscal_Year__c = 2015; })
-        .groupBy(function(d) { console.log(d); return d.Fiscal_Month__c; })
-        .map(function(d) {
-            
-            console.log(d);
-            
-            var result = _.reduce(d, function(s) {
+            .filter(function(d) { return d.Fiscal_Year__c == 2015; })
+            .groupBy(function(d) { return d.Fiscal_Month__c; })
+            .map(function(d) {
                 
-            }, {credits : 0, despatches : 0, sales : 0 })
-        });
+                return _.reduce(d, function(result, value) {
+                    result.credits += value.Gross_Credits__c;
+                    result.despatches += value.Gross_Despatches__c;
+                    result.sales += value.Value__c;
+                    
+                }, {month : d[0].Fiscal_Month__c, credits : 0, despatches : 0, sales : 0 })
+                
+            })
+            .value();
+            
+        console.log(salesByMonth);    
+        
         
 
         
