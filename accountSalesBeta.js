@@ -92,9 +92,10 @@
     ];
     
     var salesByMonth = _.chain(data.sales)
-        .filter(function(d) { return d.Fiscal_Year__c = 2015; })
-        .groupBy(function(d) { return d.Fiscal_Month__c; })
+        .filter(function(d) { console.log(d); return d.Fiscal_Year__c = 2015; })
+        .groupBy(function(d) { console.log(d); return d.Fiscal_Month__c; })
         .map(function(d) {
+            
             console.log(d);
             
             var result = _.reduce(d, function(s) {
