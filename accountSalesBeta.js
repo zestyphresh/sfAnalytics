@@ -39,8 +39,23 @@
         data.forecast = resForecast.value;
         data.fiscal = resDate.value[0];
         
+        var start, end;
+        
+        start = new Date().getTime();
         var grossSales = salesByMonthGross();
         var netSales = salesByMonthNet();
+        end = new Date().getTime();
+        
+        console.log(start - end);
+        
+        start = new Date().getTime();
+        var salesByMonth2015 = salesByMonth(data.sales, 2015);
+        var salesByMonth2014 = salesByMonth(data.sales, 2014);
+        var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
+        end = new Date().getTime();
+        
+        console.log(start - end);
+        
         var grossPeriodSales = salesByPeriod(grossSales);
         var netPeriodSales = salesByPeriod(netSales);
         
@@ -70,31 +85,8 @@
         monthlySalesTable('#netByMonthTable', netSales);
         
         //tabProductSales
-        productSales(data.sales);
+        //productSales(data.sales);
         
-        var salesByMonth = _.chain(data.sales)
-            .filter(function(d) { return d.Fiscal_Year__c == 2015; })
-            .groupBy(function(d) { return d.Fiscal_Month__c; })
-            .mapValues(function(d) {
-                
-                return _.reduce(d, function(result, value) {
-                    
-                    result.grossCredits += value.Gross_Credits__c;
-                    result.grossDespatches += value.Gross_Despatches__c;
-                    result.grossSales += value.Value__c;
-                    result.netSales += value.Net_Value__c;
-                    
-                    return result;
-                    
-                }, { grossCredits : 0, grossDespatches : 0, grossSales : 0, netSales : 0 })
-                
-            })
-            .value();
-            
-        console.log(salesByMonth);    
-        
-        
-
         
     }).done();
     
@@ -130,9 +122,19 @@
                 
                 return _.reduce(d, function(result, value) {
                     
-                    result.grossSales += value.Value__c;
-                    result.netSales += value.Net_Value__c;
-                    
+                    switch (value.Forecast_Type__c) {
+                        case 'Budget' :
+                            result.grossBudget += value.Gross_Value__c;
+                            result.netBudget += value.Net_Value__c;
+                            result.grossTarget += value.Gross_Value__c;
+                            result.netTarget += value.Net_Value__c;
+                            break;
+                        case 'Target' :
+                            result.grossTarget += value.Gross_Value__c;
+                            result.netTarget += value.Net_Value__c;
+                            break;
+                    }
+
                     return result;
                     
                 }, { grossBudget : 0, netBudget : 0, grossTarget : 0, netTarget : 0 });
