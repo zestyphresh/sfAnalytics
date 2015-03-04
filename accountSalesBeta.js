@@ -157,16 +157,16 @@
             var result = {
                 monthName : monthNames[m-1], 
                 month : m, 
-                grossCredits : salesCurrent[m].grossCredits, 
-                grossDespatches : salesCurrent[m].grossDespatches, 
-                grossSales : salesCurrent[m].grossSales, 
-                grossBudget : forecastCurrent[m].grossBudget, 
-                grossTarget : forecastCurrent[m].grossTarget, 
-                grossLast : salesPrevious[m].grossSales, 
-                netSales : salesCurrent[m].netSales, 
-                netBudget : forecastCurrent[m].netBudget,
-                netTarget : forecastCurrent[m].netTarget,
-                netLast : salesPrevious[m].netSales
+                grossCredits : (salesCurrent[m] == null ? 0 : salesCurrent[m].grossCredits), 
+                grossDespatches : (salesCurrent[m] == null ? 0 : salesCurrent[m].grossDespatches), 
+                grossSales : (salesCurrent[m] == null ? 0 : salesCurrent[m].grossSales), 
+                grossBudget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].grossBudget), 
+                grossTarget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].grossTarget), 
+                grossLast : (salesPrevious[m] == null ? 0 : salesPrevious[m].grossSales), 
+                netSales : (salesCurrent[m] == null ? 0 : salesCurrent[m].netSales), 
+                netBudget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].netBudget),
+                netTarget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].netTarget),
+                netLast : (salesPrevious[m] == null ? 0 : salesPrevious[m].netSales)
             }
             
             result.grossBudgetVsSales = result.grossSales - result.grossBudget;
