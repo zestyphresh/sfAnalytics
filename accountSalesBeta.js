@@ -151,20 +151,20 @@
         var result = [];
         
         _.each(months, function(m) {
-            
+            typeof salesPrevious[m] === 'undefined'
             var result = {
                 monthName : monthNames[m-1], 
                 month : m, 
-                grossCredits : (salesCurrent[m] == null ? 0 : salesCurrent[m].grossCredits), 
-                grossDespatches : (salesCurrent[m] == null ? 0 : salesCurrent[m].grossDespatches), 
-                grossSales : (salesCurrent[m] == null ? 0 : salesCurrent[m].grossSales), 
-                grossBudget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].grossBudget), 
-                grossTarget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].grossTarget), 
-                grossLast : (salesPrevious[m] == null ? 0 : salesPrevious[m].grossSales), 
-                netSales : (salesCurrent[m] == null ? 0 : salesCurrent[m].netSales), 
-                netBudget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].netBudget),
-                netTarget : (forecastCurrent[m] == null ? 0 : forecastCurrent[m].netTarget),
-                netLast : (salesPrevious[m] == null ? 0 : salesPrevious[m].netSales)
+                grossCredits : (typeof salesCurrent[m] === 'undefined' ? 0 : salesCurrent[m].grossCredits), 
+                grossDespatches : (typeof salesCurrent[m] === 'undefined' ? 0 : salesCurrent[m].grossDespatches), 
+                grossSales : (typeof salesCurrent[m] === 'undefined' ? 0 : salesCurrent[m].grossSales), 
+                grossBudget : (typeof forecastCurrent[m] === 'undefined' ? 0 : forecastCurrent[m].grossBudget), 
+                grossTarget : (typeof forecastCurrent[m] === 'undefined' ? 0 : forecastCurrent[m].grossTarget), 
+                grossLast : (typeof salesPrevious[m] === 'undefined' ? 0 : salesPrevious[m].grossSales), 
+                netSales : (typeof salesCurrent[m] === 'undefined' ? 0 : salesCurrent[m].netSales), 
+                netBudget : (typeof forecastCurrent[m] === 'undefined' == null ? 0 : forecastCurrent[m].netBudget),
+                netTarget : (typeof forecastCurrent[m] === 'undefined' == null ? 0 : forecastCurrent[m].netTarget),
+                netLast : (typeof salesPrevious[m] === 'undefined' ? 0 : salesPrevious[m].netSales)
             }
             
             result.grossBudgetVsSales = result.grossSales - result.grossBudget;
@@ -180,8 +180,6 @@
     
     
     function dataSummaryByPeriod(data) {
-        
-        console.log(data);
         
         function sumPeriod(comparator) {
             
