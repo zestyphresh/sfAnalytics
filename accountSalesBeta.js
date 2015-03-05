@@ -161,8 +161,8 @@
                 grossTarget : (typeof forecastCurrent[m] === 'undefined' ? 0 : forecastCurrent[m].grossTarget), 
                 grossLast : (typeof salesPrevious[m] === 'undefined' ? 0 : salesPrevious[m].grossSales), 
                 netSales : (typeof salesCurrent[m] === 'undefined' ? 0 : salesCurrent[m].netSales), 
-                netBudget : (typeof forecastCurrent[m] === 'undefined' == null ? 0 : forecastCurrent[m].netBudget),
-                netTarget : (typeof forecastCurrent[m] === 'undefined' == null ? 0 : forecastCurrent[m].netTarget),
+                netBudget : (typeof forecastCurrent[m] === 'undefined' ? 0 : forecastCurrent[m].netBudget),
+                netTarget : (typeof forecastCurrent[m] === 'undefined' ? 0 : forecastCurrent[m].netTarget),
                 netLast : (typeof salesPrevious[m] === 'undefined' ? 0 : salesPrevious[m].netSales)
             };
             
