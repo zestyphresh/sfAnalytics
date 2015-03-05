@@ -57,7 +57,7 @@
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
         var salesSummary = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
-        var salesByPeriod =  dataSummaryByPeriod(salesSummary);
+        //var salesByPeriod =  dataSummaryByPeriod(salesSummary);
         end = performance.now();
         console.log(end - start);
         
@@ -164,7 +164,7 @@
                 netBudget : (typeof forecastCurrent[m] === 'undefined' == null ? 0 : forecastCurrent[m].netBudget),
                 netTarget : (typeof forecastCurrent[m] === 'undefined' == null ? 0 : forecastCurrent[m].netTarget),
                 netLast : (typeof salesPrevious[m] === 'undefined' ? 0 : salesPrevious[m].netSales)
-            }
+            };
             
             result.grossBudgetVsSales = result.grossSales - result.grossBudget;
             result.grossTargetVsSales = result.grossSales - result.grossTarget;
@@ -178,55 +178,55 @@
     }
     
     
-    function dataSummaryByPeriod(data) {
+    // function dataSummaryByPeriod(data) {
         
-        // function sumPeriod(comparator) {
+    //     function sumPeriod(comparator) {
             
-        //     var sum = _.chain(data)
-        //         .filter(function(d) { return comparator(d.month); })
-        //         .reduce(function(result, value) {
+    //         var sum = _.chain(data)
+    //             .filter(function(d) { return comparator(d.month); })
+    //             .reduce(function(result, value) {
 
-        //             result.grossCredits += value.grossCredits;
-        //             result.grossDespatches += value.grossDespatches; 
-        //             result.grossSales += value.grossSales;
-        //             result.grossBudget += value.grossBudget; 
-        //             result.grossTarget += value.grossTarget; 
-        //             result.grossLast += value.grossLast;
-        //             result.netSales += value.netSales;
-        //             result.netBudget += value.netBudget;
-        //             result.netTarget += value.netTarget;
-        //             result.netLast += value.netLast;
-        //             result.grossBudgetVsSales = result.grossSales - result.grossBudget;
-        //             result.grossTargetVsSales = result.grossSales - result.grossTarget;
-        //             result.grossLastVsSales = result.grossSales - result.grossLast;
-        //             result.netBudgetVsSales = result.netSales - result.netBudget;
-        //             result.netTargetVsSales = result.netSales - result.netTarget; 
-        //             result.netLastVsSales = result.netSales - result.netLast;
+    //                 result.grossCredits += value.grossCredits;
+    //                 result.grossDespatches += value.grossDespatches; 
+    //                 result.grossSales += value.grossSales;
+    //                 result.grossBudget += value.grossBudget; 
+    //                 result.grossTarget += value.grossTarget; 
+    //                 result.grossLast += value.grossLast;
+    //                 result.netSales += value.netSales;
+    //                 result.netBudget += value.netBudget;
+    //                 result.netTarget += value.netTarget;
+    //                 result.netLast += value.netLast;
+    //                 result.grossBudgetVsSales = result.grossSales - result.grossBudget;
+    //                 result.grossTargetVsSales = result.grossSales - result.grossTarget;
+    //                 result.grossLastVsSales = result.grossSales - result.grossLast;
+    //                 result.netBudgetVsSales = result.netSales - result.netBudget;
+    //                 result.netTargetVsSales = result.netSales - result.netTarget; 
+    //                 result.netLastVsSales = result.netSales - result.netLast;
 
-        //             return result;
+    //                 return result;
                     
-        //         },{ grossCredits : 0, grossDespatches : 0, grossSales : 0, 
-        //             grossBudget : 0, grossTarget : 0, grossLast : 0, 
-        //             netSales : 0, netBudget : 0, netTarget : 0, netLast : 0,
-        //             grossBudgetVsSales : 0, grossTargetVsSales : 0,
-        //             grossLastVsSales : 0, netBudgetVsSales : 0,
-        //             netTargetVsSales : 0, netLastVsSales : 0
-        //         })
-        //         .value();
+    //             },{ grossCredits : 0, grossDespatches : 0, grossSales : 0, 
+    //                 grossBudget : 0, grossTarget : 0, grossLast : 0, 
+    //                 netSales : 0, netBudget : 0, netTarget : 0, netLast : 0,
+    //                 grossBudgetVsSales : 0, grossTargetVsSales : 0,
+    //                 grossLastVsSales : 0, netBudgetVsSales : 0,
+    //                 netTargetVsSales : 0, netLastVsSales : 0
+    //             })
+    //             .value();
 
-        //     return sum;
+    //         return sum;
             
-        // };
+    //     };
         
-        // var periods = {};
-        // periods.currentPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
-        // periods.lastPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c - 1; });
-        // periods.yearToDate = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
-        // periods.fullYear = sumPeriod(function(month) { return true; });
+    //     var periods = {};
+    //     periods.currentPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
+    //     periods.lastPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c - 1; });
+    //     periods.yearToDate = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
+    //     periods.fullYear = sumPeriod(function(month) { return true; });
         
-        // return periods;
+    //     return periods;
         
-    }
+    // }
     
         
     var dataTemplatebyMonth = [
