@@ -180,7 +180,7 @@
     
     function dataSummaryByPeriod(dataSummaryByMonth) {
         
-        function sumPeriod(comparator, data) {
+        function sumPeriod(data, comparator) {
             
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
@@ -219,10 +219,10 @@
         };
         
         var periods = {};
-        periods.currentPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
-        periods.lastPeriod = sumPeriod(function(month) { return month == fiscal.PeriodNum__c - 1; });
-        periods.yearToDate = sumPeriod(function(month) { return month == fiscal.PeriodNum__c; });
-        periods.fullYear = sumPeriod(function(month) { return true; });
+        periods.currentPeriod = sumPeriod(dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.lastPeriod = sumPeriod(dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c - 1; });
+        periods.yearToDate = sumPeriod(dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.fullYear = sumPeriod(dataSummaryByMonth, function(month) { return true; });
         
         return periods;
         
