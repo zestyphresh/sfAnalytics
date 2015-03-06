@@ -57,7 +57,7 @@
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
         var salesSummary = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
-        //var salesByPeriod =  dataSummaryByPeriod(salesSummary);
+        var sxtwd =  dataSummaryByPeriod(salesSummary);
         end = performance.now();
         console.log(end - start);
         
@@ -180,9 +180,9 @@
     
     function dataSummaryByPeriod(dataSummaryByMonth) {
         
-        function sumPeriod(comparator) {
+        function sumPeriod(comparator, data) {
             
-            var sum = _.chain(dataSummaryByMonth)
+            var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
                 .reduce(function(result, value) {
 
