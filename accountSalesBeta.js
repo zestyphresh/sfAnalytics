@@ -45,6 +45,8 @@
         fiscal = {};
 
     Q.allSettled([new soql.multipart(query.sales), new soql.multipart(query.forecast), new soql.multipart(query.date)]).spread(function (resSales, resForecast, resDate) {
+        
+        console.log('START - Return Promises');
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
@@ -90,6 +92,8 @@
     
     var salesByMonth = function(data, year) {
         
+        console.log('START - FUNCTION - salesByMonth');
+        
         return _.chain(data)
             .filter(function(d) { return d.Fiscal_Year__c == year; })
             .groupBy(function(d) { return d.Fiscal_Month__c; })
@@ -112,6 +116,8 @@
     };
     
     var forecastByMonth = function(data, year) {
+        
+        console.log('START - FUNCTION - forecastByMonth');
         
         return _.chain(data)
             .filter(function(d) { return d.Fiscal_Year__c == year; })
@@ -143,6 +149,8 @@
     };
     
     function dataSummaryByMonth(salesCurrent, salesPrevious, forecastCurrent) {
+        
+        console.log('START - FUNCTION - dataSummaryByMonth');
         
         var months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
         var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -180,7 +188,8 @@
     
     
     function dataSummaryByPeriod(data) {
-    
+        
+        console.log('START - FUNCTION - dataSummaryByPeriod');
         
         function sumPeriod(period, data, comparator) {
 
@@ -234,6 +243,8 @@
     }
 
     var summarySalesChart = function(selector, data, isNet) {
+        
+        console.log('START - FUNCTION - summarySalesChart');
         
         var chartData = [
             {type : 'Sales', value : isNet ? data.netSales : data.grossSales},
@@ -301,6 +312,8 @@
         
     var summarySalesTable = function(selector, data, isNet) {
         
+        console.log('START - FUNCTION - summarySalesTable');
+        
         //convert period data into an Array of objects, is there a better way of flattening?
         var tableData = [];
         tableData.push(data.currentPeriod);
@@ -352,6 +365,8 @@
     
     var monthlySalesTable = function(selector, data, isNet) {
         
+        console.log('START - FUNCTION - monthlySalesTable');
+        
         var tableCols = [
             {data : "monthName", title : "Month"},
             {data : isNet ? 0 : 'grossCredits', title : "Credits"},
@@ -395,6 +410,8 @@
     };
     
     var monthlySalesChart = function(selector, data, isNet) {
+        
+        console.log('START - FUNCTION - monthlySalesChart');
         
         var chartData = [];
         
@@ -460,6 +477,8 @@
     
     function productSales(data) {
         
+        console.log('START - FUNCTION - productSales');
+        
         //TABLE
         var tableData = _.sortBy(data, function(d) {
             return moment(d.Invoice_Date__c).toDate();
@@ -517,6 +536,13 @@
                 weekly : function(d) { return moment(d.Invoice_Date__c).weekday(0).format('YYYY-MM-DD'); },
                 daily : function(d) { return d.Invoice_Date__c; } 
             }
+            
+            var cData = _.reduce(data, function(d) {
+                
+            },
+            {
+                value : ''
+            });
         
             var chartData = d3.nest()
                 .key(function(d) { return keys[granularity](d); })
