@@ -143,7 +143,7 @@
         var result = [];
         
         _.each(months, function(m) {
-            var result = {
+            var month = {
                 monthName : monthNames[m-1], 
                 month : m, 
                 grossCredits : (typeof salesCurrent[m] === 'undefined' ? 0 : salesCurrent[m].grossCredits), 
@@ -158,12 +158,14 @@
                 netLast : (typeof salesPrevious[m] === 'undefined' ? 0 : salesPrevious[m].netSales)
             };
             
-            result.grossBudgetVsSales = result.grossSales - result.grossBudget;
-            result.grossTargetVsSales = result.grossSales - result.grossTarget;
-            result.grossLastVsSales = result.grossSales - result.grossLast;
-            result.netBudgetVsSales = result.netSales - result.netBudget;
-            result.netTargetVsSales = result.netSales - result.netTarget; 
-            result.netLastVsSales = result.netSales - result.netLast;
+            month.grossBudgetVsSales = month.grossSales - month.grossBudget;
+            month.grossTargetVsSales = month.grossSales - month.grossTarget;
+            month.grossLastVsSales = month.grossSales - month.grossLast;
+            month.netBudgetVsSales = month.netSales - month.netBudget;
+            month.netTargetVsSales = month.netSales - month.netTarget; 
+            month.netLastVsSales = month.netSales - month.netLast;
+            
+            result.push(month);
         });
         
         return result;
