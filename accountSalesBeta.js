@@ -344,7 +344,7 @@
             'ordering' : false,
             "order": [],
             'dom' : 't',
-            'columns' : tableCols
+            'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
         
