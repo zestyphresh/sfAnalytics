@@ -40,51 +40,40 @@
         data.sales = resSales.value;
         data.forecast = resForecast.value;
         fiscal = resDate.value[0];
-        
-        var start, end;
-        
-        start = performance.now();
-        var grossSales = salesByMonthGross();
-        var netSales = salesByMonthNet();
-        var grossPeriodSales = salesByPeriod(grossSales);
-        var netPeriodSales = salesByPeriod(netSales);
-        end = performance.now();
-        console.log(end - start);
-        
-        
+
         start = performance.now();
         var salesByMonth2015 = salesByMonth(data.sales, 2015);
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
-        var salesSummary = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
-        var sxtwd =  dataSummaryByPeriod(salesSummary);
+        var summaryByMonth = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
+        var summaryByPeriod =  dataSummaryByPeriod(salesSummary);
         end = performance.now();
         console.log(end - start);
         
         //tabGrossSummary
-        summarySalesChart('#grossSummaryCurrentChart', grossPeriodSales.currentPeriod);
-        summarySalesChart('#grossSummaryLastChart', grossPeriodSales.lastPeriod);
-        summarySalesChart('#grossSummaryYearChart', grossPeriodSales.yearToDate);
-        summarySalesChart('#grossSummaryFullChart', grossPeriodSales.fullYear);
-        periodSummaryTable('#grossSummaryTable', grossPeriodSales);
-         
+        summarySalesChart('#grossSummaryCurrentChart', summaryByPeriod.currentPeriod, false);
+        summarySalesChart('#grossSummaryLastChart', summaryByPeriod.lastPeriod, false);
+        summarySalesChart('#grossSummaryYearChart', summaryByPeriod.yearToDate, false);
+        summarySalesChart('#grossSummaryFullChart', summaryByPeriod.fullYear, false);
+        periodSummaryTable('#grossSummaryTable', summaryByPeriod);
+
         //tabNetSummary
-        summarySalesChart('#netSummaryCurrentChart', netPeriodSales.currentPeriod);
-        summarySalesChart('#netSummaryLastChart', netPeriodSales.lastPeriod);
-        summarySalesChart('#netSummaryYearChart', netPeriodSales.yearToDate);
-        summarySalesChart('#netSummaryFullChart', netPeriodSales.fullYear);
-        periodSummaryTable('#netSummaryTable', netPeriodSales);
+        summarySalesChart('#netSummaryCurrentChart', summaryByPeriod.currentPeriod, true);
+        summarySalesChart('#netSummaryLastChart', summaryByPeriod.lastPeriod, true);
+        summarySalesChart('#netSummaryYearChart', summaryByPeriod.yearToDate, true);
+        summarySalesChart('#netSummaryFullChart', summaryByPeriod.fullYear, true);
+        periodSummaryTable('#netSummaryTable', summaryByPeriod);
         
         //tabGrossByMonth
-        monthlySalesChart('#grossByMonthChart', grossSales);
-        monthlySalesTable('#grossByMonthTable', grossSales);
+        monthlySalesChart('#grossByMonthChart', summaryByMonth, false);
+        monthlySalesTable('#grossByMonthTable', summaryByMonth, false);
         
         //tabNetByMonth
-        monthlySalesChart('#netByMonthChart', netSales);
-        monthlySalesTable('#netByMonthTable', netSales);
+        monthlySalesChart('#netByMonthChart', summaryByMonth, true);
+        monthlySalesTable('#netByMonthTable', summaryByMonth, true);
         
         //tabProductSales
-        //productSales(data.sales);
+        productSales(data.sales);
         
         
     }).done();
@@ -180,7 +169,7 @@
     
     function dataSummaryByPeriod(dataSummaryByMonth) {
         
-        function sumPeriod(data, comparator) {
+        function sumPeriod(period, data, comparator) {
             
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
@@ -213,31 +202,31 @@
                     netTargetVsSales : 0, netLastVsSales : 0
                 })
                 .value();
+                
+            sum.period = period; 
 
             return sum;
             
         };
         
         var periods = {};
-        periods.currentPeriod = sumPeriod(dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
-        periods.lastPeriod = sumPeriod(dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c - 1; });
-        periods.yearToDate = sumPeriod(dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
-        periods.fullYear = sumPeriod(dataSummaryByMonth, function(month) { return true; });
+        periods.currentPeriod = sumPeriod('Current Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.lastPeriod = sumPeriod('Last Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c - 1; });
+        periods.yearToDate = sumPeriod('Year To Date', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.fullYear = sumPeriod('Full Year', dataSummaryByMonth, function(month) { return true; });
         
         return periods;
         
     }
-    
+
     //NEED TO UPDATE CHARTDATA FUNCTION BEFORE IT WILL WORK AGAIN
-    var summarySalesChart = function(selector, data) {
-        
-        //console.log(data);
+    var summarySalesChart = function(selector, data, isNet) {
         
         var chartData = [
-            {type : 'Sales', value : data.sales},
-            {type : 'Budget', value : data.budget},
-            {type : 'Target', value : data.target},
-            {type : 'Last', value : data.last}
+            {type : 'Sales', value : isNet ? data.netSales : data.grossSales},
+            {type : 'Budget', value : isNet ? data.netBudget : data.grossBudget},
+            {type : 'Target', value : isNet ? data.netTarget : data.grossTarget},
+            {type : 'Last', value : isNet ? data.netLast : data.grossLast}
         ];
         
         //console.log('FUNCTION summarySalesChart', data, chartData);
@@ -250,7 +239,7 @@
             },
             data : {
                 x: 'type',
-                json: chartData,
+                json: data,
                 keys: {
                     x : 'type',
                     value: ['value']
@@ -297,27 +286,26 @@
         
     }
         
-    var periodSummaryTable = function(selector, data) {
+    var summarySalesTable = function(selector, data, isNet) {
         
+        //convert period data into an Array of objects, is there a better way of flattening?
         var tableData = [];
         tableData.push(data.currentPeriod);
         tableData.push(data.lastPeriod);
         tableData.push(data.yearToDate);
         tableData.push(data.fullYear);
-        
-        console.log(tableData);
 
         var tableCols = [
-            {"data": "period", "title": "Period"},
-            {"data": "credits", "title": "Credits"},
-            {"data": "despatches", "title": "Despatches"},
-            {"data": "sales", "title": "Sales"},
-            {"data": "budget", "title": "Budget"},
-            {"data": "vsBudget", "title": "vs Sales"},
-            {"data": "target", "title": "Target"},
-            {"data": "vsTarget", "title": "vs Sales"},
-            {"data": "last", "title": "Last Year"},
-            {"data": "vsLast", "title": "vs Sales"}
+            {data : "period", title : "Period"},
+            {data : "grossCredits", title : "Credits"},
+            {data : "grossDespatches", title : "Despatches"},
+            {data : isNet ? 'netSales' : 'grossSales', title : "Sales"},
+            {data : isNet ? 'netBudget' : 'grossBudget', title : "Budget"},
+            {data : isNet ? 'netBudgetVsSales' : 'grossBudgetVsSales', title : "vs Sales"},
+            {data : isNet ? 'netTarget' : 'grossTarget', title : "Target"},
+            {data : isNet ? 'netTargetVsSales' : 'grossTargetVsSales', title : "vs Sales"},
+            {data : isNet ? 'netLast' : 'grossLast', title : "Last Year"},
+            {data : isNet ? 'netLastVsSales' : 'grossLastVsSales', title : "vs Sales"}
         ];
         
         var tableColDefs = [
@@ -349,18 +337,19 @@
         
     }
     
-    var monthlySalesTable = function(selector, data) {
+    var monthlySalesTable = function(selector, data, isNet) {
         
-        var tableCols = [{"data": "monthName", "title": "Month"},
-                         {"data": "credits", "title": "Credits"},
-                         {"data": "despatches", "title": "Despatches"},
-                         {"data": "sales", "title": "Sales"},
-                         {"data": "budget", "title": "Budget"},
-                         {"data": "vsBudget", "title": "vs Sales"},
-                         {"data": "target", "title": "Target"},
-                         {"data": "vsTarget", "title": "vs Sales"},
-                         {"data": "last", "title": "Last Year"},
-                         {"data": "vsLast", "title": "vs Sales"}
+        var tableCols = [
+            {data : "monthName", title : "Month"},
+            {data : "grossCredits", title : "Credits"},
+            {data : "grossDespatches", title : "Despatches"},
+            {data : isNet ? 'netSales' : 'grossSales', title : "Sales"},
+            {data : isNet ? 'netBudget' : 'grossBudget', title : "Budget"},
+            {data : isNet ? 'netBudgetVsSales' : 'grossBudgetVsSales', title : "vs Sales"},
+            {data : isNet ? 'netTarget' : 'grossTarget', title : "Target"},
+            {data : isNet ? 'netTargetVsSales' : 'grossTargetVsSales', title : "vs Sales"},
+            {data : isNet ? 'netLast' : 'grossLast', title : "Last Year"},
+            {data : isNet ? 'netLastVsSales' : 'grossLastVsSales', title : "vs Sales"}
         ];
         
         var tableColDefs = [
@@ -392,7 +381,9 @@
         
     }
     
-    var monthlySalesChart = function(selector, data) {
+    var monthlySalesChart = function(selector, data, isNet) {
+        
+        var values = isNet ? ['grossSales', 'grossBudget', 'grossTarget', 'grossLast'] : ['netSales', 'netBudget', 'netTarget', 'netLast'];
         
         c3.generate({
             bindto: selector,
@@ -405,7 +396,7 @@
                 json: data,
                 keys: {
                     x: 'monthName',
-                    value: ['sales', 'target', 'budget', 'last'],
+                    value: values,
                 },
                 names: {
                     sales : '2015 Sales',
@@ -421,6 +412,7 @@
                 },
                 colors: {
                     sales : '#91BDEB',
+                    budget : '#F5A631',
                     target : '#C9297A',
                     last : '#4E7B00'
                 }
@@ -471,7 +463,7 @@
             'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
-                        return cell == null ? '': cell;
+                        return typeof cell === 'undefined' ? '' : cell;
                     }
                     return data;
                 }
@@ -487,7 +479,7 @@
             "order": [[0,'desc']],
             'dom' : 'ftp',
             'columns' : tableCols,
-            //'columnDefs' : tableColDefs
+            'columnDefs' : tableColDefs
         });
         
         var showValue = 'Value__c';
