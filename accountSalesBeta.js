@@ -485,7 +485,7 @@
         });
         
         var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
-                         {"data": "Product__r.Family", "title": "Category"},
+                         {"data": "Product__r.Family", "title": "Category", "defaultContent" : "N/A"},
                          {"data": "Product__r.Part_Code__c", "title": "Product Code"},
                          {"data": "Product__r.Name", "title": "Product Name"},
                          {"data": "Quantity__c", "title": "Quantity"},
@@ -498,11 +498,11 @@
             {
                 'targets' : [4,5,6], 
                 'render' : function (cell, type, row, meta) {
-                switch (type) {
-                    case 'display':
-                        return accounting.formatMoney(cell);
-                    }
-                    return data;
+                    switch (type) {
+                        case 'display':
+                            return accounting.formatMoney(cell);
+                        }
+                        return cell;
                 }
             },
             {
@@ -521,7 +521,7 @@
             'columnDefs' : tableColDefs
         });
         
-        
+        /*
         var chart = {};
         //CHART MONTHLY
         
@@ -645,6 +645,8 @@
             chartUpdate(tableData, 'monthly');
             
         });
+        
+        */
 
     }
 
