@@ -229,7 +229,7 @@
             {type : 'Last', value : isNet ? data.netLast : data.grossLast}
         ];
         
-        //console.log('FUNCTION summarySalesChart', data, chartData);
+        console.log('FUNCTION summarySalesChart', data, chartData);
         
         var chart = c3.generate({
             bindto : selector,
