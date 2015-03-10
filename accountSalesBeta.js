@@ -650,4 +650,4 @@
     	}
     };
     
-})(accId, accType, SOQL, parentName, groupName);
+})(accId, accType, SOQL, accParent, accGroup);
