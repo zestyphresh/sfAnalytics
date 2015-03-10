@@ -531,6 +531,8 @@
 
         var chartData = function(data, granularity) {
             
+            console.log('START - FUNCTION - chartData');
+            
             var keys = {
                 monthly : function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; },
                 weekly : function(d) { return moment(d.Invoice_Date__c).weekday(0).format('YYYY-MM-DD'); },
