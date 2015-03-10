@@ -486,11 +486,11 @@
                     return data;
                 }
             },
-            {
-                'targets' : [7], 
-                'data' : null,
-                'defaultContent' : 'N/A'
-            },
+            //{
+             //   'targets' : [7], 
+             //   'data' : null,
+             //   'defaultContent' : 'N/A'
+            //},
             {
                 'targets': [4,5,6],
                 'className': 'dt-right'
