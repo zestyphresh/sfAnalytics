@@ -6,49 +6,45 @@
         lastYear = 2014,
         orgId = '00Db0000000ZVQP';
     
-    //load tabs
+    //LOAD TABS
     $j( "#tabs" ).responsiveTabs();
     
-    var soqlWhereClause;
-    switch (accType) {
-        case 'Branch':
-            soqlWhereClause = 'Account__r.Id = ' + "'" + accId + "'" + 'AND Fiscal_Year__c >= 2014';
-            break;
-        case 'Parent':
-            soqlWhereClause = 'Account__r.Parent_Name__c = ' + "'" + parentName + "'" + 'AND Fiscal_Year__c >= 2014';
-            break;
-        case 'Group':
-            soqlWhereClause = 'Account__r.Group_Name__c = ' + "'" + groupName + "'" + 'AND Fiscal_Year__c >= 2014';
-            break;
-    }
     
+    //QUERY PARAMETERS
+    var query = {}
+    
+    var whereClause = {
+        Branch : 'Account__r.Id = ' + "'" + accId + "'" + 'AND Fiscal_Year__c >= 2014',
+        Parent : 'Account__r.Parent_Name__c = ' + "'" + parentName + "'" + 'AND Fiscal_Year__c >= 2014',
+        Group : 'Account__r.Group_Name__c = ' + "'" + groupName + "'" + 'AND Fiscal_Year__c >= 2014'
+    }
 
-    var salesQuery = {
+    query.sales = {
         sObject : 'Daily_Historical_Sales__c',
         select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Gross_Credits__c, Gross_Despatches__c, Value__c, Gross_Sales_Price_Per_Item__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
-        where : soqlWhereClause,
+        where : whereClause[accType],
         maxfetch : 100000
     };
         
-    var forecastQuery = {
+    query.forecast = {
         sObject : 'Forecast2__c',
         select : 'Fiscal_Year__c, Fiscal_Month__c, Gross_Value__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Brand__c, Forecast_Type__c',
-        where : soqlWhereClause,
+        where : whereClause[accType],
         maxfetch : 100000
     };
     
-    var dateQuery = {
+    query.date = {
         sObject : 'FY_Settings__c',
         select : 'PeriodNum__c, PeriodYear__c',
         where : 'SetupOwnerId = ' + "'" + orgId + "'",
         maxfetch : 10
     };
     
-    var data = {};
-    
-    var fiscal = {};
+    //GET DATA AND RETURN PROMISES - SO EVERYTHING IN HERE
+    var data = {},
+        fiscal = {};
 
-    Q.allSettled([new soql.multipart(salesQuery), new soql.multipart(forecastQuery), new soql.multipart(dateQuery)]).spread(function (resSales, resForecast, resDate) {
+    Q.allSettled([new soql.multipart(query.sales), new soql.multipart(query.forecast), new soql.multipart(query.date)]).spread(function (resSales, resForecast, resDate) {
 
         data.sales = resSales.value;
         data.forecast = resForecast.value;
@@ -63,8 +59,6 @@
         var summaryByPeriod =  dataSummaryByPeriod(summaryByMonth);
         end = performance.now();
         console.log(end - start);
-        
-        //console.log(salesByMonth2014, salesByMonth2015, forecastByMonth2015, summaryByMonth, summaryByPeriod);
         
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', summaryByPeriod.currentPeriod, false);
