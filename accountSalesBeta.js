@@ -40,7 +40,7 @@
     var dateQuery = {
         sObject : 'FY_Settings__c',
         select : 'PeriodNum__c, PeriodYear__c',
-        where : soqlWhereClause,
+        where : 'SetupOwnerId = ' + "'" + orgId + "'",
         maxfetch : 10
     };
     
