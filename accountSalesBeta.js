@@ -460,6 +460,7 @@
     
     function productSales(data) {
         
+        //TABLE
         var tableData = _.sortBy(data, function(d) {
             return moment(d.Invoice_Date__c).toDate();
         });
@@ -507,12 +508,22 @@
             //'columnDefs' : tableColDefs
         });
         
+        
+        var chart = {}
+        //CHART MONTHLY
+        
         var showValue = 'Value__c';
 
-        var chartData = function(data) {
+        var chartData = function(data, granularity) {
+            
+            var keys = {
+                monthly : function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; },
+                weekly : function(d) { return moment(d.Invoice_Date__c).weekday(0).format('YYYY-MM-DD'); },
+                daily : function(d) { return d.Invoice_Date__c; } 
+            }
         
             var chartData = d3.nest()
-                .key(function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; })
+                .key(function(d) { return keys[granularity](d); })
                 .rollup(function(d) { return d3.sum(d, function(i) { return i[showValue]; }); })
                 .entries(data);
 
@@ -521,8 +532,8 @@
         };
         
         var ticks = [];
-        for (var i = 0; i <= 71; i++) {
-            ticks.push(moment('2010-01-01').add(i, 'months').format('YYYY-MM-DD'));
+        for (var i = 0; i <= 23; i++) {
+            ticks.push(moment('2014-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
 
         var chart = c3.generate({
@@ -534,7 +545,7 @@
             data: {
                 x: 'key',
                 xFormat: '%Y-%m-%d',
-                json: chartData(tableData),
+                json: chartData(tableData, 'monthly'),
                 keys: {
                     x: 'key',
                     value: ['values'],
@@ -550,7 +561,7 @@
                         culling : false,
                         values : ticks
                     },
-                    min : new Date(2009,11,1),
+                    min : new Date(2013,11,1),
                     max : new Date(2016,01,1),
                     padding: {
                         left: 0,
@@ -567,11 +578,7 @@
             },
             grid: {
                 x: {
-                    lines: [{value: new Date(2010,11,15), text: '2010'},
-                            {value: new Date(2011,11,15), text: '2011'},
-                            {value: new Date(2012,11,15), text: '2012'},
-                            {value: new Date(2013,11,15), text: '2013'},
-                            {value: new Date(2014,11,15), text: '2014'},
+                    lines: [{value: new Date(2014,11,15), text: '2014'},
                             {value: new Date(2015,11,15), text: '2015'},
                     ]
                 }
@@ -585,7 +592,7 @@
             
             chart.load({
                 x: 'key',
-                json: chartData(data),
+                json: chartData(data, 'monthly'),
                 keys: {
                     x: 'key',
                     value: ['values'],
@@ -619,7 +626,7 @@
                     break;
             }
             
-            chartUpdate(tableData);
+            chartUpdate(tableData, 'monthly');
             
         });
 
