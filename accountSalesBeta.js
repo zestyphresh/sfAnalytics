@@ -10,7 +10,7 @@
     $j( "#tabs" ).responsiveTabs();
     
     var soqlWhereClause;
-    switch (acctype) {
+    switch (accType) {
         case 'Branch':
             soqlWhereClause = 'Account__r.Id = ' + "'" + accId + "'" + 'AND Fiscal_Year__c >= 2014';
             break;
