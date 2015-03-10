@@ -505,7 +505,7 @@
             "order": [[0,'desc']],
             'dom' : 'ftp',
             'columns' : tableCols,
-            //'columnDefs' : tableColDefs
+            'columnDefs' : tableColDefs
         });
         
         
