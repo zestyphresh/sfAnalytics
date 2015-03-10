@@ -646,8 +646,7 @@
             chartUpdate(tableData, 'monthly');
             
         });
-        
-        */
+    
 
     }
 
