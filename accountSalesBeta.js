@@ -176,14 +176,10 @@
     
         
         function sumPeriod(period, data, comparator) {
-            
-            console.log(period, data, comparator);
-            
+
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
                 .reduce(function(result, value) {
-                    
-                    console.log(value);
 
                     result.grossCredits += value.grossCredits;
                     result.grossDespatches += value.grossDespatches; 
@@ -230,7 +226,6 @@
         
     }
 
-    //NEED TO UPDATE CHARTDATA FUNCTION BEFORE IT WILL WORK AGAIN
     var summarySalesChart = function(selector, data, isNet) {
         
         var chartData = [
@@ -394,8 +389,20 @@
     
     var monthlySalesChart = function(selector, data, isNet) {
         
-        var values = isNet ? ['grossSales', 'grossBudget', 'grossTarget', 'grossLast'] : ['netSales', 'netBudget', 'netTarget', 'netLast'];
+        var chartData = [];
         
+        _.each(data, function(d) {
+        
+            var result = {};
+            result.monthName = d.monthName;
+            result.sales = isNet ? d.netSales : d.grossSales;
+            result.budget = isNet ? d.netBudget : d.grossBudget;
+            result.target = isNet ? d.netTarget : d.grossTarget;
+            result.last = isNet ? d.netLast : d.grossLast;
+            chartData.push(result);
+            
+        });
+
         c3.generate({
             bindto: selector,
             size : {
@@ -404,10 +411,10 @@
             },
             data: {
                 x: 'monthName',
-                json: data,
+                json: chartData,
                 keys: {
                     x: 'monthName',
-                    value: values,
+                    value: ['sales', 'budget', 'target', 'last'],
                 },
                 names: {
                     sales : '2015 Sales',
@@ -441,7 +448,7 @@
                 
             }
         });
-
+        
     };
     
     function productSales(data) {
