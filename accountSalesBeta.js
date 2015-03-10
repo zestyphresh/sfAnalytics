@@ -519,7 +519,7 @@
         });
         
         
-        var chart = {}
+        var chart = {};
         //CHART MONTHLY
         
         var showValue = 'Value__c';
@@ -532,7 +532,7 @@
                 monthly : function(d) { return d.Invoice_Date__c.slice(0,-2) + '01'; },
                 weekly : function(d) { return moment(d.Invoice_Date__c).weekday(0).format('YYYY-MM-DD'); },
                 daily : function(d) { return d.Invoice_Date__c; } 
-            }
+            };
 
             var chartData = d3.nest()
                 .key(function(d) { return keys[granularity](d); })
@@ -548,6 +548,7 @@
             ticks.push(moment('2014-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
 
+        console.log('START CHART');
         var chart = c3.generate({
             bindto: '#chartWeeklySales',
             size : {
