@@ -50,7 +50,7 @@
         end = performance.now();
         console.log(end - start);
         
-        console.log(salesByMonth2014, salesByMonth2015, forecastByMonth2015, summaryByMonth, summaryByPeriod);
+        //console.log(salesByMonth2014, salesByMonth2015, forecastByMonth2015, summaryByMonth, summaryByPeriod);
         
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', summaryByPeriod.currentPeriod, false);
@@ -172,6 +172,8 @@
     function dataSummaryByPeriod(dataSummaryByMonth) {
         
         function sumPeriod(period, data, comparator) {
+            
+            console.log(period, data, comparator);
             
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
