@@ -208,12 +208,10 @@
                 .value();
                 
             sum.period = period; 
-            
-            console.log(sum);
 
             return sum;
             
-        };
+        }
         
         var periods = {};
         periods.currentPeriod = sumPeriod('Current Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
