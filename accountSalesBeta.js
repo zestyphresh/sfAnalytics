@@ -536,14 +536,7 @@
                 weekly : function(d) { return moment(d.Invoice_Date__c).weekday(0).format('YYYY-MM-DD'); },
                 daily : function(d) { return d.Invoice_Date__c; } 
             }
-            
-            var cData = _.reduce(data, function(d) {
-                
-            },
-            {
-                value : ''
-            });
-        
+
             var chartData = d3.nest()
                 .key(function(d) { return keys[granularity](d); })
                 .rollup(function(d) { return d3.sum(d, function(i) { return i[showValue]; }); })
