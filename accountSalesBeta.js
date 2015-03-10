@@ -50,6 +50,8 @@
         end = performance.now();
         console.log(end - start);
         
+        console.log(salesByMonth2014, salesByMonth2015, forecastByMonth2015, summaryByMonth, summaryByPeriod);
+        
         //tabGrossSummary
         summarySalesChart('#grossSummaryCurrentChart', summaryByPeriod.currentPeriod, false);
         summarySalesChart('#grossSummaryLastChart', summaryByPeriod.lastPeriod, false);
