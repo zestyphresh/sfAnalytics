@@ -347,8 +347,8 @@
         
         var tableCols = [
             {data : "monthName", title : "Month"},
-            {data : "grossCredits", title : "Credits"},
-            {data : "grossDespatches", title : "Despatches"},
+            {data : isNet ? 0 : 'grossCredits', title : "Credits"},
+            {data : isNet ? 0 : "grossDespatches", title : "Despatches"},
             {data : isNet ? 'netSales' : 'grossSales', title : "Sales"},
             {data : isNet ? 'netBudget' : 'grossBudget', title : "Budget"},
             {data : isNet ? 'netBudgetVsSales' : 'grossBudgetVsSales', title : "vs Sales"},
