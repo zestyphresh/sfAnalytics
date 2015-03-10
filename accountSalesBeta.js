@@ -351,9 +351,7 @@
             {data : isNet ? 'netLast' : 'grossLast', title : "Last Year"},
             {data : isNet ? 'netLastVsSales' : 'grossLastVsSales', title : "vs Sales"}
         ];
-        
-        console.log(tableCols);
-        
+
         var tableColDefs = [
             {'targets' : [1,2,3,4,5,6,7,8,9], 
             'render' : function (cell, type, row, meta) {
