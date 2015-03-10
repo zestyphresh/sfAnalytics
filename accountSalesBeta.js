@@ -345,7 +345,7 @@
             "order": [],
             'dom' : 't',
             'columns' : tableCols
-            //'columnDefs' : tableColDefs
+            'columnDefs' : tableColDefs
         });
         
     }
@@ -476,8 +476,9 @@
         ];
         
         var tableColDefs = [
-            {'targets' : [4,5,6], 
-            'render' : function (cell, type, row, meta) {
+            {
+                'targets' : [4,5,6], 
+                'render' : function (cell, type, row, meta) {
                 switch (type) {
                     case 'display':
                         return accounting.formatMoney(cell);
@@ -485,17 +486,15 @@
                     return data;
                 }
             },
-            {'targets' : [7], 
-            'render' : function (cell, type, row, meta) {
-                switch (type) {
-                    case 'display':
-                        return typeof cell === 'undefined' ? '' : cell;
-                    }
-                    return data;
-                }
+            {
+                'targets' : [7], 
+                'data' : null,
+                'defaultContent' : 'N/A'
             },
-            {'targets': [4,5,6],
-            'className': 'dt-right'}
+            {
+                'targets': [4,5,6],
+                'className': 'dt-right'
+            }
         ];
         
         var table = $j('#table-productSales').DataTable({
