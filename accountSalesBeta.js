@@ -1,33 +1,46 @@
-(function(accId, accType, soql) {
+(function(accId, accType, soql, parentName, groupName) {
     
     $j = jQuery.noConflict();
         
     var thisYear = 2015,
-        lastYear = 2014;
+        lastYear = 2014,
+        orgId = '00Db0000000ZVQP';
     
     //load tabs
     $j( "#tabs" ).responsiveTabs();
     
-    var orgId = '00Db0000000ZVQP';
+    var soqlWhereClause;
+    switch (acctype) {
+        case 'Branch':
+            soqlWhereClause = 'Account__r.Id = ' + "'" + accId + "'" + 'AND Fiscal_Year__c >= 2014';
+            break;
+        case 'Parent':
+            soqlWhereClause = 'Account__r.Parent_Name__c = ' + "'" + parentName + "'" + 'AND Fiscal_Year__c >= 2014';
+            break;
+        case 'Group':
+            soqlWhereClause = 'Account__r.Group_Name__c = ' + "'" + groupName + "'" + 'AND Fiscal_Year__c >= 2014';
+            break;
+    }
     
+
     var salesQuery = {
         sObject : 'Daily_Historical_Sales__c',
         select : 'Invoice_Date__c, Fiscal_Year__c, Fiscal_Month__c, Gross_Credits__c, Gross_Despatches__c, Value__c, Gross_Sales_Price_Per_Item__c, Net_Value__c, Quantity__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Product__r.Part_Code__c, Product__r.Name, Product__r.Product_Code_Name__c, Product__r.Family, Promotion__r.Name',
-        where : 'Account__r.Id = ' + "'" + accId + "'",
+        where : soqlWhereClause,
         maxfetch : 100000
     };
         
     var forecastQuery = {
         sObject : 'Forecast2__c',
         select : 'Fiscal_Year__c, Fiscal_Month__c, Gross_Value__c, Net_Value__c, Is_Fiscal_Year_To_Date__c, Is_Fiscal_Last_Period__c, Forecast_Brand__c, Forecast_Type__c',
-        where : 'Account__r.Id = ' + "'" + accId + "'",
+        where : soqlWhereClause,
         maxfetch : 100000
     };
     
     var dateQuery = {
         sObject : 'FY_Settings__c',
         select : 'PeriodNum__c, PeriodYear__c',
-        where : 'SetupOwnerId = ' + "'" + orgId + "'",
+        where : soqlWhereClause,
         maxfetch : 10
     };
     
@@ -637,4 +650,4 @@
     	}
     };
     
-})(accId, accType, SOQL);
+})(accId, accType, SOQL, parentName, groupName);
