@@ -176,6 +176,8 @@
             var sum = _.chain(data)
                 .filter(function(d) { return comparator(d.month); })
                 .reduce(function(result, value) {
+                    
+                    console.log(value);
 
                     result.grossCredits += value.grossCredits;
                     result.grossDespatches += value.grossDespatches; 
@@ -206,6 +208,8 @@
                 .value();
                 
             sum.period = period; 
+            
+            console.log(sum);
 
             return sum;
             
@@ -214,7 +218,7 @@
         var periods = {};
         periods.currentPeriod = sumPeriod('Current Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
         periods.lastPeriod = sumPeriod('Last Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c - 1; });
-        periods.yearToDate = sumPeriod('Year To Date', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.yearToDate = sumPeriod('Year To Date', dataSummaryByMonth, function(month) { return month < fiscal.PeriodNum__c; });
         periods.fullYear = sumPeriod('Full Year', dataSummaryByMonth, function(month) { return true; });
         
         return periods;
