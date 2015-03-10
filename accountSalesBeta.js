@@ -55,14 +55,14 @@
         summarySalesChart('#grossSummaryLastChart', summaryByPeriod.lastPeriod, false);
         summarySalesChart('#grossSummaryYearChart', summaryByPeriod.yearToDate, false);
         summarySalesChart('#grossSummaryFullChart', summaryByPeriod.fullYear, false);
-        periodSummaryTable('#grossSummaryTable', summaryByPeriod);
+        summarySalesTable('#grossSummaryTable', summaryByPeriod);
 
         //tabNetSummary
         summarySalesChart('#netSummaryCurrentChart', summaryByPeriod.currentPeriod, true);
         summarySalesChart('#netSummaryLastChart', summaryByPeriod.lastPeriod, true);
         summarySalesChart('#netSummaryYearChart', summaryByPeriod.yearToDate, true);
         summarySalesChart('#netSummaryFullChart', summaryByPeriod.fullYear, true);
-        periodSummaryTable('#netSummaryTable', summaryByPeriod);
+        summarySalesTable('#netSummaryTable', summaryByPeriod);
         
         //tabGrossByMonth
         monthlySalesChart('#grossByMonthChart', summaryByMonth, false);
@@ -239,7 +239,7 @@
             },
             data : {
                 x: 'type',
-                json: data,
+                json: chartData,
                 keys: {
                     x : 'type',
                     value: ['value']
@@ -352,6 +352,8 @@
             {data : isNet ? 'netLastVsSales' : 'grossLastVsSales', title : "vs Sales"}
         ];
         
+        console.log(tableCols);
+        
         var tableColDefs = [
             {'targets' : [1,2,3,4,5,6,7,8,9], 
             'render' : function (cell, type, row, meta) {
@@ -379,7 +381,7 @@
             'columnDefs' : tableColDefs
         });
         
-    }
+    };
     
     var monthlySalesChart = function(selector, data, isNet) {
         
