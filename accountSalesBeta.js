@@ -421,7 +421,7 @@
                 json: chartData,
                 keys: {
                     x: 'monthName',
-                    value: ['sales', 'budget', 'target', 'last'],
+                    value: ['sales', 'target', 'budget', 'last'],
                 },
                 names: {
                     sales : '2015 Sales',
@@ -484,17 +484,14 @@
                         return accounting.formatMoney(cell);
                     }
                     return data;
-                }
-            },
+                },
+                'className': 'dt-right'
+            }
             //{
              //   'targets' : [7], 
              //   'data' : null,
              //   'defaultContent' : 'N/A'
             //},
-            {
-                'targets': [4,5,6],
-                'className': 'dt-right'
-            }
         ];
         
         var table = $j('#table-productSales').DataTable({
