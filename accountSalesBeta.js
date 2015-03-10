@@ -171,17 +171,9 @@
     
     
     function dataSummaryByPeriod(data) {
+    
         
-        var periods = {};
-        
-        periods.currentPeriod = sumPeriod('Current Period', data, function(month) { return month == fiscal.PeriodNum__c; });
-        periods.lastPeriod = sumPeriod('Last Period', data, function(month) { return month == fiscal.PeriodNum__c - 1; });
-        periods.yearToDate = sumPeriod('Year To Date', data, function(month) { return month < fiscal.PeriodNum__c; });
-        periods.fullYear = sumPeriod('Full Year', data, function(month) { return true; });
-        
-        return periods;
-        
-        var sumPeriod = function(period, data, comparator) {
+        function sumPeriod(period, data, comparator) {
             
             console.log(period, data, comparator);
             
@@ -224,6 +216,15 @@
             return sum;
             
         }
+        
+        var periods = {};
+        
+        periods.currentPeriod = sumPeriod('Current Period', data, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.lastPeriod = sumPeriod('Last Period', data, function(month) { return month == fiscal.PeriodNum__c - 1; });
+        periods.yearToDate = sumPeriod('Year To Date', data, function(month) { return month < fiscal.PeriodNum__c; });
+        periods.fullYear = sumPeriod('Full Year', data, function(month) { return true; });
+        
+        return periods;
         
     }
 
