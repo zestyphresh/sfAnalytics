@@ -46,6 +46,7 @@
         var salesByMonth2014 = salesByMonth(data.sales, 2014);
         var forecastByMonth2015 = forecastByMonth(data.sales, 2015);
         var summaryByMonth = dataSummaryByMonth(salesByMonth2015, salesByMonth2014, forecastByMonth2015);
+        console.log("SUMMARY BY MONTH", summaryByMonth);
         var summaryByPeriod =  dataSummaryByPeriod(summaryByMonth);
         end = performance.now();
         console.log(end - start);
@@ -169,9 +170,18 @@
     }
     
     
-    function dataSummaryByPeriod(dataSummaryByMonth) {
+    function dataSummaryByPeriod(data) {
         
-        function sumPeriod(period, data, comparator) {
+        var periods = {};
+        
+        periods.currentPeriod = sumPeriod('Current Period', data, function(month) { return month == fiscal.PeriodNum__c; });
+        periods.lastPeriod = sumPeriod('Last Period', data, function(month) { return month == fiscal.PeriodNum__c - 1; });
+        periods.yearToDate = sumPeriod('Year To Date', data, function(month) { return month < fiscal.PeriodNum__c; });
+        periods.fullYear = sumPeriod('Full Year', data, function(month) { return true; });
+        
+        return periods;
+        
+        var sumPeriod = function(period, data, comparator) {
             
             console.log(period, data, comparator);
             
@@ -214,14 +224,6 @@
             return sum;
             
         }
-        
-        var periods = {};
-        periods.currentPeriod = sumPeriod('Current Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c; });
-        periods.lastPeriod = sumPeriod('Last Period', dataSummaryByMonth, function(month) { return month == fiscal.PeriodNum__c - 1; });
-        periods.yearToDate = sumPeriod('Year To Date', dataSummaryByMonth, function(month) { return month < fiscal.PeriodNum__c; });
-        periods.fullYear = sumPeriod('Full Year', dataSummaryByMonth, function(month) { return true; });
-        
-        return periods;
         
     }
 
