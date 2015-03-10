@@ -491,7 +491,7 @@
                          {"data": "Quantity__c", "title": "Quantity"},
                          {"data": "Value__c", "title": "Gross Value"},
                          {"data": "Gross_Sales_Price_Per_Item__c", "title": "Sales Price Per Item"},
-                         {"data": "Promotion__r.Name", "title": "Promotion"}
+                         {"data": "Promotion__r.Name", "title": "Promotion", "defaultContent" : "N/A"}
         ];
         
         var tableColDefs = [
@@ -506,11 +506,6 @@
                 },
                 'className': 'dt-right'
             }
-            //{
-             //   'targets' : [7], 
-             //   'data' : null,
-             //   'defaultContent' : 'N/A'
-            //},
         ];
         
         var table = $j('#table-productSales').DataTable({
