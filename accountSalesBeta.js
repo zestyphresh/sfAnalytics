@@ -503,7 +503,10 @@
                         return accounting.formatMoney(cell);
                     }
                     return data;
-                },
+                }
+            },
+            {
+                'targets' : [4,5,6], 
                 'className': 'dt-right'
             }
         ];
