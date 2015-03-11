@@ -527,6 +527,18 @@
         //CHART MONTHLY
         
         var showValue = 'Value__c';
+        
+        var showValueTextBox = {
+            Value__c : 'Gross Value',
+            Net_Value__c : 'Net Value',
+            Quantity__c : 'Quantity__c'
+        }
+        
+        var chartShowing = function() {
+            $j('#productChartSelectedData').text('Showing : ' + showValueTextBox[showValue]);
+        };
+        
+        chatShowing();
 
         var chartData = function(data, granularity) {
             
@@ -615,6 +627,8 @@
                 },
                 type : 'bar'
             });
+            
+            chartShowing();
             
         };
         
