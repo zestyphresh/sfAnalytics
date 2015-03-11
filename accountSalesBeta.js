@@ -610,6 +610,12 @@
                             {value: new Date(2015,11,15), text: '2015'},
                     ]
                 }
+            },
+            tooltip : {
+                format : {
+                    name :  function(name, ratio, id, index) { console.log(name, ratio, id, index); },
+                    title : function (x) { console.log(x); }
+                }
             }
         });
         
