@@ -566,6 +566,9 @@
                     x: 'key',
                     value: ['values'],
                 },
+                names : {
+                    values : 'Value/Quantity'
+                },
                 type : 'bar'
             },
             axis: {
@@ -586,7 +589,7 @@
                 },
                 y : {
                     tick: {
-                        format: function (d) { return accounting.formatMoney(d); }
+                        format: function (d) { return accounting.formatNumber(d, 0, ','); }
                     },
                     padding : {bottom: 0},
                     min : 0
