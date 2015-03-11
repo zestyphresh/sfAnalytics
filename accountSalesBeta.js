@@ -361,7 +361,7 @@
             'columnDefs' : tableColDefs
         });
         
-    }
+    };
     
     var monthlySalesTable = function(selector, data, isNet) {
         
@@ -552,7 +552,7 @@
             ticks.push(moment('2014-01-01').add(i, 'months').format('YYYY-MM-DD'));
         }
 
-        var chart1 = c3.generate({
+        var chart = c3.generate({
             bindto: '#chartWeeklySales',
             size : {
                 width : $j('#chartWeeklySales').actual('width'),
