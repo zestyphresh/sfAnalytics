@@ -613,8 +613,7 @@
             },
             tooltip : {
                 format : {
-                    name :  function(name, ratio, id, index) { console.log(name, ratio, id, index); },
-                    title : function (x) { console.log(x); }
+                    title : function (x) { return moment(x).format('MMMM YYYY'); }
                 }
             }
         });
