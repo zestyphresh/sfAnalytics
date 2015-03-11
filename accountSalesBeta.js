@@ -520,10 +520,7 @@
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
-        
-        
-        var chart = {};
-        
+
         //CHART MONTHLY
         
         var showValue = 'Value__c';
