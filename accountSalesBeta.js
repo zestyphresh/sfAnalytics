@@ -528,7 +528,7 @@
         var showValueTextBox = {
             Value__c : 'Gross Value',
             Net_Value__c : 'Net Value',
-            Quantity__c : 'Quantity__c'
+            Quantity__c : 'Quantity'
         }
         
         var chartShowing = function() {
