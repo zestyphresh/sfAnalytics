@@ -538,7 +538,7 @@
             $j('#productChartSelectedData').text('Showing : ' + showValueTextBox[showValue]);
         };
         
-        chatShowing();
+        chartShowing();
 
         var chartData = function(data, granularity) {
             
