@@ -323,8 +323,8 @@
 
         var tableCols = [
             {data : "period", title : "Period"},
-            {data : "grossCredits", title : "Credits"},
-            {data : "grossDespatches", title : "Despatches"},
+            {data : isNet ? 0 : "grossCredits", title : "Credits"},
+            {data : isNet ? 0 : "grossDespatches", title : "Despatches"},
             {data : isNet ? 'netSales' : 'grossSales', title : "Sales"},
             {data : isNet ? 'netBudget' : 'grossBudget', title : "Budget"},
             {data : isNet ? 'netBudgetVsSales' : 'grossBudgetVsSales', title : "vs Sales"},
@@ -496,7 +496,7 @@
         
         var tableColDefs = [
             {
-                'targets' : [4,5,6], 
+                'targets' : [5,6], 
                 'render' : function (cell, type, row, meta) {
                     switch (type) {
                         case 'display':
