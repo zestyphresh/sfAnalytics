@@ -427,7 +427,7 @@
             
         });
 
-        c3.generate({
+        var chart = c3.generate({
             bindto: selector,
             size : {
                 width : $j(selector).actual('width'),
@@ -472,6 +472,8 @@
                 
             }
         });
+        
+        chart.flush();
         
     };
     
