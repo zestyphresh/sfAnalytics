@@ -533,14 +533,14 @@
             'columnDefs' : tableColDefs
         });
         
-        $('#table-productSales tfoot th').each( function () {
-            var title = $('#example thead th').eq( $(this).index() ).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        $j('#table-productSales tfoot th').each( function () {
+            var title = $('#example thead th').eq( $j(this).index() ).text();
+            $j(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         });
 
         // Apply the search
         table.columns().eq(0).each( function (colIdx) {
-            $( 'input', table.column(colIdx).footer()).on('keyup change', function () {
+            $j( 'input', table.column(colIdx).footer()).on('keyup change', function () {
                 table
                     .column(colIdx)
                     .search(this.value)
