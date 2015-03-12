@@ -521,24 +521,23 @@
             }
         ];
         
-        
-        
         var table = $j('#table-productSales').DataTable({
             'data' : tableData,
             'paging' : true,
             'ordering' : true,
             "order": [[0,'desc']],
-            'dom' : 'ftp',
+            'dom' : 'pt',
             'columns' : tableCols,
             'columnDefs' : tableColDefs
         });
         
+        //Adds search boxes to each column
         $j('#table-productSales tfoot th').each( function () {
             var title = $j('#example thead th').eq( $j(this).index() ).text();
             $j(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         });
 
-        // Apply the search
+        //Updates table when using the column search boxes
         table.columns().eq(0).each( function (colIdx) {
             $j( 'input', table.column(colIdx).footer()).on('keyup change', function () {
                 table
