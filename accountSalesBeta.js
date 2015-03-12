@@ -490,9 +490,9 @@
                          {data : "Product__r.Family", title: "Category", "defaultContent" : "N/A"},
                          {data : "Product__r.Part_Code__c", title: "Product Code", "defaultContent" : "N/A"},
                          {data : "Product__r.Name", title: "Product Name", "defaultContent" : "N/A"},
-                         {data : "Quantity__c", title: "Quantity"},
-                         {data : "Value__c", title: "Gross Value"},
-                         {data : "Gross_Sales_Price_Per_Item__c", title: "Gross Sales Price Per Item"},
+                         {data : "Quantity__c", title: "Quantity    "},
+                         {data : "Value__c", title: "Gross Value    "},
+                         {data : "Gross_Sales_Price_Per_Item__c", title: "Gross Sales Price Per Item    "},
                          {data : "Promotion__r.Name", title: "Promotion", "defaultContent" : "N/A"}
         ];
         
