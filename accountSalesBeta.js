@@ -67,14 +67,14 @@
         summarySalesChart('#grossSummaryLastChart', summaryByPeriod.lastPeriod, false);
         summarySalesChart('#grossSummaryYearChart', summaryByPeriod.yearToDate, false);
         summarySalesChart('#grossSummaryFullChart', summaryByPeriod.fullYear, false);
-        summarySalesTable('#grossSummaryTable', summaryByPeriod);
+        summarySalesTable('#grossSummaryTable', summaryByPeriod, false);
 
         //tabNetSummary
         summarySalesChart('#netSummaryCurrentChart', summaryByPeriod.currentPeriod, true);
         summarySalesChart('#netSummaryLastChart', summaryByPeriod.lastPeriod, true);
         summarySalesChart('#netSummaryYearChart', summaryByPeriod.yearToDate, true);
         summarySalesChart('#netSummaryFullChart', summaryByPeriod.fullYear, true);
-        summarySalesTable('#netSummaryTable', summaryByPeriod);
+        summarySalesTable('#netSummaryTable', summaryByPeriod, true);
         
         //tabGrossByMonth
         monthlySalesChart('#grossByMonthChart', summaryByMonth, false);
