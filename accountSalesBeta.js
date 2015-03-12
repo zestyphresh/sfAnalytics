@@ -534,7 +534,7 @@
         });
         
         $j('#table-productSales tfoot th').each( function () {
-            var title = $('#example thead th').eq( $j(this).index() ).text();
+            var title = $j('#example thead th').eq( $j(this).index() ).text();
             $j(this).html( '<input type="text" placeholder="Search '+title+'" />' );
         });
 
