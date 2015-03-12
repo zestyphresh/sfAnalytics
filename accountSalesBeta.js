@@ -502,7 +502,7 @@
                 'render' : function (cell, type, row, meta) {
                     switch (type) {
                         case 'display':
-                            return accounting.formatMoney(cell, 2, "£", ",", ".");
+                            return accounting.formatMoney(cell, "£", 2, ",", ".");
                         }
                         return cell;
                 }
