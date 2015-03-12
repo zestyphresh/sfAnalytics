@@ -484,14 +484,14 @@
             return moment(d.Invoice_Date__c).toDate();
         });
         
-        var tableCols = [{"data": "Invoice_Date__c", "title": "Invoice Date"},
-                         {"data": "Product__r.Family", "title": "Category", "defaultContent" : "N/A"},
-                         {"data": "Product__r.Part_Code__c", "title": "Product Code", "defaultContent" : "N/A"},
-                         {"data": "Product__r.Name", "title": "Product Name", "defaultContent" : "N/A"},
-                         {"data": "Quantity__c", "title": "Quantity"},
-                         {"data": "Value__c", "title": "Gross Value"},
-                         {"data": "Gross_Sales_Price_Per_Item__c", "title": "Sales Price Per Item"},
-                         {"data": "Promotion__r.Name", "title": "Promotion", "defaultContent" : "N/A"}
+        var tableCols = [{data : "Invoice_Date__c", title: "Invoice Date"},
+                         {data : "Product__r.Family", title: "Category", "defaultContent" : "N/A"},
+                         {data : "Product__r.Part_Code__c", title: "Product Code", "defaultContent" : "N/A"},
+                         {data : "Product__r.Name", title: "Product Name", "defaultContent" : "N/A"},
+                         {data : "Quantity__c", title: "Quantity"},
+                         {data : "Value__c", title: "Gross Value"},
+                         {data : "Gross_Sales_Price_Per_Item__c", title: "Gross Sales Price Per Item"},
+                         {data : "Promotion__r.Name", title: "Promotion", "defaultContent" : "N/A"}
         ];
         
         var tableColDefs = [
@@ -500,7 +500,17 @@
                 'render' : function (cell, type, row, meta) {
                     switch (type) {
                         case 'display':
-                            return accounting.formatMoney(cell);
+                            return accounting.formatMoney(cell, "£", ",", ".");
+                        }
+                        return cell;
+                }
+            },
+            {
+                'targets' : [4], 
+                'render' : function (cell, type, row, meta) {
+                    switch (type) {
+                        case 'display':
+                            return accounting.formatNumber(cell);
                         }
                         return cell;
                 }
@@ -606,8 +616,8 @@
             },
             grid: {
                 x: {
-                    lines: [{value: new Date(2014,11,15), text: '2014'},
-                            {value: new Date(2015,11,15), text: '2015'},
+                    lines: [{value: new Date(2013,11,15), text: '2014'},
+                            {value: new Date(2014,11,15), text: '2015'},
                     ]
                 }
             },
