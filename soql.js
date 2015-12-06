@@ -22,7 +22,7 @@ var SOQL = (function(conn) {
             .on('end', function(err) {
                 deferred.resolve(records);
             })
-            .run({ autoFetch : true, maxFetch : this.query.maxFetch });
+            .run({ autoFetch : true, maxFetch : 50000 /*this.query.maxFetch*/ });
             
         return deferred.promise;
         
